@@ -37,6 +37,7 @@ const FontStyles = {
   // XL '1.5rem', // 24px
   XL_Bold: getFont("XL", "Bold"),
   XL_SemiBold: getFont("XL", "SemiBold"),
+  XL_Regular: getFont("XL", "Regular"),
 
   // LG '1.25rem', // 20px
   LG_Bold: getFont("LG", "Bold"),
