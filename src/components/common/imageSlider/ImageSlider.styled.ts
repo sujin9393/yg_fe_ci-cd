@@ -9,6 +9,7 @@ export const ImageSliderContainer = styled.div`
   flex-direction: column;
   overflow: hidden;
   padding: 10px;
+  gap: 10px;
 `;
 
 export const ImagePart = styled.div`
@@ -20,7 +21,9 @@ export const ImagePart = styled.div`
 `;
 
 export const ImageContainer = styled.img`
-  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 `;
 
 export const LeftArrow = styled.img`
