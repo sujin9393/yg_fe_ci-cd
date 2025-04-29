@@ -8,8 +8,6 @@ const fontSizes = {
   MD2: "1rem", // 16px
   SM: "0.875rem", // 14px
   XS: "0.75rem", // 12px
-  XXS: "0.625rem", // 10px
-  XXXS: "0.5rem", //8px
 };
 
 const fontWeights = {
@@ -39,7 +37,6 @@ const FontStyles = {
   // XL '1.5rem', // 24px
   XL_Bold: getFont("XL", "Bold"),
   XL_SemiBold: getFont("XL", "SemiBold"),
-  XL_Regular: getFont("XL", "Regular"),
 
   // LG '1.25rem', // 20px
   LG_Bold: getFont("LG", "Bold"),
@@ -69,18 +66,6 @@ const FontStyles = {
   XS_Medium: getFont("XS", "Medium"),
   XS_Regular: getFont("XS", "Regular"),
   XS_Light: getFont("XS", "Light"),
-
-  // XS '0.75rem', // 12px
-  XXS_SemiBold: getFont("XXS", "SemiBold"),
-  XXS_Medium: getFont("XXS", "Medium"),
-  XXS_Regular: getFont("XXS", "Regular"),
-  XXS_Light: getFont("XXS", "Light"),
-
-  // XS '0.75rem', // 12px
-  XXXS_SemiBold: getFont("XXXS", "SemiBold"),
-  XXXS_Medium: getFont("XXXS", "Medium"),
-  XXXS_Regular: getFont("XXXS", "Regular"),
-  XXXS_Light: getFont("XXXS", "Light"),
 };
 
 export default FontStyles;
