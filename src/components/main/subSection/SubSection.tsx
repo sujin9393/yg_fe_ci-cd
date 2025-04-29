@@ -1,12 +1,12 @@
 import MainCard from "../mainCard/MainCard";
-import * as S from "./RowScroll.styled";
+import * as S from "./SubSection.styled";
 import 참치1 from "../../../assets/images/참치1.png";
 import 참치2 from "../../../assets/images/참치2.png";
 import tomato from "../../../assets/images/Tomato.png";
 import 샤프란 from "../../../assets/images/샤프란.png";
 import yummy from "../../../assets/images/yummy.png";
 
-const RowScroll = () => {
+const SubSection = () => {
   return (
     <S.RowScrollSection>
       <S.SectionName>전체</S.SectionName>
@@ -46,4 +46,4 @@ const RowScroll = () => {
   );
 };
 
-export default RowScroll;
+export default SubSection;
