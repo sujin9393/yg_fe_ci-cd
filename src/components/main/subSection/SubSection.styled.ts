@@ -2,11 +2,10 @@ import styled from "styled-components";
 import { FontStyles } from "../../../styles";
 
 export const RowScrollSection = styled.div`
-  height: 240px;
   //background-color: red;
   display: flex;
   flex-direction: column;
-  margin: 10px 0px 10px 20px;
+  margin: 15px 0px 10px 20px;
   gap: 10px;
 `;
 
