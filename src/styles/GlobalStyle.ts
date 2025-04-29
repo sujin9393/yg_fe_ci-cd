@@ -1,6 +1,9 @@
 import { createGlobalStyle } from "styled-components";
+import Fonts from "./Fonts";
 
 const GlobalStyle = createGlobalStyle`
+${Fonts}
+
   * {
     margin: 0;
     padding: 0;
@@ -10,7 +13,7 @@ const GlobalStyle = createGlobalStyle`
   html, body {
     width: 100%;
     height: 100%;
-    font-family: 'Pretendard'; 
+   font-family: 'Pretendard'; 
     background-color: white;
     overflow-x: hidden; 
   }

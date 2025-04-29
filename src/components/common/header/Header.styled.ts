@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import FontStyles from "../../../styles/FontStyles";
+import { FontStyles } from "../../../styles";
 
 export const HeaderContainer = styled.div`
   position: relative;

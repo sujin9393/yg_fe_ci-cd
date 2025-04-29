@@ -8,8 +8,8 @@ const Header = () => {
   return (
     <S.HeaderContainer>
       <S.LogoPart>
-        <img src={Logo} alt="Logo" />
-        <img src={Service} alt="Service Name" />
+        <img src={Logo} alt="logo" />
+        <img src={Service} alt="service name" />
       </S.LogoPart>
       <S.SidePart>
         {/*<S.AlertIcon src={Bell} alt="alert" />*/}
