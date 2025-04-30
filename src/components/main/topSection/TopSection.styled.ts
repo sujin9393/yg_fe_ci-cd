@@ -40,4 +40,5 @@ export const ImageContainer = styled.img`
   height: 70px;
   border-radius: 10px;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+  //object-fit: cover;
 `;

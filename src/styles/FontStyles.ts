@@ -70,13 +70,13 @@ const FontStyles = {
   XS_Regular: getFont("XS", "Regular"),
   XS_Light: getFont("XS", "Light"),
 
-  // XS '0.75rem', // 12px
+  XXS_Bold: getFont("XXS", "Bold"),
   XXS_SemiBold: getFont("XXS", "SemiBold"),
   XXS_Medium: getFont("XXS", "Medium"),
   XXS_Regular: getFont("XXS", "Regular"),
   XXS_Light: getFont("XXS", "Light"),
 
-  // XS '0.75rem', // 12px
+  XXXS_Bold: getFont("XXXS", "Bold"),
   XXXS_SemiBold: getFont("XXXS", "SemiBold"),
   XXXS_Medium: getFont("XXXS", "Medium"),
   XXXS_Regular: getFont("XXXS", "Regular"),

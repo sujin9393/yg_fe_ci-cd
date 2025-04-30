@@ -4,7 +4,8 @@ import { Colors } from "../../../styles";
 export const ImageSliderContainer = styled.div`
   position: relative;
   border-radius: 10px;
-  border: 1px solid black;
+  border: none;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -14,7 +15,7 @@ export const ImageSliderContainer = styled.div`
 
 export const ImagePart = styled.div`
   width: 100%;
-  height: 140px;
+  height: 130px;
   display: flex;
   justify-content: center;
   align-items: center;
