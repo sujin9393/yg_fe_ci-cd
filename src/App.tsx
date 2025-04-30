@@ -1,13 +1,13 @@
 import * as S from "./App.styled";
 import Header from "./components/common/header/Header";
-import Main from "./pages/main/Main";
+import AppRouter from "./Router";
 
 const App = () => {
   return (
     <S.MainContainer>
       <Header />
       <S.HeaderLine />
-      <Main />
+      <AppRouter />
     </S.MainContainer>
   );
 };
