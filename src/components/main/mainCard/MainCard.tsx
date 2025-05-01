@@ -1,3 +1,4 @@
+import ImageContainer from "../../common/imageContainer/ImageContainer";
 import * as S from "./MainCard.styled";
 
 interface MainCardProps {
@@ -15,9 +16,7 @@ const MainCard = ({
 }: MainCardProps) => {
   return (
     <S.MainCardContainer>
-      <S.ImageContainer>
-        <S.CardImage src={imageUrl} alt="상품 이미지" />
-      </S.ImageContainer>
+      <ImageContainer imageUrl={imageUrl} />
       <S.CardInfo>
         <S.CardTitle>{title}</S.CardTitle>
         <S.UnitInfo>
