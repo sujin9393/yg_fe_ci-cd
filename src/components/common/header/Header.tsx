@@ -16,7 +16,7 @@ const Header = () => {
         }}
       >
         <img src={Logo} alt="logo" />
-        <img src={Service} alt="service name" />
+        <S.ServiceName src={Service} />
       </S.LogoPart>
       <S.SidePart>
         {/*<S.AlertIcon src={Bell} alt="alert" />*/}
