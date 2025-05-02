@@ -1,13 +1,12 @@
 import styled from "styled-components";
 import { Colors, FontStyles } from "../../styles";
-import UserIcon from "../../assets/icons/User.svg?react";
 
 export const PostDetailContainer = styled.div`
   width: 100%;
 `;
 
 export const TopSection = styled.div`
-  margin: 20px 30px 10px 30px;
+  margin: 10px 30px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -39,13 +38,6 @@ export const NameInfo = styled.p`
 export const AccountInfo = styled.p`
   ${FontStyles.XXXS_SemiBold};
   color: ${Colors.Grayscale60};
-`;
-
-export const SectionLine = styled.hr`
-  border: none;
-  border-top: 0.5px solid ${Colors.Grayscale30};
-  width: 100%;
-  flex: 1;
 `;
 
 export const PostInfo = styled.div`
@@ -110,34 +102,7 @@ export const OrderButton = styled.button`
   margin-bottom: 3px;
   background-color: ${Colors.Main10};
   color: ${Colors.Grayscale0};
-`;
-
-export const AmountPart = styled.div`
-  display: flex;
-  gap: 3px;
-  align-items: center;
-  margin-top: 5px;
-`;
-
-export const Amount = styled.p`
-  ${FontStyles.XXS_Bold};
-  color: ${Colors.Main30};
-`;
-
-export const PartCount = styled.div`
-  display: flex;
-  gap: 2px;
-`;
-
-export const PartCountMent = styled.p`
-  ${FontStyles.XXXS_Bold};
-  color: ${Colors.Main60};
-  padding-top: 8px;
-`;
-
-export const StyledUserIcon = styled(UserIcon)`
-  color: ${Colors.Main60};
-  width: 18px;
+  margin-bottom: 5px;
 `;
 
 export const Ddate = styled.p`
@@ -165,4 +130,12 @@ export const SectionName = styled.p`
 
 export const DetailInfo = styled.div`
   ${FontStyles.XS_Medium};
+`;
+
+export const PostDate = styled.p`
+  display: flex;
+  justify-content: end;
+  color: ${Colors.Grayscale60};
+  ${FontStyles.XXXS_SemiBold};
+  margin-top: 20px;
 `;

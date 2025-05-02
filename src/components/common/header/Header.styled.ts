@@ -15,7 +15,7 @@ export const LogoPart = styled.div`
   transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
-  ${FontStyles.XL_Regular};
+  ${FontStyles.MD1_SemiBold};
   cursor: pointer;
 `;
 

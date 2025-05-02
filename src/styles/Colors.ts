@@ -11,12 +11,12 @@ const Colors = {
   Grayscale0: "#FFFFFF", // 배경용 흰색
   Grayscale10: "#F1F2F7", // 매우 연한 회색 배경
   Grayscale20: "#F1F1F3", // 연회색 배경
-  Grayscale30: "#DFE0DF", // 연한 회색
+  Grayscale30: "#DFE0DF", // 구분선
   Grayscale40: "#D9D9D9", // 중간 회색
-  Grayscale50: "#B3B3B3", // 중간~어두운 회색
-  Grayscale60: "#6B6A71", // 다크 그레이 (텍스트)
+  Grayscale50: "#B3B3B3", // 입력칸 테두리
+  Grayscale60: "#6B6A71", // 글자2
   Grayscale70: "#2F4858", // 블루그레이 (보조 텍스트/배경)
-  Grayscale80: "#292D2F", // 매우 진한 회색
+  Grayscale80: "#292D2F", // 검정 강조
   Grayscale90: "#000000", // 검정
 };
 

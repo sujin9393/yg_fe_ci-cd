@@ -1,14 +1,14 @@
+import { SectionLine } from "../../components/common/SectionLine.styled";
 import SubSection from "../../components/main/subSection/SubSection";
 import TopSection from "../../components/main/topSection/TopSection";
-import * as S from "./Main.styled";
 
 const Main = () => {
   return (
     <>
       <TopSection />
-      <S.SectionLine />
+      <SectionLine />
       <SubSection />
-      <S.SectionLine />
+      <SectionLine />
       <SubSection />
     </>
   );
