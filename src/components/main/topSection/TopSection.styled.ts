@@ -1,16 +1,17 @@
 import styled from "styled-components";
-import { FontStyles } from "../../../styles";
+import { Colors, FontStyles } from "../../../styles";
 
 export const SectionContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
   width: 100%;
-  padding: 20px 20px 5px 20px;
+  padding: 20px;
 `;
 
 export const SectionName = styled.p`
   ${FontStyles.MD1_Bold};
+  color: ${Colors.Main10};
 `;
 
 export const ImagePart = styled.div`

@@ -1,12 +1,13 @@
 import styled from "styled-components";
 import { Colors, FontStyles } from "../../styles";
+import UserIcon from "../../assets/icons/User.svg?react";
 
 export const PostDetailContainer = styled.div`
   width: 100%;
 `;
 
 export const TopSection = styled.div`
-  margin: 20px 30px 0px 30px;
+  margin: 20px 30px 10px 30px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -35,19 +36,16 @@ export const NameInfo = styled.p`
   ${FontStyles.XXS_SemiBold};
 `;
 
-export const PlaceInfo = styled.p`
-  ${FontStyles.XXXS_SemiBold};
-`;
-
 export const AccountInfo = styled.p`
   ${FontStyles.XXXS_SemiBold};
+  color: ${Colors.Grayscale60};
 `;
 
 export const SectionLine = styled.hr`
   border: none;
-  border-top: 2px solid ${Colors.Grayscale10};
+  border-top: 0.5px solid ${Colors.Grayscale30};
   width: 100%;
-  margin-top: 10px;
+  flex: 1;
 `;
 
 export const PostInfo = styled.div`
@@ -74,6 +72,7 @@ export const PostTitle = styled.p`
 
 export const ProductTitle = styled.p`
   ${FontStyles.SM_SemiBold};
+  color: ${Colors.Grayscale70};
 `;
 
 export const ProductInfo = styled.div`
@@ -84,21 +83,23 @@ export const ProductInfo = styled.div`
 
 export const PickupDate = styled.p`
   ${FontStyles.XXXS_SemiBold};
+  color: ${Colors.Grayscale60};
 `;
 
 export const unitPrice = styled.p`
-  ${FontStyles.SM_SemiBold}
+  ${FontStyles.SM_SemiBold};
+  color: ${Colors.Main30};
 `;
 
 export const unitAmount = styled.p`
-  ${FontStyles.XXXS_Medium}
+  ${FontStyles.XXXS_Medium};
+  color: ${Colors.Grayscale60};
 `;
 
 export const OrderInfo = styled.div`
   display: flex;
   flex-direction: column;
   align-items: end;
-  gap: 5px;
 `;
 
 export const OrderButton = styled.button`
@@ -107,24 +108,42 @@ export const OrderButton = styled.button`
   border: none;
   border-radius: 5px;
   margin-bottom: 3px;
+  background-color: ${Colors.Main10};
+  color: ${Colors.Grayscale0};
 `;
 
 export const AmountPart = styled.div`
   display: flex;
   gap: 3px;
   align-items: center;
+  margin-top: 5px;
 `;
 
 export const Amount = styled.p`
   ${FontStyles.XXS_Bold};
+  color: ${Colors.Main30};
 `;
 
-export const PartCount = styled.p`
-  ${FontStyles.XXXS_Bold}
+export const PartCount = styled.div`
+  display: flex;
+  gap: 2px;
+`;
+
+export const PartCountMent = styled.p`
+  ${FontStyles.XXXS_Bold};
+  color: ${Colors.Main60};
+  padding-top: 8px;
+`;
+
+export const StyledUserIcon = styled(UserIcon)`
+  color: ${Colors.Main60};
+  width: 18px;
 `;
 
 export const Ddate = styled.p`
   ${FontStyles.XXXS_Regular};
+  color: ${Colors.Main10};
+  margin-top: 3px;
 `;
 
 export const DetailPart = styled.div`
@@ -142,11 +161,6 @@ export const SectionDivider = styled.div`
 
 export const SectionName = styled.p`
   ${FontStyles.XS_SemiBold}
-`;
-
-export const Line = styled.hr`
-  flex: 1;
-  height: 1px;
 `;
 
 export const DetailInfo = styled.div`

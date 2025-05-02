@@ -3,7 +3,7 @@ import { FontStyles } from "../../../styles";
 
 export const HeaderContainer = styled.div`
   position: relative;
-  height: 60px;
+  height: 54px;
   display: flex;
   align-items: center;
 `;

@@ -1,7 +1,7 @@
 import ImageSlider from "../../components/common/imageSlider/ImageSlider";
 import * as S from "./PostDetail.styled";
 import tomato from "../../assets/images/Tomato.png";
-import Box from "../../assets/icons/Box.svg";
+import Package from "../../assets/icons/Package.svg";
 
 const PostDetail = () => {
   return (
@@ -12,7 +12,6 @@ const PostDetail = () => {
           <S.ProfileImg src={tomato} alt="프로필 이미지" />
           <S.ProfileInfo>
             <S.NameInfo>토마토녀</S.NameInfo>
-            <S.PlaceInfo>카카오테크 교육장</S.PlaceInfo>
             <S.AccountInfo>주최자 계좌번호 : ~!~!0101010</S.AccountInfo>
           </S.ProfileInfo>
         </S.WriterInfo>
@@ -37,16 +36,19 @@ const PostDetail = () => {
             <S.OrderButton>주문참여</S.OrderButton>
             <S.AmountPart>
               <S.Amount>45/80</S.Amount>
-              <img src={Box} alt="박스 아이콘" />
+              <img src={Package} alt="박스 아이콘" />
             </S.AmountPart>
-            <S.PartCount>5명 참여 중!</S.PartCount>
+            <S.PartCount>
+              <S.PartCountMent>5명 참여 중!</S.PartCountMent>
+              <S.StyledUserIcon />
+            </S.PartCount>
             <S.Ddate>마감까지 D-2</S.Ddate>
           </S.OrderInfo>
         </S.InfoPart>
         <S.DetailPart>
           <S.SectionDivider>
             <S.SectionName>상품 설명</S.SectionName>
-            <S.Line />
+            <S.SectionLine />
           </S.SectionDivider>
           <S.DetailInfo>
             대한민국 국민 참치 동원! <br />

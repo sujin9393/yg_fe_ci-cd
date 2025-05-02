@@ -1,15 +1,12 @@
 import * as S from "./ImageSlider.styled";
 import 참치1 from "../../../assets/images/참치1.png";
 import 참치2 from "../../../assets/images/참치2.png";
-import LeftArrow from "../../../assets/icons/LeftArrow.svg";
-import RightArrow from "../../../assets/icons/RightArrow.svg";
 import { useState } from "react";
 
 const images = [참치1, 참치2];
 
 const ImageSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
   const [touchEndX, setTouchEndX] = useState<number | null>(null);
 
@@ -58,17 +55,15 @@ const ImageSlider = () => {
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        {currentIndex !== 0 && (
-          <S.LeftArrow src={LeftArrow} onClick={handlePrev} />
-        )}
+        {currentIndex !== 0 && <S.StyledLeftArrow onClick={handlePrev} />}
         <S.ImageContainer src={images[currentIndex]}></S.ImageContainer>
         {currentIndex !== images.length - 1 && (
-          <S.RightArrow src={RightArrow} onClick={handleNext} />
+          <S.StyledRightArrow onClick={handlePrev} />
         )}
       </S.ImagePart>
       <S.SlideIcon>
         {images.map((_, index) => (
-          <S.Indicator key={index} isActive={currentIndex === index} />
+          <S.Indicator key={index} $isSelected={currentIndex === index} />
         ))}
       </S.SlideIcon>
     </S.ImageSliderContainer>
