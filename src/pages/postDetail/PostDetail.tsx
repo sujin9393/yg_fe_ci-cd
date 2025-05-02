@@ -1,22 +1,17 @@
 import ImageSlider from "../../components/common/imageSlider/ImageSlider";
 import * as S from "./PostDetail.styled";
-import tomato from "../../assets/images/Tomato.png";
-import Package from "../../assets/icons/Package.svg";
+import CurrentParti from "../../components/common/currentParti/CurrentParti";
+import { SectionLine } from "../../components/common/SectionLine.styled";
+import Profile from "../../components/common/profile/Profile";
 
 const PostDetail = () => {
   return (
     <S.PostDetailContainer>
       <S.TopSection>
         <ImageSlider />
-        <S.WriterInfo>
-          <S.ProfileImg src={tomato} alt="프로필 이미지" />
-          <S.ProfileInfo>
-            <S.NameInfo>토마토녀</S.NameInfo>
-            <S.AccountInfo>주최자 계좌번호 : ~!~!0101010</S.AccountInfo>
-          </S.ProfileInfo>
-        </S.WriterInfo>
+        <Profile type="post" />
       </S.TopSection>
-      <S.SectionLine />
+      <SectionLine />
       <S.PostInfo>
         <S.TitlePart>
           <S.PostTitle>
@@ -34,21 +29,14 @@ const PostDetail = () => {
           </S.ProductInfo>
           <S.OrderInfo>
             <S.OrderButton>주문참여</S.OrderButton>
-            <S.AmountPart>
-              <S.Amount>45/80</S.Amount>
-              <img src={Package} alt="박스 아이콘" />
-            </S.AmountPart>
-            <S.PartCount>
-              <S.PartCountMent>5명 참여 중!</S.PartCountMent>
-              <S.StyledUserIcon />
-            </S.PartCount>
+            <CurrentParti />
             <S.Ddate>마감까지 D-2</S.Ddate>
           </S.OrderInfo>
         </S.InfoPart>
         <S.DetailPart>
           <S.SectionDivider>
             <S.SectionName>상품 설명</S.SectionName>
-            <S.SectionLine />
+            <SectionLine />
           </S.SectionDivider>
           <S.DetailInfo>
             대한민국 국민 참치 동원! <br />
@@ -57,8 +45,10 @@ const PostDetail = () => {
             <br /> 반찬걱정 안녕~q(≧▽≦q)동원 고추 참치!! <br />
             1. [동원] 고추참치 85g X 25캔 <br />
             *유통기한
-            <br /> 상시제조 상품 /제조일로부터60개월
+            <br /> 상시제조 상품
+            /제조일로부터60개월dldidld이야이야이야이이ㅑㅇ에
           </S.DetailInfo>
+          <S.PostDate>3시간전</S.PostDate>
         </S.DetailPart>
       </S.PostInfo>
     </S.PostDetailContainer>

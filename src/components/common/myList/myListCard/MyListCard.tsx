@@ -1,6 +1,9 @@
-import ImageContainer from "../imageContainer/ImageContainer";
 import * as S from "./MyListCard.styled";
-import 참치 from "../../../assets/images/참치1.png";
+import ImageContainer from "../../imageContainer/ImageContainer";
+import 참치 from "../../../../assets/images/참치1.png";
+import ShoppingBag from "../../../../assets/icons/ShoppingBag.svg";
+import CurrentParti from "../../currentParti/CurrentParti";
+import { SectionLine } from "../../SectionLine.styled";
 
 const MyListCard = () => {
   return (
@@ -15,12 +18,15 @@ const MyListCard = () => {
             <S.postTitle>구매해라!!!!!</S.postTitle>
           </S.productInfo>
           <S.OrderInfo>
-            <S.MyOrder>구매수량 : 10</S.MyOrder>
-            <S.TotalAmount>45/80</S.TotalAmount>
+            <S.MyOrder>
+              <img src={ShoppingBag} alt="쇼핑백" /> 구매수량 : 10
+            </S.MyOrder>
+            <CurrentParti />
           </S.OrderInfo>
         </S.CardInfo>
       </S.CommonSection>
       <S.ButtonSection></S.ButtonSection>
+      <SectionLine />
     </S.CardContainer>
   );
 };

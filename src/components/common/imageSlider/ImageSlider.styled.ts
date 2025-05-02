@@ -34,7 +34,7 @@ export const StyledLeftArrow = styled(LeftArrow)`
   top: 50%;
   left: 10px;
   transform: translateY(-50%);
-  transition: background-color 0.2s;
+  transition: background-color 0.1s;
   cursor: pointer;
   color: ${Colors.Grayscale60};
 `;
@@ -44,7 +44,7 @@ export const StyledRightArrow = styled(RightArrow)`
   top: 50%;
   right: 10px;
   transform: translateY(-50%);
-  transition: background-color 0.2s;
+  transition: background-color 0.1s;
   cursor: pointer;
   color: ${Colors.Grayscale60};
 `;
@@ -60,6 +60,6 @@ export const Indicator = styled.div<{ $isSelected: boolean }>`
   height: 4px;
   border-radius: 50%;
   background-color: ${({ $isSelected }) =>
-    $isSelected ? Colors.Main10 : Colors.Grayscale0};
+    $isSelected ? Colors.Main10 : Colors.Grayscale40};
   transition: background-color 0.3s;
 `;

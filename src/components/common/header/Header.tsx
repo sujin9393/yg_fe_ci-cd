@@ -20,7 +20,13 @@ const Header = () => {
       </S.LogoPart>
       <S.SidePart>
         {/*<S.AlertIcon src={Bell} alt="alert" />*/}
-        <S.ProfileIcon src={User} alt="profile" />
+        <S.ProfileIcon
+          src={User}
+          alt="profile"
+          onClick={() => {
+            navigate("/mypage");
+          }}
+        />
       </S.SidePart>
     </S.HeaderContainer>
   );
