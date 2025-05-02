@@ -3,11 +3,18 @@ import Logo from "../../../assets/icons/Logo.svg";
 import Service from "../../../assets/icons/Service.svg";
 //import Bell from "../../../assets/icons/Bell.svg";
 import User from "../../../assets/icons/User.svg";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
+
   return (
     <S.HeaderContainer>
-      <S.LogoPart>
+      <S.LogoPart
+        onClick={() => {
+          navigate("/");
+        }}
+      >
         <img src={Logo} alt="logo" />
         <img src={Service} alt="service name" />
       </S.LogoPart>

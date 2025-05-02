@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { Colors } from "../../../styles";
+import RightArrow from "../../../assets/icons/RightArrow.svg?react";
+import LeftArrow from "../../../assets/icons/LeftArrow.svg?react";
 
 export const ImageSliderContainer = styled.div`
   position: relative;
@@ -27,22 +29,24 @@ export const ImageContainer = styled.img`
   object-fit: contain;
 `;
 
-export const LeftArrow = styled.img`
+export const StyledLeftArrow = styled(LeftArrow)`
   position: absolute;
   top: 50%;
   left: 10px;
   transform: translateY(-50%);
   transition: background-color 0.2s;
   cursor: pointer;
+  color: ${Colors.Grayscale60};
 `;
 
-export const RightArrow = styled.img`
+export const StyledRightArrow = styled(RightArrow)`
   position: absolute;
   top: 50%;
   right: 10px;
   transform: translateY(-50%);
   transition: background-color 0.2s;
   cursor: pointer;
+  color: ${Colors.Grayscale60};
 `;
 
 export const SlideIcon = styled.div`
@@ -51,11 +55,11 @@ export const SlideIcon = styled.div`
   justify-content: center;
 `;
 
-export const Indicator = styled.div<{ isActive: boolean }>`
-  width: 5px;
-  height: 5px;
+export const Indicator = styled.div<{ $isSelected: boolean }>`
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
-  background-color: ${({ isActive }) =>
-    isActive ? "black" : Colors.Grayscale10};
+  background-color: ${({ $isSelected }) =>
+    $isSelected ? Colors.Main10 : Colors.Grayscale0};
   transition: background-color 0.3s;
 `;

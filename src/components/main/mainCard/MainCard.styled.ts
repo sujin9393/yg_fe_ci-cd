@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { FontStyles } from "../../../styles";
+import { Colors, FontStyles } from "../../../styles";
 
 export const MainCardContainer = styled.div`
   display: flex;
@@ -28,6 +28,7 @@ export const UnitInfo = styled.p`
   display: flex;
   overflow: hidden;
   flex-wrap: nowrap;
+  color: ${Colors.Main30};
 `;
 
 export const UnitPrice = styled.span`

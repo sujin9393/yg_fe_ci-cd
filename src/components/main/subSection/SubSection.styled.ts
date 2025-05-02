@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import { FontStyles } from "../../../styles";
+import { Colors, FontStyles } from "../../../styles";
 
 export const RowScrollSection = styled.div`
-  //background-color: red;
+  overflow-x: auto;
   display: flex;
   flex-direction: column;
-  margin: 15px 0px 10px 20px;
+  margin: 15px 0px 20px 20px;
   gap: 10px;
 `;
 
@@ -19,4 +19,21 @@ export const RowScrollContainer = styled.div`
   padding-right: 20px;
   padding-bottom: 15px;
   gap: 16px;
+
+  /* 스크롤바 전체 (높이/두께 지정) */
+  &::-webkit-scrollbar {
+    height: 7px; /* 가로 스크롤 */
+  }
+
+  /* 스크롤바 트랙 (배경) */
+  &::-webkit-scrollbar-track {
+    background: ${Colors.Grayscale40};
+    border-radius: 12px;
+  }
+
+  /* 스크롤바 썸(움직이는 막대) */
+  &::-webkit-scrollbar-thumb {
+    background: ${Colors.Main10};
+    border-radius: 12px;
+  }
 `;
