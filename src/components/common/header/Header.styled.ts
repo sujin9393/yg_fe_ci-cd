@@ -19,6 +19,10 @@ export const LogoPart = styled.div`
   cursor: pointer;
 `;
 
+export const ServiceName = styled.img`
+  width: 100px;
+`;
+
 export const SidePart = styled.div`
   display: flex;
   margin-left: auto;
