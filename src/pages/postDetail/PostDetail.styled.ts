@@ -126,6 +126,7 @@ export const SectionDivider = styled.div`
 
 export const SectionName = styled.p`
   ${FontStyles.XS_SemiBold}
+  width: 55px;
 `;
 
 export const DetailInfo = styled.div`

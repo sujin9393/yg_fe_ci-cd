@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { Colors, FontStyles } from "../../../styles";
 
 export const RowScrollSection = styled.div`
-  overflow-x: auto;
   display: flex;
   flex-direction: column;
   margin: 15px 0px 20px 20px;
