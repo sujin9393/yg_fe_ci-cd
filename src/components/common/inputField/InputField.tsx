@@ -13,7 +13,7 @@ const InputField = ({
   placeholder,
   helperText,
   type = "text",
-  required = false,
+  required = true,
   ...rest // ✅ 여기로 register가 넘겨주는 props(value, onChange 등)가 들어옴
 }: InputFieldProps) => {
   return (

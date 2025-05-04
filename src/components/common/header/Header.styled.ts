@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { FontStyles } from "../../../styles";
+import User from "../../../assets/icons/User.svg?react";
 
 export const HeaderContainer = styled.div`
   position: relative;
@@ -35,7 +36,8 @@ export const AlertIcon = styled.img`
   width: 24px;
 `;
 
-export const ProfileIcon = styled.img`
+export const ProfileIcon = styled(User)`
   width: 24px;
   cursor: pointer;
+  stroke-width: 2px;
 `;
