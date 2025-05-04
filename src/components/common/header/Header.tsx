@@ -2,7 +2,7 @@ import * as S from "./Header.styled";
 import Logo from "../../../assets/icons/Logo.svg";
 import Service from "../../../assets/icons/Service.svg";
 //import Bell from "../../../assets/icons/Bell.svg";
-import User from "../../../assets/icons/User.svg";
+
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
@@ -21,8 +21,6 @@ const Header = () => {
       <S.SidePart>
         {/*<S.AlertIcon src={Bell} alt="alert" />*/}
         <S.ProfileIcon
-          src={User}
-          alt="profile"
           onClick={() => {
             navigate("/mypage");
           }}

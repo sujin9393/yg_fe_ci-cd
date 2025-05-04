@@ -4,8 +4,11 @@ import { signupSchema, SignupFormData } from "../../schemas/signupSchema";
 import InputField from "../../components/common/inputField/InputField";
 import * as S from "./Signup.styled";
 import Button from "../../components/common/button/Button";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -16,6 +19,7 @@ const Signup = () => {
 
   const onSubmit = (data: SignupFormData) => {
     console.log("제출된 데이터:", data);
+    navigate("/signupInfo");
   };
 
   return (
