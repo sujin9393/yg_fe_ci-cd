@@ -1,15 +1,15 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import InputField from "../../components/common/inputField/InputField";
 import * as S from "./SignupInfo.styled";
 import Button from "../../components/common/button/Button";
 import {
   SignupInfoFormData,
   signupInfoSchema,
 } from "../../schemas/signupInfoSchema";
-import Dropdown from "../../components/common/dropdown/Dropdown";
 import SignupCheckbox from "../../components/signupInfo/agreeCheckbox/AgreeCheckBox";
-import ImageUploader from "../../components/common/imageUploader/ImageUploader";
+import InputField from "../../components/common/input/inputField/InputField";
+import Dropdown from "../../components/common/input/dropdown/Dropdown";
+import ImageUploader from "../../components/common/image/imageUploader/ImageUploader";
 
 const inputFields = [
   {

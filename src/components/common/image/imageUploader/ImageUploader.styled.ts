@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { Colors } from "../../../styles";
-import User from "../../../assets/icons/User.svg?react";
-import Camera from "../../../assets/icons/Camera.svg?react";
+import { Colors } from "../../../../styles";
+import User from "../../../../assets/icons/User.svg?react";
+import Camera from "../../../../assets/icons/Camera.svg?react";
 
 export const Container = styled.div`
   display: flex;

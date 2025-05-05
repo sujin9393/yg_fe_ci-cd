@@ -1,8 +1,8 @@
-import ImageSlider from "../../components/common/imageSlider/ImageSlider";
 import * as S from "./PostDetail.styled";
 import CurrentParti from "../../components/common/currentParti/CurrentParti";
 import { SectionLine } from "../../components/common/SectionLine.styled";
 import Profile from "../../components/common/profile/Profile";
+import ImageSlider from "../../components/common/image/imageSlider/ImageSlider";
 
 const PostDetail = () => {
   return (

@@ -2,13 +2,13 @@ import * as S from "./Button.styled";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  buttonStyle?: "round" | "square"; // ✅ 커스텀 prop은 명시 필요
+  buttonStyle?: "round" | "square";
 }
 
 const Button = ({
   type = "button",
   children,
-  buttonStyle,
+  buttonStyle = "round",
   ...props
 }: ButtonProps) => {
   return (

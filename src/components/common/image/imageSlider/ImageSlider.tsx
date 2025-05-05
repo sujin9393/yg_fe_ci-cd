@@ -1,6 +1,6 @@
 import * as S from "./ImageSlider.styled";
-import 참치1 from "../../../assets/images/참치1.png";
-import 참치2 from "../../../assets/images/참치2.png";
+import 참치1 from "../../../../assets/images/참치1.png";
+import 참치2 from "../../../../assets/images/참치2.png";
 import { useState } from "react";
 
 const images = [참치1, 참치2];
