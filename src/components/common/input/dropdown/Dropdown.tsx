@@ -7,16 +7,17 @@ interface Option {
 }
 
 interface DropdownProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
-  label: string;
+  label?: string;
   options: Option[];
-  helperText?: string;
+  width?: string;
+  helperText?: React.ReactNode;
 }
 
 const Dropdown = forwardRef<HTMLSelectElement, DropdownProps>(
-  ({ label, options, helperText, ...props }, ref) => {
+  ({ label, options, width, helperText, ...props }, ref) => {
     return (
-      <S.Container>
-        <S.Label>{label}</S.Label>
+      <S.Container $width={width}>
+        {label && <S.Label>{label}</S.Label>}
         <S.Select ref={ref} {...props}>
           {options.map((option) => (
             <S.Option key={option.value} value={option.value}>

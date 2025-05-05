@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { Colors } from "../../../styles";
-import RightArrow from "../../../assets/icons/RightArrow.svg?react";
-import LeftArrow from "../../../assets/icons/LeftArrow.svg?react";
+import { Colors } from "../../../../styles";
+import RightArrow from "../../../../assets/icons/RightArrow.svg?react";
+import LeftArrow from "../../../../assets/icons/LeftArrow.svg?react";
 
 export const ImageSliderContainer = styled.div`
   position: relative;

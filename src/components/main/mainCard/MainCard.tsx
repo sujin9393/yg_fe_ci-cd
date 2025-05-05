@@ -1,4 +1,4 @@
-import ImageContainer from "../../common/imageContainer/ImageContainer";
+import ImageContainer from "../../common/image/imageContainer/ImageContainer";
 import * as S from "./MainCard.styled";
 
 interface MainCardProps {

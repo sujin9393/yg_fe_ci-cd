@@ -1,9 +1,9 @@
 import * as S from "./MyListCard.styled";
-import ImageContainer from "../../imageContainer/ImageContainer";
 import 참치 from "../../../../assets/images/참치1.png";
 import ShoppingBag from "../../../../assets/icons/ShoppingBag.svg";
 import CurrentParti from "../../currentParti/CurrentParti";
 import { SectionLine } from "../../SectionLine.styled";
+import ImageContainer from "../../image/imageContainer/ImageContainer";
 
 const MyListCard = () => {
   return (
