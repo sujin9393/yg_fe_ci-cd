@@ -1,11 +1,17 @@
 import styled from "styled-components";
 import User from "../../../assets/icons/User.svg?react";
+import GoBackIcon from "../../../assets/icons/GoBack.svg?react";
 
 export const HeaderContainer = styled.div`
   position: relative;
   height: 54px;
   display: flex;
   align-items: center;
+`;
+
+export const GoBack = styled(GoBackIcon)`
+  margin-left: 20px;
+  cursor: pointer;
 `;
 
 export const LogoPart = styled.div`

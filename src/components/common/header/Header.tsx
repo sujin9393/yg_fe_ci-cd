@@ -1,15 +1,17 @@
 import * as S from "./Header.styled";
 import Logo from "../../../assets/icons/Logo.svg";
 import Service from "../../../assets/icons/Service.svg";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useModalStore } from "../../../stores/useModalStore";
 
 const Header = () => {
   const openModal = useModalStore((s) => s.openModal);
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   return (
     <S.HeaderContainer>
+      {pathname !== "/" && <S.GoBack onClick={() => navigate(-1)} />}
       <S.LogoPart
         onClick={() => {
           navigate("/");
