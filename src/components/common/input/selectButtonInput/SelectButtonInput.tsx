@@ -31,7 +31,7 @@ const SelectButtonInput = ({
   };
 
   useEffect(() => {
-    setAmount(initial); // 또는 setAmount(unit)도 가능
+    setAmount(unit); // 또는 setAmount(unit)도 가능
   }, [unit]);
 
   return (
