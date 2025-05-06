@@ -3,8 +3,11 @@ import CurrentParti from "../../components/common/currentParti/CurrentParti";
 import { SectionLine } from "../../components/common/SectionLine.styled";
 import Profile from "../../components/common/profile/Profile";
 import ImageSlider from "../../components/common/image/imageSlider/ImageSlider";
+import { useModalStore } from "../../stores/useModalStore";
 
 const PostDetail = () => {
+  const openModal = useModalStore((s) => s.openModal);
+
   return (
     <S.PostDetailContainer>
       <S.TopSection>
@@ -28,7 +31,9 @@ const PostDetail = () => {
             <S.unitAmount>(주문 단위: 5)</S.unitAmount>
           </S.ProductInfo>
           <S.OrderInfo>
-            <S.OrderButton>주문참여</S.OrderButton>
+            <S.OrderButton onClick={() => openModal("order")}>
+              주문참여
+            </S.OrderButton>
             <CurrentParti />
             <S.Ddate>마감까지 D-2</S.Ddate>
           </S.OrderInfo>

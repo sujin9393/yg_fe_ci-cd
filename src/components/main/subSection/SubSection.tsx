@@ -4,7 +4,7 @@ import 참치1 from "../../../assets/images/참치1.png";
 import 참치2 from "../../../assets/images/참치2.png";
 import tomato from "../../../assets/images/Tomato.png";
 import 샤프란 from "../../../assets/images/샤프란.png";
-import yummy from "../../../assets/images/yummy.png";
+import yummy from "../../../assets/images/Yummy.png";
 
 const SubSection = () => {
   return (

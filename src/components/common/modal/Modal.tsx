@@ -1,6 +1,5 @@
-import { useEffect } from 'react';
-import * as S from './Modal.Style';
-import { ModalPortal } from './Portal';
+import { useEffect } from "react";
+import * as S from "./Modal.Style";
 
 interface ModalProps {
   children: React.ReactNode;
@@ -16,19 +15,16 @@ interface ModalProps {
 
 const Modal = ({ children, onClose }: ModalProps) => {
   useEffect(() => {
-    document.body.style.overflow = 'hidden';
-
+    document.body.style.overflow = "hidden";
     return () => {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = "auto";
     };
   }, []);
 
   return (
-    <ModalPortal>
-      <S.Mask onClick={onClose}>
-        <S.ModalBody onClick={(e) => e.stopPropagation()}>{children}</S.ModalBody>
-      </S.Mask>
-    </ModalPortal>
+    <S.Mask onClick={onClose}>
+      <S.ModalBody onClick={(e) => e.stopPropagation()}>{children}</S.ModalBody>
+    </S.Mask>
   );
 };
 

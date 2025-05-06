@@ -12,10 +12,10 @@ const Colors = {
   Grayscale10: "#F1F2F7", // 채팅색
   Grayscale20: "#F1F1F3", // 연회색 배경
   Grayscale30: "#DFE0DF", // 구분선
-  Grayscale40: "#D9D9D9", // 입력칸 고정일때
+  Grayscale40: "#D9D9D9", // 입력칸 고정일때, 연한 테두리
   Grayscale50: "#B3B3B3", // 입력칸 테두리, 글자
   Grayscale60: "#6B6A71", // 글자2
-  Grayscale70: "#2F4858", // 블루그레이 (보조 텍스트/배경)
+  Grayscale70: "#2F4858", // 상품리스트 상품 이름
   Grayscale80: "#292D2F", // 검정 강조
   Grayscale90: "#000000", // 검정
 };
