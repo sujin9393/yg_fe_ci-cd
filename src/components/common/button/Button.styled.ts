@@ -1,12 +1,17 @@
 import styled from "styled-components";
 import { Colors, FontStyles } from "../../../styles";
 
-export const Button = styled.button<{ $buttonStyle?: "round" | "square" }>`
+export const Button = styled.button<{
+  $buttonStyle?: "round" | "square";
+  $buttonState?: "confirm" | "cancel";
+}>`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${Colors.Main10};
-  color: ${Colors.Grayscale0};
+  background-color: ${({ $buttonState }) =>
+    $buttonState === "cancel" ? Colors.Grayscale10 : Colors.Main10};
+  color: ${({ $buttonState }) =>
+    $buttonState === "cancel" ? Colors.Grayscale60 : Colors.Grayscale0};
   ${FontStyles.MD2_Bold};
   border: none;
   border-radius: ${({ $buttonStyle }) =>

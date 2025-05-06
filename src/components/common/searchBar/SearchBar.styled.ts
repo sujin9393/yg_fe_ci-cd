@@ -31,7 +31,7 @@ export const SearchText = styled.input`
   outline: none;
 
   &::placeholder {
-    color: ${Colors.Grayscale5};
+    color: ${Colors.Grayscale50};
   }
 `;
 

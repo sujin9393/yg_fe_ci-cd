@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { FontStyles } from "../../../styles";
 import User from "../../../assets/icons/User.svg?react";
 
 export const HeaderContainer = styled.div`
@@ -16,7 +15,6 @@ export const LogoPart = styled.div`
   transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
-  ${FontStyles.MD1_SemiBold};
   cursor: pointer;
 `;
 
