@@ -6,10 +6,10 @@ import {
   SignupInfoFormData,
   signupInfoSchema,
 } from "../../schemas/signupInfoSchema";
-import SignupCheckbox from "../../components/signupInfo/agreeCheckbox/AgreeCheckBox";
 import InputField from "../../components/common/input/inputField/InputField";
 import Dropdown from "../../components/common/input/dropdown/Dropdown";
 import ImageUploader from "../../components/common/image/imageUploader/ImageUploader";
+import AgreeCheckBox from "../../components/common/agreeCheckbox/AgreeCheckBox";
 
 const inputFields = [
   {
@@ -78,7 +78,9 @@ const Signup = () => {
           {...register("accountNumber")}
           helperText={errors.accountNumber?.message}
         />
-        <SignupCheckbox
+        <AgreeCheckBox
+          label="개인정보 수집 동의"
+          message="동의"
           {...register("agree")}
           checked={watch("agree") ?? false} // watch로 체크 여부 관리
           helperText={errors.agree?.message}

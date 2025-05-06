@@ -33,4 +33,5 @@ export const PartCountMent = styled.p`
 export const StyledUserIcon = styled(UserIcon)`
   color: ${Colors.Main60};
   width: 18px;
+  stroke-width: 2px;
 `;

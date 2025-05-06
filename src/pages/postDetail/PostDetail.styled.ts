@@ -103,6 +103,7 @@ export const OrderButton = styled.button`
   background-color: ${Colors.Main10};
   color: ${Colors.Grayscale0};
   margin-bottom: 5px;
+  cursor: pointer;
 `;
 
 export const Ddate = styled.p`

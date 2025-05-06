@@ -12,6 +12,10 @@ export const Container = styled.div`
   padding: 40px 30px;
   border-radius: 20px;
   position: relative;
+  position: absolute;
+  top: 50%;
+  // left: 50%;
+  transform: translate(-50%, -50%);
 `;
 
 export const StyledXIcon = styled(XIcon)`
