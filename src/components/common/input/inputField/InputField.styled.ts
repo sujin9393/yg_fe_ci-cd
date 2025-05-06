@@ -7,7 +7,9 @@ export const InputFieldContainer = styled.div`
   width: 100%;
 `;
 
-export const InputLabel = styled.label<{ $styleType?: "signup" | "post" }>`
+export const InputLabel = styled.label<{
+  $styleType?: "signup" | "post" | "login";
+}>`
   ${({ $styleType }) =>
     $styleType === "signup" ? FontStyles.SM_Regular : FontStyles.MD2_Bold}
 
@@ -37,11 +39,15 @@ export const Suffix = styled.span`
 export const InputBox = styled.input<{
   $prefix?: React.ReactNode;
   $suffix?: React.ReactNode;
+  $styleType?: "signup" | "post" | "login";
 }>`
   width: 100%;
   border-radius: 8px;
   height: 40px;
-  border: 1px solid ${Colors.Grayscale50};
+  border: ${({ $styleType }) =>
+    $styleType === "login" ? "none" : `1px solid ${Colors.Grayscale50}`};
+  background-color: ${({ $styleType }) =>
+    $styleType === "login" ? Colors.Grayscale10 : Colors.Grayscale0};
   padding-left: ${({ $prefix }) => ($prefix ? "30px" : "15px")};
   padding-right: ${({ $suffix }) => ($suffix ? "30px" : "15px")};
   &::placeholder {
