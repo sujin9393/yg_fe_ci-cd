@@ -10,6 +10,7 @@ on:
 env:
   IMAGE_NAME: sally2020s/yg-fe
   CONTAINER_NAME: yg-frontend
+  WORKDIR: .  # Dockerfile과 모든 소스가 루트에 있음
 
 jobs:
   ci:
