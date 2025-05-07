@@ -10,7 +10,6 @@ on:
 env:
   IMAGE_NAME: sally2020s/yg-fe
   CONTAINER_NAME: yg-frontend
-  WORKDIR: ./frontend  # 실제 소스 디렉토리 맞게 수정
 
 jobs:
   ci:
@@ -52,7 +51,6 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-        working-directory: ${{ env.WORKDIR }}
 
       - name: Build frontend (Vite)
         run: npm run build
@@ -66,8 +64,8 @@ jobs:
       - name: Docker build & push
         uses: docker/build-push-action@v5
         with:
-          context: ${{ env.WORKDIR }}
-          file: ${{ env.WORKDIR }}/Dockerfile
+          context: .
+          file: ./Dockerfile
           push: true
           tags: ${{ env.IMAGE_NAME }}:latest
 
