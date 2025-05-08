@@ -24,7 +24,7 @@ const Profile = ({ type, user }: ProfileProps) => {
       <S.ProfilePart>
         <S.ProfileImg $type={type} src={tomato} alt="프로필 이미지" />
         <S.ProfileInfo>
-          <S.NameInfo>{user.nickName}</S.NameInfo>
+          <S.NameInfo>{user.nickname}</S.NameInfo>
           {type === "mypage" && (
             <>
               <S.RealName>{user.name}</S.RealName>

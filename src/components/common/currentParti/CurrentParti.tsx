@@ -1,15 +1,27 @@
 import * as S from "./CurrentParti.styled";
 import Package from "../../../assets/icons/Package.svg";
 
-const CurrentParti = () => {
+interface CurrentPartiProps {
+  soldAmount: number;
+  totalAmount: number;
+  participantCount: number;
+}
+
+const CurrentParti = ({
+  soldAmount,
+  totalAmount,
+  participantCount,
+}: CurrentPartiProps) => {
   return (
     <S.CurrentParticipation>
       <S.AmountPart>
-        <S.Amount>45/80</S.Amount>
+        <S.Amount>
+          {soldAmount}/{totalAmount}
+        </S.Amount>
         <img src={Package} alt="박스 아이콘" />
       </S.AmountPart>
       <S.PartCount>
-        <S.PartCountMent>5명 참여 중!</S.PartCountMent>
+        <S.PartCountMent>{participantCount}명 참여 중!</S.PartCountMent>
         <S.StyledUserIcon />
       </S.PartCount>
     </S.CurrentParticipation>

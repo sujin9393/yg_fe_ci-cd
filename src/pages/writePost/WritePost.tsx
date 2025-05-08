@@ -47,14 +47,14 @@ const WritePost = () => {
 
   const handleFormSubmit = async (data: PostFormData) => {
     try {
-      // 1. 이미지 업로드
-      const imageUrls = await uploadImages(imageFiles); // File[]은 외부 상태에서 가져오기
-      console.log("업로드 결과:", imageUrls);
+      // 1. 이미지 업로드 (key만 반환됨)
+      const imageKeys = await uploadImages(imageFiles); // ← File[]은 외부 상태에서 가져오는 것으로 가정
+      console.log("업로드 결과 (S3 keys):", imageKeys);
 
       // 2. 최종 payload 구성
       const payload = {
         ...data,
-        imageUrls,
+        imageKeys: imageKeys,
         location: "카카오테크 부트캠프장",
         dueDate: formatDateTimeForDTO(data.dueDate),
         pickupDate: formatDateTimeForDTO(data.pickupDate),

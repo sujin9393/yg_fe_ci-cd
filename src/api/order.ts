@@ -1,11 +1,5 @@
+import { OrderRequestData } from "../types/orderTypes";
 import api from "./instance";
-
-interface OrderRequestData {
-  postId: number;
-  price: number;
-  quantity: number;
-  name: string;
-}
 
 /**
  * 주문 등록
@@ -17,11 +11,12 @@ export const postOrder = async (data: OrderRequestData) => {
   try {
     const res = await api.post("/api/orders", data);
 
-    if (res.data.data) {
-      return res.data.data;
+    if (res.data) {
+      return res.data;
     }
   } catch (error) {
-    console.error("회원가입 실패:", error);
+    console.error("주문 실패:", error);
+    throw error;
   }
 };
 

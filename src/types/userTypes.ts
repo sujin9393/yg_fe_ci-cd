@@ -1,6 +1,7 @@
 export interface UserInfo {
   userId: number;
-  nickName: string;
+  nickname: string;
+  accountBank: string;
   accountNumber: string;
   profileImageUrl: string;
 }

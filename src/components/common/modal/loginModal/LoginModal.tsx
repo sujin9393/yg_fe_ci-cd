@@ -9,12 +9,12 @@ import { useNavigate } from "react-router-dom";
 import { LoginFormData, loginSchema } from "../../../../schemas/loginSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { login } from "../../../../api/user";
-import { useUserStore } from "../../../../stores/useUserStore";
+import { useLoginMutation } from "../../../../hooks/mutations/user/useLoginMutation";
 
 const LoginModal = () => {
   const navigate = useNavigate();
   const closeModal = useModalStore((s) => s.closeModal);
+  const { mutate: loginMutate } = useLoginMutation();
 
   const {
     register,
@@ -22,21 +22,11 @@ const LoginModal = () => {
     formState: { errors },
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
+    mode: "onChange",
   });
 
-  const handleLogin = async (data: LoginFormData) => {
-    try {
-      const res = await login(data); // 서버에 요청
-      console.log("로그인 성공", res);
-      useUserStore.getState().setUser(res); // ✅ 상태 저장
-      closeModal();
-    } catch (err) {
-      console.error("로그인 실패", err);
-    }
-  };
-
   const onSubmit = (data: LoginFormData) => {
-    handleLogin(data);
+    loginMutate(data);
   };
 
   const handleSignupClick = () => {

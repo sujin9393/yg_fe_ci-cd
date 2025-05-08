@@ -8,13 +8,37 @@ import AgreeCheckBox from "../../agreeCheckbox/AgreeCheckBox";
 import { DotIcon } from "../../DotIcon.styled";
 import Button from "../../button/Button";
 import { SectionLine } from "../../SectionLine.styled";
+import { useOrderStore } from "../../../../stores/useOrderStore";
+import { useUserStore } from "../../../../stores/useUserStore";
+import { useOrderMutation } from "../../../../hooks/mutations/order/useOrderMutation";
 
 const OrderModal = () => {
   const closeModal = useModalStore((s) => s.closeModal);
+  const { user } = useUserStore();
+  const [payerName, setPayerName] = useState(user?.name || "");
 
-  const unitPrice = 1400;
-  const [quantity, setQuantity] = useState(3);
+  const {
+    postId,
+    productName,
+    unitPrice,
+    unitAmount,
+    totalAmount,
+    hostAccountBank,
+    hostAccountNumber,
+  } = useOrderStore();
+
+  const { mutate: orderMutate } = useOrderMutation(postId);
+  const [quantity, setQuantity] = useState(unitAmount);
   const totalPrice = quantity * unitPrice;
+
+  const handleOrder = () => {
+    orderMutate({
+      postId,
+      price: totalPrice,
+      quantity,
+      name: payerName,
+    });
+  };
 
   return (
     <Modal onClose={closeModal}>
@@ -22,16 +46,20 @@ const OrderModal = () => {
         <S.CloseButton onClick={closeModal} />
         <S.ContainerLabel>수량 선택</S.ContainerLabel>
         <SectionLine />
-        <S.Name>[동원] 라이트스탠다드 참치 85g X 25캔 </S.Name>
+        <S.Name>{productName}</S.Name>
         <S.MainPart>
           <S.SelectAmount>
             <S.Label>수량선택</S.Label>
             <S.UnitAmount>
               <S.StyledOpenBox />
-              주문단위: 3
+              주문단위: {unitAmount}
             </S.UnitAmount>
             <S.AboutPrice>
-              <SelectButtonInput unit={3} onChange={setQuantity} />
+              <SelectButtonInput
+                unit={unitAmount}
+                max={totalAmount}
+                onChange={setQuantity}
+              />
               <S.PriceInfo>
                 <S.Info>(개)당 금액</S.Info>
                 <S.Price>{unitPrice.toLocaleString()}원</S.Price>
@@ -50,8 +78,14 @@ const OrderModal = () => {
           </S.TotalInfo>
           <S.AccountInfo>
             <S.Label>계좌이체</S.Label>
-            <S.Account>주최자 계좌번호: 우리은행~1</S.Account>
-            <InputField placeholder="입금자명을 입력해주세요." />
+            <S.Account>
+              주최자 계좌번호: {hostAccountBank} {hostAccountNumber}
+            </S.Account>
+            <InputField
+              value={payerName}
+              onChange={(e) => setPayerName(e.target.value)}
+              placeholder="입금자명을 입력해주세요."
+            />
             <S.Guide>
               <DotIcon />
               입금자명은 수령 시 확인 가능한 본인 이름으로 입력해주세요. <br />
@@ -67,7 +101,9 @@ const OrderModal = () => {
             />
           </S.AccountInfo>
         </S.MainPart>
-        <Button buttonStyle="square">주문</Button>
+        <Button buttonStyle="square" onClick={handleOrder}>
+          주문
+        </Button>
       </S.Container>
     </Modal>
   );

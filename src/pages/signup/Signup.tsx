@@ -15,6 +15,7 @@ const Signup = () => {
     formState: { errors },
   } = useForm<SignupFormData>({
     resolver: zodResolver(signupSchema),
+    mode: "onChange",
   });
 
   const onSubmit = (data: SignupFormData) => {

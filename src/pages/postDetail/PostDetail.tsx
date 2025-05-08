@@ -4,57 +4,50 @@ import { SectionLine } from "../../components/common/SectionLine.styled";
 import Profile from "../../components/common/profile/Profile";
 import ImageSlider from "../../components/common/image/imageSlider/ImageSlider";
 import { useModalStore } from "../../stores/useModalStore";
-import { useEffect, useState } from "react";
-import { getPost } from "../../api/product";
-import { GroupBuyImage } from "../../components/main/subSection/SubSection";
 import { useParams } from "react-router-dom";
-import { UserInfo } from "../../types/userTypes";
-import { formatDateTime, formatRelativeTime } from "../../utils/date";
-
-interface PostProps {
-  title: string;
-  name: string;
-  postStatus: string;
-  description: string;
-  url: string;
-  imageUrls: GroupBuyImage[];
-  location: string;
-  unitPrice: number;
-  unitAmount: number;
-  soldAmount: number;
-  totalAmount: number;
-  participantCount: number;
-  dueSoon: boolean;
-  isWish: boolean;
-  isParticipant: boolean;
-  createdAt: string;
-  userProfileResponse: UserInfo;
-}
+import { formatDateTime, formatRelativeTime, getDday } from "../../utils/date";
+import { useOrderStore } from "../../stores/useOrderStore";
+import { useProductDetail } from "../../hooks/queries/product/useProductDetail";
+import { useUserStore } from "../../stores/useUserStore";
 
 const PostDetail = () => {
   const openModal = useModalStore((s) => s.openModal);
-  const [post, setPost] = useState<PostProps | null>(null);
-  const { postId } = useParams();
 
-  useEffect(() => {
-    if (!postId) return;
-    const fetchData = async () => {
-      const res = await getPost(Number(postId));
-      if (res) {
-        setPost(res);
-        console.log(res);
-        console.log(res.userProfileResponse);
-      }
-    };
-    fetchData();
-  }, [postId]);
+  const setOrderInfo = useOrderStore((s) => s.setOrderInfo);
+  const { postId } = useParams();
+  const user = useUserStore((s) => s.user);
+  const { data: post, isLoading, isError } = useProductDetail(Number(postId));
+
+  const handleOrderClick = () => {
+    if (!post) return;
+
+    if (!user) {
+      openModal("login");
+      return;
+    }
+
+    setOrderInfo({
+      postId: post.postId,
+      productName: post.name,
+      unitPrice: post.unitPrice,
+      unitAmount: post.unitAmount,
+      totalAmount: post.totalAmount,
+      hostAccountBank: post.userProfileResponse.accountBank ?? "정보없음",
+      hostAccountNumber: post.userProfileResponse.accountNumber ?? "정보없음",
+    });
+
+    openModal("order");
+  };
+
+  if (isLoading) return <div>로딩중...</div>;
+  if (isError || !post) return <div>에러 발생</div>;
 
   return (
     <S.PostDetailContainer>
       {post && (
         <>
           <S.TopSection>
-            <ImageSlider images={post.imageUrls?.map((img) => img.imageUrl)} />
+            <ImageSlider images={post.imageKeys?.map((img) => img.imageKey)} />
             <Profile type="post" user={post.userProfileResponse} />
           </S.TopSection>
           <SectionLine />
@@ -66,17 +59,21 @@ const PostDetail = () => {
             <S.InfoPart>
               <S.ProductInfo>
                 <S.PickupDate>
-                  픽업 {formatDateTime(post.createdAt)} / {post.location}
+                  픽업 {formatDateTime(post.pickupDate)} / {post.location}
                 </S.PickupDate>
                 <S.unitPrice>{post.unitPrice.toLocaleString()}원</S.unitPrice>
                 <S.unitAmount>(주문 단위: {post.unitAmount})</S.unitAmount>
               </S.ProductInfo>
               <S.OrderInfo>
-                <S.OrderButton onClick={() => openModal("order")}>
+                <S.OrderButton onClick={handleOrderClick}>
                   주문참여
                 </S.OrderButton>
-                <CurrentParti />
-                <S.Ddate>마감까지 D-2</S.Ddate>
+                <CurrentParti
+                  soldAmount={post.soldAmount}
+                  totalAmount={post.totalAmount}
+                  participantCount={post.participantCount}
+                />
+                <S.Ddate>마감까지 {getDday(post.dueDate)}</S.Ddate>
               </S.OrderInfo>
             </S.InfoPart>
             <S.DetailPart>

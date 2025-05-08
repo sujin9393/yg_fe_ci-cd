@@ -1,16 +1,17 @@
 import ImageContainer from "../../common/image/imageContainer/ImageContainer";
 import * as S from "./MainCard.styled";
+import { getImageUrl } from "./../../../utils/image";
 
 interface MainCardProps {
-  imageUrl: string;
+  imageKey: string;
   title: string;
-  unitPrice: number;
+  unitPrice: string;
   unitAmount: number;
   onClick?: () => void;
 }
 
 const MainCard = ({
-  imageUrl,
+  imageKey,
   title,
   unitPrice,
   unitAmount,
@@ -18,7 +19,7 @@ const MainCard = ({
 }: MainCardProps) => {
   return (
     <S.MainCardContainer onClick={onClick}>
-      <ImageContainer imageUrl={`https://moongsan.com/${imageUrl}`} />
+      <ImageContainer imageUrl={getImageUrl(imageKey)} />
       <S.CardInfo>
         <S.CardTitle>{title}</S.CardTitle>
         <S.UnitInfo>

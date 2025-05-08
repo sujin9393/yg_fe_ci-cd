@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import { LoginFormData } from "../schemas/loginSchema";
 import api from "./instance";
 
@@ -30,6 +31,30 @@ export const postUser = async (data: SignupRequestData) => {
 };
 
 /**
+ * 닉네임 중복확인
+ * @returns
+ */
+export const confirmNickname = async (nickname: string) => {
+  try {
+    const res = await api.get("/api/users/check-nickname", {
+      params: { nickname },
+    });
+
+    if (res.data.data) {
+      return res.data.data;
+    } else {
+      throw new Error("응답에 data가 없습니다");
+    }
+  } catch (error) {
+    console.log(error);
+    if (error instanceof AxiosError && error.response?.data?.message) {
+      throw new Error(error.response.data.message); // 서버 메시지를 직접 전달
+    }
+    throw new Error("닉네임 확인 중 오류가 발생했습니다.");
+  }
+};
+
+/**
  * 로그인
  * @param email
  * @param password
@@ -41,9 +66,12 @@ export const login = async (data: LoginFormData) => {
 
     if (res.data.data) {
       return res.data.data;
+    } else {
+      throw new Error("응답에 data가 없습니다");
     }
   } catch (error) {
     console.error("로그인 실패:", error);
+    throw error; // 🔥 다시 던지기!
   }
 };
 
