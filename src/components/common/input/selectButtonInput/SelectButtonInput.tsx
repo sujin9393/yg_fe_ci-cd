@@ -4,7 +4,7 @@ import * as S from "./SelectButtonInput.styled";
 interface SelectButtonInputProps {
   unit: number; // 수량 증가 단위 (ex: 1, 2, 5 ...)
   min?: number;
-  max?: number;
+  max: number;
   initial?: number;
   onChange?: (value: number) => void;
 }
@@ -12,7 +12,7 @@ interface SelectButtonInputProps {
 const SelectButtonInput = ({
   unit,
   min = unit,
-  max = 100,
+  max,
   initial = unit,
   onChange,
 }: SelectButtonInputProps) => {

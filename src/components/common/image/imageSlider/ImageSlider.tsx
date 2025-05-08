@@ -1,3 +1,4 @@
+import { getImageUrl } from "../../../../utils/image";
 import * as S from "./ImageSlider.styled";
 //import 참치1 from "../../../../assets/images/참치1.png";
 //import 참치2 from "../../../../assets/images/참치2.png";
@@ -62,7 +63,7 @@ const ImageSlider = ({ images }: ImageSliderProps) => {
       >
         {currentIndex !== 0 && <S.StyledLeftArrow onClick={handlePrev} />}
         <S.ImageContainer
-          src={`https://moongsan.com/${images[currentIndex]}`}
+          src={getImageUrl(images[currentIndex])}
         ></S.ImageContainer>
         {currentIndex !== images.length - 1 && (
           <S.StyledRightArrow onClick={handlePrev} />

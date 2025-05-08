@@ -2,10 +2,11 @@ import * as S from "./TopSection.styled";
 import { useEffect, useState } from "react";
 import { GroupBuyImage } from "../subSection/SubSection";
 import { getGroupBuyList } from "../../../api/product";
+import { getImageUrl } from "./../../../utils/image";
 
 interface MainTopItem {
   postId: number;
-  imageUrls: GroupBuyImage[];
+  imageKeys: GroupBuyImage[];
 }
 
 const TopSection = () => {
@@ -19,7 +20,6 @@ const TopSection = () => {
       });
       if (res) {
         setItems(res);
-        console.log(res);
       }
     };
     fetchData();
@@ -29,14 +29,12 @@ const TopSection = () => {
     <S.SectionContainer>
       <S.SectionName>마감 임박!!</S.SectionName>
       <S.ImagePart>
-        <S.BigImage
-          src={`https://moongsan.com/${items[0]?.imageUrls[0]?.imageUrl}`}
-        />
+        <S.BigImage src={getImageUrl(items[0]?.imageKeys[0]?.imageKey)} />
         <S.SmallImagePart>
           {items.slice(1).map((item) => (
             <S.ImageContainer
               key={item.postId}
-              src={`https://moongsan.com/${item?.imageUrls[0]?.imageUrl}`}
+              src={getImageUrl(item?.imageKeys[0]?.imageKey)}
             />
           ))}
         </S.SmallImagePart>

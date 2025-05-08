@@ -1,21 +1,33 @@
 import api from "./instance";
 
+/**
+ * S3 Presigned URL 방식으로 이미지 업로드
+ * @param files 업로드할 File 배열
+ * @returns 업로드된 S3 key 목록
+ */
 export const uploadImages = async (files: File[]) => {
-  const formData = new FormData();
+  const uploadedKeys: string[] = [];
 
-  files.forEach((file) => {
-    formData.append("imageFiles", file); // ✅ ← 정확한 키 이름
-  });
+  for (const file of files) {
+    const fileName = encodeURIComponent(file.name);
 
-  try {
-    const res = await api.post("/api/image", formData, {
+    // 1. Presigned URL 요청
+    const res = await api.get(`/api/image/presign?fileName=${fileName}`);
+    const { key, url } = res.data;
+    console.log(key);
+
+    // 2. S3에 직접 업로드
+    await fetch(url, {
+      method: "PUT",
       headers: {
-        "Content-Type": undefined, // ✅ axios가 자동으로 multipart/form-data 설정
+        "Content-Type": file.type,
       },
+      body: file,
     });
-    return res.data.imageUrls; // 이미지 URL 배열 등 서버 응답
-  } catch (error) {
-    console.error("이미지 업로드 실패:", error);
-    throw error;
+
+    // 3. 업로드된 key 저장 (imageUrl이 아니라 key를 저장해야 메타데이터 연결됨)
+    uploadedKeys.push(key);
   }
+
+  return uploadedKeys; // ex) ["posts/123/550e8400-chicken.png", ...]
 };

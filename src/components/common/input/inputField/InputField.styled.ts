@@ -62,6 +62,14 @@ export const InputBox = styled.input<{
   &:disabled::placeholder {
     color: ${Colors.Grayscale60};
   }
+
+  /* 🔥 자동완성 배경색 제거 (크롬 대응) */
+  &:-webkit-autofill {
+    box-shadow: 0 0 0px 1000px white inset;
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+    -webkit-text-fill-color: #000; /* 텍스트 색도 지정해줘야 함 */
+    transition: background-color 5000s ease-in-out 0s; /* 딜레이로 무효화 */
+  }
 `;
 
 export const InputHelperText = styled.p`

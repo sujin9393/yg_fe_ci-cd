@@ -15,7 +15,7 @@ interface SubSectionProps {
 }
 
 export interface GroupBuyImage {
-  imageUrl: string;
+  imageKey: string;
   isThumbnail: boolean;
   orderIndex: number;
 }
@@ -23,7 +23,7 @@ export interface GroupBuyImage {
 interface GroupBuyItem {
   postId: number;
   title: string;
-  imageUrls: GroupBuyImage[];
+  imageKeys: GroupBuyImage[];
   unitPrice: number;
   unitAmount: number;
   // 필요한 필드 추가로 작성 가능
@@ -41,8 +41,6 @@ const SubSection = ({ title, categoryId }: SubSectionProps) => {
         limit: 10,
       });
       if (res) {
-        console.log(res);
-        console.log("🔍 imageUrls:", res[0].imageUrls[0].imageUrl);
         setGroupBuys(res);
       }
     };
@@ -59,9 +57,9 @@ const SubSection = ({ title, categoryId }: SubSectionProps) => {
               navigate(`/products/${item.postId}`);
             }}
             key={item.postId}
-            imageUrl={item.imageUrls[0]?.imageUrl}
+            imageKey={item.imageKeys[0]?.imageKey}
             title={item.title}
-            unitPrice={item.unitPrice}
+            unitPrice={item.unitPrice.toLocaleString()}
             unitAmount={item.unitAmount}
           />
         ))}

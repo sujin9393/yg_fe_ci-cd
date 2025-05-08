@@ -85,6 +85,7 @@ const UnitAmountSelector = () => {
             render={({ field }) => (
               <SelectButtonInput
                 unit={unit}
+                max={totalAmount}
                 initial={field.value}
                 onChange={field.onChange}
               />

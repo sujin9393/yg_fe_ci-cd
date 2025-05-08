@@ -13,13 +13,10 @@ import AgreeCheckBox from "../../components/common/agreeCheckbox/AgreeCheckBox";
 import { postUser, SignupRequestData } from "../../api/user";
 import { useNavigate } from "react-router-dom";
 import { useUserStore } from "../../stores/useUserStore";
+import { useNicknameCheckMutation } from "../../hooks/mutations/user/useNicknameCheckMutation";
+import { useEffect, useState } from "react";
 
 const inputFields = [
-  {
-    name: "nickname",
-    label: "닉네임",
-    placeholder: "사용할 닉네임 입력",
-  },
   {
     name: "name",
     label: "실명",
@@ -33,8 +30,22 @@ const inputFields = [
 ] as const;
 
 const Signup = () => {
-  //const [user, setGroupBuys] = useState<GroupBuyItem[]>([]);
   const navigate = useNavigate();
+  const { mutate: checkNickname } = useNicknameCheckMutation({
+    onSuccess: (data) => {
+      if (data.isDuplication === "NO") {
+        setIsNicknameChecked(true);
+        setIsNicknameDuplicated(false);
+      } else {
+        setIsNicknameChecked(false);
+        setIsNicknameDuplicated(true);
+      }
+    },
+    onError: () => {
+      setIsNicknameChecked(false);
+      setIsNicknameDuplicated(false);
+    },
+  });
 
   const {
     register,
@@ -43,7 +54,24 @@ const Signup = () => {
     watch,
   } = useForm<SignupInfoFormData>({
     resolver: zodResolver(signupInfoSchema),
+    mode: "onChange",
   });
+
+  const [isNicknameChecked, setIsNicknameChecked] = useState(false);
+  const [isNicknameDuplicated, setIsNicknameDuplicated] = useState(false);
+
+  const nickname = watch("nickname") || "";
+  const isNicknameValid =
+    !errors.nickname && nickname.length >= 2 && nickname.length <= 12;
+
+  const handleClick = () => {
+    checkNickname(nickname);
+  };
+
+  useEffect(() => {
+    setIsNicknameChecked(false);
+    setIsNicknameDuplicated(false);
+  }, [nickname]);
 
   const handleSignup = async (data: SignupRequestData) => {
     try {
@@ -83,7 +111,30 @@ const Signup = () => {
       </S.SectionInfo>
       <S.SignupForm onSubmit={handleSubmit(onSubmit)}>
         {/* <ImageUploader {...register("imageUrl")} styleType="circle" /> */}
-
+        <InputField
+          label="닉네임"
+          placeholder="사용할 닉네임 입력"
+          {...register("nickname")}
+          helperText={
+            errors.nickname?.message ||
+            (isNicknameDuplicated
+              ? "이미 사용 중인 닉네임입니다. 다시 입력해주세요."
+              : !isNicknameChecked && nickname.length >= 2
+                ? "닉네임 중복 확인을 해주세요"
+                : "")
+          }
+          suffix={
+            !isNicknameChecked && ( // ✅ 중복 확인 완료되면 버튼 숨김
+              <S.ConfirmButton
+                type="button"
+                onClick={handleClick}
+                disabled={!isNicknameValid}
+              >
+                중복 확인
+              </S.ConfirmButton>
+            )
+          }
+        />
         {inputFields.map(({ name, label, placeholder }) => (
           <InputField
             key={name}
