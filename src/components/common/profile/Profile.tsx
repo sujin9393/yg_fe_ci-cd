@@ -1,8 +1,15 @@
 import * as S from "./Profile.styled";
-import yummy from "../../../assets/images/Yummy.png";
+import tomato from "../../../assets/images/Tomato.png";
+import { UserInfo } from "../../../types/userTypes";
 
 interface ProfileProps {
   type: "mypage" | "post";
+  user: UserInfo &
+    Partial<{
+      name: string;
+      email: string;
+      phoneNumber: string;
+    }>;
 }
 
 /**
@@ -11,22 +18,22 @@ interface ProfileProps {
  * @returns
  */
 
-const Profile = ({ type }: ProfileProps) => {
+const Profile = ({ type, user }: ProfileProps) => {
   return (
     <div>
       <S.ProfilePart>
-        <S.ProfileImg $type={type} src={yummy} alt="프로필 이미지" />
+        <S.ProfileImg $type={type} src={tomato} alt="프로필 이미지" />
         <S.ProfileInfo>
-          <S.NameInfo>토마토녀</S.NameInfo>
+          <S.NameInfo>{user.nickName}</S.NameInfo>
           {type === "mypage" && (
             <>
-              <S.RealName>이정수</S.RealName>
-              <S.Email>abc@ff</S.Email>
-              <S.PhoneNumber>010-1234-5678</S.PhoneNumber>
+              <S.RealName>{user.name}</S.RealName>
+              <S.Email>{user.email}</S.Email>
+              <S.PhoneNumber>{user.phoneNumber}</S.PhoneNumber>
             </>
           )}
 
-          <S.AccountInfo>주최자 계좌번호 : ~!~!0101010</S.AccountInfo>
+          <S.AccountInfo>주최자 계좌번호 : {user.accountNumber}</S.AccountInfo>
         </S.ProfileInfo>
       </S.ProfilePart>
     </div>

@@ -10,8 +10,19 @@ import InputField from "../../components/common/input/inputField/InputField";
 import DateInput from "../../components/common/input/dateInput/DateInput";
 import TextAreaField from "../../components/common/input/textAreaField/TextAreaField";
 import { HelperText } from "../../components/common/HelperText.styled";
+import { formatDateTimeForDTO } from "../../utils/date";
+import { PostRequestData } from "../../types/productTypes";
+import { writePost } from "../../api/product";
+import { useNavigate } from "react-router-dom";
+import { useUserStore } from "../../stores/useUserStore";
+import { uploadImages } from "../../api/image";
+import { useState } from "react";
 
 const WritePost = () => {
+  const navigate = useNavigate();
+  const user = useUserStore((s) => s.user);
+  const [imageFiles, setImageFiles] = useState<File[]>([]);
+
   const methods = useForm<PostFormData>({
     resolver: zodResolver(writePostSchema),
   });
@@ -23,8 +34,50 @@ const WritePost = () => {
     watch,
   } = methods;
 
+  const handlePost = async (data: PostRequestData) => {
+    console.log(data);
+    try {
+      const res = await writePost(data); // 서버에 요청
+      console.log("공구글 게시 성공", res);
+      navigate(`/products/${res.data.postId}`);
+    } catch (err) {
+      console.error("공구글 게시 실패", err);
+    }
+  };
+
+  const handleFormSubmit = async (data: PostFormData) => {
+    try {
+      // 1. 이미지 업로드
+      const imageUrls = await uploadImages(imageFiles); // File[]은 외부 상태에서 가져오기
+      console.log("업로드 결과:", imageUrls);
+
+      // 2. 최종 payload 구성
+      const payload = {
+        ...data,
+        imageUrls,
+        location: "카카오테크 부트캠프장",
+        dueDate: formatDateTimeForDTO(data.dueDate),
+        pickupDate: formatDateTimeForDTO(data.pickupDate),
+      };
+      if (payload.url === "") {
+        delete payload.url; // 명시적으로 삭제
+      }
+
+      console.log("최종 payload:", payload);
+
+      // 3. 게시글 작성
+      await handlePost(payload);
+    } catch (err) {
+      console.error("전체 게시 실패", err);
+    }
+  };
+
   const onSubmit = (data: PostFormData) => {
-    console.log("제출된 데이터:", data);
+    if (!user) {
+      console.warn("로그인 필요");
+      return;
+    }
+    handleFormSubmit(data);
   };
 
   return (
@@ -33,7 +86,11 @@ const WritePost = () => {
         <S.PostForm onSubmit={handleSubmit(onSubmit)}>
           <MultiImageUploader
             value={watch("imageUrls")}
-            onChange={(urls) => setValue("imageUrls", urls)}
+            onChange={(urls, files) => {
+              setValue("imageUrls", urls);
+              setImageFiles(files);
+            }}
+            helperText={errors.imageUrls?.message}
           />
           <InputField
             label="공구 제목"

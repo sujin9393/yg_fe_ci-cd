@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 
 import * as S from "./UnitAmountSelector.styled";
 import InputField from "../../common/input/inputField/InputField";
@@ -10,6 +10,7 @@ const UnitAmountSelector = () => {
   const {
     register,
     watch,
+    control,
     formState: { errors },
   } = useFormContext();
 
@@ -77,7 +78,18 @@ const UnitAmountSelector = () => {
       {unitAmount && (
         <S.MyParti>
           <S.Label>공구 참여 수량</S.Label>
-          <SelectButtonInput unit={unit} />
+          <Controller
+            name="hostQuantity"
+            control={control}
+            defaultValue={unit}
+            render={({ field }) => (
+              <SelectButtonInput
+                unit={unit}
+                initial={field.value}
+                onChange={field.onChange}
+              />
+            )}
+          />
         </S.MyParti>
       )}
     </div>

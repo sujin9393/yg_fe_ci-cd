@@ -1,6 +1,12 @@
 import styled from "styled-components";
 import { Colors, FontStyles } from "../../../styles";
 
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+`;
+
 export const ScrollWrapper = styled.div`
   display: flex;
   gap: 10px;

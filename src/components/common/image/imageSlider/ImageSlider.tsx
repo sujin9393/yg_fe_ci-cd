@@ -1,11 +1,16 @@
 import * as S from "./ImageSlider.styled";
-import 참치1 from "../../../../assets/images/참치1.png";
-import 참치2 from "../../../../assets/images/참치2.png";
+//import 참치1 from "../../../../assets/images/참치1.png";
+//import 참치2 from "../../../../assets/images/참치2.png";
 import { useState } from "react";
+//import { GroupBuyImage } from "../../../main/subSection/SubSection";
 
-const images = [참치1, 참치2];
+//const images = [참치1, 참치2];
 
-const ImageSlider = () => {
+interface ImageSliderProps {
+  images: string[];
+}
+
+const ImageSlider = ({ images }: ImageSliderProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
   const [touchEndX, setTouchEndX] = useState<number | null>(null);
@@ -56,7 +61,9 @@ const ImageSlider = () => {
         onTouchEnd={handleTouchEnd}
       >
         {currentIndex !== 0 && <S.StyledLeftArrow onClick={handlePrev} />}
-        <S.ImageContainer src={images[currentIndex]}></S.ImageContainer>
+        <S.ImageContainer
+          src={`https://moongsan.com/${images[currentIndex]}`}
+        ></S.ImageContainer>
         {currentIndex !== images.length - 1 && (
           <S.StyledRightArrow onClick={handlePrev} />
         )}

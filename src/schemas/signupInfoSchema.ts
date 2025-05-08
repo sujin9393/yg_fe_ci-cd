@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const signupInfoSchema = z.object({
-  profileImage: z.any().optional(),
+  //imageUrl: z.any().optional(),
   nickname: z.string().min(2, "닉네임은 2자 이상이어야 해요."),
   name: z.string().min(1, "이름을 입력해 주세요."),
   phoneNumber: z

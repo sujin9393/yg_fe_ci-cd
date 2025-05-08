@@ -6,6 +6,7 @@ interface MainCardProps {
   title: string;
   unitPrice: number;
   unitAmount: number;
+  onClick?: () => void;
 }
 
 const MainCard = ({
@@ -13,10 +14,11 @@ const MainCard = ({
   title,
   unitPrice,
   unitAmount,
+  onClick,
 }: MainCardProps) => {
   return (
-    <S.MainCardContainer>
-      <ImageContainer imageUrl={imageUrl} />
+    <S.MainCardContainer onClick={onClick}>
+      <ImageContainer imageUrl={`https://moongsan.com/${imageUrl}`} />
       <S.CardInfo>
         <S.CardTitle>{title}</S.CardTitle>
         <S.UnitInfo>
