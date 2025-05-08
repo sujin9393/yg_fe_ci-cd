@@ -4,12 +4,12 @@ import { Colors, FontStyles } from "../../../styles";
 export const ProfilePart = styled.div`
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 10px;
 `;
 
 export const ProfileImg = styled.img<{ $type: "mypage" | "post" }>`
-  width: ${({ $type }) => ($type === "mypage" ? "62px" : "36px")};
-  height: ${({ $type }) => ($type === "mypage" ? "62px" : "36px")};
+  width: ${({ $type }) => ($type === "mypage" ? "70px" : "36px")};
+  height: ${({ $type }) => ($type === "mypage" ? "70px" : "36px")};
   border-radius: 50%;
   object-fit: cover;
   object-position: center;

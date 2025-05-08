@@ -18,7 +18,10 @@ const Signup = () => {
   });
 
   const onSubmit = (data: SignupFormData) => {
-    console.log("제출된 데이터:", data);
+    const { email, password } = data;
+
+    localStorage.setItem("signupStep1", JSON.stringify({ email, password }));
+
     navigate("/signupInfo");
   };
 

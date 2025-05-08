@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 import { LoginFormData, loginSchema } from "../../../../schemas/loginSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { login } from "../../../../api/user";
+import { useUserStore } from "../../../../stores/useUserStore";
 
 const LoginModal = () => {
   const navigate = useNavigate();
@@ -22,9 +24,19 @@ const LoginModal = () => {
     resolver: zodResolver(loginSchema),
   });
 
+  const handleLogin = async (data: LoginFormData) => {
+    try {
+      const res = await login(data); // 서버에 요청
+      console.log("로그인 성공", res);
+      useUserStore.getState().setUser(res); // ✅ 상태 저장
+      closeModal();
+    } catch (err) {
+      console.error("로그인 실패", err);
+    }
+  };
+
   const onSubmit = (data: LoginFormData) => {
-    console.log("로그인 요청:", data);
-    // 로그인 API 요청 로직 넣기
+    handleLogin(data);
   };
 
   const handleSignupClick = () => {

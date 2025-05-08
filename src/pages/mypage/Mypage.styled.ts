@@ -4,8 +4,8 @@ import { Colors, FontStyles } from "../../styles";
 export const MypageContainer = styled.div``;
 
 export const PageName = styled.p`
-  ${FontStyles.SM_SemiBold}
-  margin:20px 30px;
+  ${FontStyles.MD1_Bold};
+  margin: 20px 30px;
 `;
 
 export const ProfileSection = styled.div`

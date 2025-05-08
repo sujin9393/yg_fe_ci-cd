@@ -1,21 +1,44 @@
 import * as S from "./TopSection.styled";
-import 참치1 from "../../../assets/images/참치1.png";
-import 참치2 from "../../../assets/images/참치2.png";
-import tomato from "../../../assets/images/Tomato.png";
-import 샤프란 from "../../../assets/images/샤프란.png";
-import yummy from "../../../assets/images/Yummy.png";
+import { useEffect, useState } from "react";
+import { GroupBuyImage } from "../subSection/SubSection";
+import { getGroupBuyList } from "../../../api/product";
+
+interface MainTopItem {
+  postId: number;
+  imageUrls: GroupBuyImage[];
+}
 
 const TopSection = () => {
+  const [items, setItems] = useState<MainTopItem[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await getGroupBuyList({
+        sort: "ending_soon",
+        limit: 5,
+      });
+      if (res) {
+        setItems(res);
+        console.log(res);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <S.SectionContainer>
       <S.SectionName>마감 임박!!</S.SectionName>
       <S.ImagePart>
-        <S.BigImage src={참치1} />
+        <S.BigImage
+          src={`https://moongsan.com/${items[0]?.imageUrls[0]?.imageUrl}`}
+        />
         <S.SmallImagePart>
-          <S.ImageContainer src={샤프란} />
-          <S.ImageContainer src={참치2} />
-          <S.ImageContainer src={tomato} />
-          <S.ImageContainer src={yummy} />
+          {items.slice(1).map((item) => (
+            <S.ImageContainer
+              key={item.postId}
+              src={`https://moongsan.com/${item?.imageUrls[0]?.imageUrl}`}
+            />
+          ))}
         </S.SmallImagePart>
       </S.ImagePart>
     </S.SectionContainer>

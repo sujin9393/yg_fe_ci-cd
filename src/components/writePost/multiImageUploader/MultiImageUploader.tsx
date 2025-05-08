@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import * as S from "./MultiImageUploader.styled";
 import PlusButton from "../../../assets/icons/PlusSquare.svg?react";
+import { HelperText } from "../../common/HelperText.styled";
 
 interface ImageData {
   id: string;
@@ -11,10 +12,15 @@ interface ImageData {
 
 interface MultiImageUploaderProps {
   value: string[]; // 이미지 URL 목록 (예: preview 또는 S3 URL)
-  onChange: (urls: string[]) => void;
+  onChange: (urls: string[], files: File[]) => void;
+  helperText?: string;
 }
 
-const MultiImageUploader = ({ value, onChange }: MultiImageUploaderProps) => {
+const MultiImageUploader = ({
+  value,
+  onChange,
+  helperText,
+}: MultiImageUploaderProps) => {
   const [images, setImages] = useState<ImageData[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -49,12 +55,14 @@ const MultiImageUploader = ({ value, onChange }: MultiImageUploaderProps) => {
   useEffect(() => {
     const urls = images.map((img) => img.preview);
     if (JSON.stringify(urls) !== JSON.stringify(value)) {
-      onChange(urls);
+      const urls = images.map((img) => img.preview);
+      const files = images.map((img) => img.file);
+      onChange(urls, files); // ✅ 파일도 같이 전달
     }
   }, [images]);
 
   return (
-    <>
+    <S.Container>
       <S.ScrollWrapper>
         {images.length < 5 && (
           <S.AddBox onClick={() => inputRef.current?.click()}>
@@ -71,6 +79,7 @@ const MultiImageUploader = ({ value, onChange }: MultiImageUploaderProps) => {
           </S.ImageBox>
         ))}
       </S.ScrollWrapper>
+      <HelperText>{helperText}</HelperText>
       {/* 숨겨진 input */}
       <input
         type="file"
@@ -79,7 +88,7 @@ const MultiImageUploader = ({ value, onChange }: MultiImageUploaderProps) => {
         style={{ display: "none" }}
         onChange={handleUpload}
       />
-    </>
+    </S.Container>
   );
 };
 

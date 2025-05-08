@@ -8,8 +8,11 @@ import {
 } from "../../schemas/signupInfoSchema";
 import InputField from "../../components/common/input/inputField/InputField";
 import Dropdown from "../../components/common/input/dropdown/Dropdown";
-import ImageUploader from "../../components/common/image/imageUploader/ImageUploader";
+//import ImageUploader from "../../components/common/image/imageUploader/ImageUploader";
 import AgreeCheckBox from "../../components/common/agreeCheckbox/AgreeCheckBox";
+import { postUser, SignupRequestData } from "../../api/user";
+import { useNavigate } from "react-router-dom";
+import { useUserStore } from "../../stores/useUserStore";
 
 const inputFields = [
   {
@@ -30,6 +33,9 @@ const inputFields = [
 ] as const;
 
 const Signup = () => {
+  //const [user, setGroupBuys] = useState<GroupBuyItem[]>([]);
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -39,8 +45,32 @@ const Signup = () => {
     resolver: zodResolver(signupInfoSchema),
   });
 
+  const handleSignup = async (data: SignupRequestData) => {
+    try {
+      const res = await postUser(data); // 서버에 요청
+      console.log("회원가입 성공", res);
+      useUserStore.getState().setUser(res); // ✅ 상태 저장
+      navigate("/");
+    } catch (err) {
+      console.error("회원가입 실패", err);
+    }
+  };
+
   const onSubmit = (data: SignupInfoFormData) => {
-    console.log("제출된 데이터:", data);
+    const step1Data = localStorage.getItem("signupStep1");
+    if (!step1Data) return alert("이메일/비밀번호 정보가 없습니다.");
+
+    const step1 = JSON.parse(step1Data);
+    const { agree, ...infoData } = data;
+    void agree; // 👈 사용하지 않는다는 걸 명시적으로 처리
+
+    const requestData = {
+      ...step1, // email, password
+      ...infoData, // nickname, name, phoneNumber, accountBank, accountNumber
+    };
+
+    console.log("최종 제출:", requestData);
+    handleSignup(requestData);
   };
 
   return (
@@ -52,7 +82,8 @@ const Signup = () => {
         입력이 완료되면 가입이 정상적으로 처리됩니다.
       </S.SectionInfo>
       <S.SignupForm onSubmit={handleSubmit(onSubmit)}>
-        <ImageUploader {...register("profileImage")} styleType="circle" />
+        {/* <ImageUploader {...register("imageUrl")} styleType="circle" /> */}
+
         {inputFields.map(({ name, label, placeholder }) => (
           <InputField
             key={name}
