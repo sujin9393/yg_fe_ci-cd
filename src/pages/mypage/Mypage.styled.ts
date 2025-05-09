@@ -9,7 +9,7 @@ export const PageName = styled.p`
 `;
 
 export const ProfileSection = styled.div`
-  border: 0.5px solid ${Colors.Grayscale50};
+  border: 1px solid ${Colors.Main30};
   border-radius: 10px;
   padding: 20px;
   margin: 0px 30px;

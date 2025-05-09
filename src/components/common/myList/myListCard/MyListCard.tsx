@@ -19,7 +19,7 @@ const MyListCard = ({ item }: MyListCardItem) => {
           <S.OrderState>입금확인완료</S.OrderState>
           <S.productInfo>
             <S.pickupPlace>{item.location}</S.pickupPlace>
-            <S.unitPrice>{item.price.toLocaleString()}원</S.unitPrice>
+            <S.unitPrice>{item.price?.toLocaleString()}원</S.unitPrice>
             <S.postTitle>{item.title}</S.postTitle>
           </S.productInfo>
           <S.OrderInfo>
