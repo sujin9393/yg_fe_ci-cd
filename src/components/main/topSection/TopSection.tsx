@@ -1,8 +1,8 @@
 import * as S from "./TopSection.styled";
 import { useEffect, useState } from "react";
-import { GroupBuyImage } from "../subSection/SubSection";
 import { getGroupBuyList } from "../../../api/product";
 import { getImageUrl } from "./../../../utils/image";
+import { GroupBuyImage } from "../../../types/productType";
 
 interface MainTopItem {
   postId: number;
