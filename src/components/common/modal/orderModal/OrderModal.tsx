@@ -27,9 +27,9 @@ const OrderModal = () => {
     hostAccountNumber,
   } = useOrderStore();
 
-  const { mutate: orderMutate } = useOrderMutation(postId);
   const [quantity, setQuantity] = useState(unitAmount);
   const totalPrice = quantity * unitPrice;
+  const { mutate: orderMutate } = useOrderMutation(postId);
 
   const handleOrder = () => {
     orderMutate({

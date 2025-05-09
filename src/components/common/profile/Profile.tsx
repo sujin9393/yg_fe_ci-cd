@@ -1,6 +1,6 @@
 import * as S from "./Profile.styled";
 import tomato from "../../../assets/images/Tomato.png";
-import { UserInfo } from "../../../types/userTypes";
+import { UserInfo } from "../../../types/userType";
 
 interface ProfileProps {
   type: "mypage" | "post";

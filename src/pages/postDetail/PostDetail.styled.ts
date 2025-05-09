@@ -94,16 +94,22 @@ export const OrderInfo = styled.div`
   align-items: end;
 `;
 
-export const OrderButton = styled.button`
+export const OrderButton = styled.button<{ $isCancel: boolean }>`
   ${FontStyles.SM_SemiBold};
   padding: 3px 7px;
   border: none;
   border-radius: 5px;
   margin-bottom: 3px;
-  background-color: ${Colors.Main10};
+  background-color: ${({ $isCancel }) =>
+    $isCancel ? Colors.Main30 : Colors.Main10};
   color: ${Colors.Grayscale0};
   margin-bottom: 5px;
   cursor: pointer;
+
+  &:disabled {
+    background-color: ${Colors.Grayscale60};
+    cursor: default;
+  }
 `;
 
 export const Ddate = styled.p`
