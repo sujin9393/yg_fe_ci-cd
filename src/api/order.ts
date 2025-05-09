@@ -28,10 +28,10 @@ export const postOrder = async (data: OrderRequestData) => {
 
 export const deleteOrder = async (postId: number) => {
   try {
-    const res = await api.delete(`/api/orders/postId/${postId}`);
+    const res = await api.delete(`/api/group-buys/${postId}/participants`);
 
-    if (res.data.data) {
-      return res.data.data;
+    if (res.data) {
+      return res.data;
     }
   } catch (error) {
     console.error("주문 취소 실패:", error);
