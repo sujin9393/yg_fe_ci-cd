@@ -89,17 +89,19 @@ const PostDetail = () => {
                 <S.unitAmount>(주문 단위: {post.unitAmount})</S.unitAmount>
               </S.ProductInfo>
               <S.OrderInfo>
-                <S.OrderButton
-                  onClick={handleButtonClick}
-                  disabled={post.postStatus === "CLOSED"}
-                  $isCancel={post.participant}
-                >
-                  {post.postStatus === "CLOSED"
-                    ? "모집마감"
-                    : post.participant
-                      ? "참여취소"
-                      : "주문참여"}
-                </S.OrderButton>
+                {user?.nickname !== post.userProfileResponse.nickname && (
+                  <S.OrderButton
+                    onClick={handleButtonClick}
+                    disabled={post.postStatus === "CLOSED"}
+                    $isCancel={post.participant}
+                  >
+                    {post.postStatus === "CLOSED"
+                      ? "모집마감"
+                      : post.participant
+                        ? "참여취소"
+                        : "주문참여"}
+                  </S.OrderButton>
+                )}
                 <CurrentParti
                   soldAmount={post.soldAmount}
                   totalAmount={post.totalAmount}

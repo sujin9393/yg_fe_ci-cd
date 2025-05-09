@@ -8,7 +8,7 @@ export const useCancelOrderMutation = () => {
     mutationFn: (postId: number) => deleteOrder(postId),
     onSuccess: () => {
       alert("주문 취소가 완료되었습니다. 3일 이내에 환불될 예정입니다.");
-      queryClient.invalidateQueries({ queryKey: ["productDetail"] });
+      queryClient.invalidateQueries({ queryKey: ["postDetail"] });
     },
     onError: (error) => {
       console.error("주문 취소 실패", error);

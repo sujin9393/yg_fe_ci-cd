@@ -8,25 +8,11 @@ import * as S from "./SubSection.styled";
 import { useEffect, useState } from "react";
 import { getGroupBuyList } from "../../../api/product";
 import { useNavigate } from "react-router-dom";
+import { GroupBuyItem } from "../../../types/productType";
 
 interface SubSectionProps {
   title: string;
   categoryId?: number;
-}
-
-export interface GroupBuyImage {
-  imageKey: string;
-  isThumbnail: boolean;
-  orderIndex: number;
-}
-
-interface GroupBuyItem {
-  postId: number;
-  title: string;
-  imageKeys: GroupBuyImage[];
-  unitPrice: number;
-  unitAmount: number;
-  // 필요한 필드 추가로 작성 가능
 }
 
 const SubSection = ({ title, categoryId }: SubSectionProps) => {

@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
-
 import * as S from "./UnitAmountSelector.styled";
-import InputField from "../../common/input/inputField/InputField";
 import Dropdown from "../../common/input/dropdown/Dropdown";
 import SelectButtonInput from "../../common/input/selectButtonInput/SelectButtonInput";
+import ControlledNumberInput from "../../common/input/controlledNumberInput/ControlledNumberInput";
 
 const UnitAmountSelector = () => {
   const {
@@ -25,7 +24,8 @@ const UnitAmountSelector = () => {
   // 전체 수량 입력에 따라 약수 옵션 자동 계산
   useEffect(() => {
     const total = Number(totalAmount);
-    if (!total || isNaN(total) || total < 1) {
+    // ❗️ 숫자 아님 or 2보다 작거나 999보다 크면 계산 스킵
+    if (!Number.isInteger(total) || total < 2 || total > 999) {
       setUnitOptions([]);
       return;
     }
@@ -54,11 +54,12 @@ const UnitAmountSelector = () => {
   return (
     <div>
       <S.TotalAmount>
-        <InputField
+        <ControlledNumberInput
+          name="totalAmount"
+          control={control}
           label="상품 전체 수량"
-          styleType="post"
           placeholder="상품 전체 수량을 입력해주세요."
-          {...register("totalAmount")}
+          maxDigits={3}
         />
         <Dropdown
           options={[{ value: "", label: "주문단위" }, ...unitOptions]}

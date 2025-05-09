@@ -20,23 +20,24 @@ interface ProfileProps {
 
 const Profile = ({ type, user }: ProfileProps) => {
   return (
-    <div>
-      <S.ProfilePart>
-        <S.ProfileImg $type={type} src={tomato} alt="프로필 이미지" />
-        <S.ProfileInfo>
-          <S.NameInfo>{user.nickname}</S.NameInfo>
-          {type === "mypage" && (
-            <>
-              <S.RealName>{user.name}</S.RealName>
-              <S.Email>{user.email}</S.Email>
-              <S.PhoneNumber>{user.phoneNumber}</S.PhoneNumber>
-            </>
-          )}
+    <S.ProfilePart $type={type}>
+      <S.ProfileImg $type={type} src={tomato} alt="프로필 이미지" />
+      <S.ProfileInfo>
+        <S.NameInfo $type={type}>{user.nickname}</S.NameInfo>
+        {type === "mypage" && (
+          <>
+            <S.RealName>{user.name}</S.RealName>
+            <S.Email>{user.email}</S.Email>
+            <S.PhoneNumber>{user.phoneNumber}</S.PhoneNumber>
+          </>
+        )}
 
-          <S.AccountInfo>주최자 계좌번호 : {user.accountNumber}</S.AccountInfo>
-        </S.ProfileInfo>
-      </S.ProfilePart>
-    </div>
+        <S.AccountInfo $type={type}>
+          {type === "mypage" ? "내 계좌번호" : "주최자 계좌번호"} :{" "}
+          {user.accountBank} {user.accountNumber}
+        </S.AccountInfo>
+      </S.ProfileInfo>
+    </S.ProfilePart>
   );
 };
 

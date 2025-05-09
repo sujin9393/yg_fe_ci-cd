@@ -1,18 +1,17 @@
 import styled from "styled-components";
 import { Colors, FontStyles } from "../../../styles";
 
-export const ProfilePart = styled.div`
+export const ProfilePart = styled.div<{ $type: "mypage" | "post" }>`
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: ${({ $type }) => ($type === "mypage" ? "15px" : "10px")};
 `;
 
 export const ProfileImg = styled.img<{ $type: "mypage" | "post" }>`
-  width: ${({ $type }) => ($type === "mypage" ? "70px" : "36px")};
-  height: ${({ $type }) => ($type === "mypage" ? "70px" : "36px")};
+  width: ${({ $type }) => ($type === "mypage" ? "80px" : "36px")};
+  height: ${({ $type }) => ($type === "mypage" ? "80px" : "36px")};
   border-radius: 50%;
   object-fit: cover;
-  object-position: center;
 `;
 
 export const ProfileInfo = styled.div`
@@ -20,26 +19,22 @@ export const ProfileInfo = styled.div`
   flex-direction: column;
 `;
 
-export const NameInfo = styled.p`
+export const NameInfo = styled.p<{ $type: "mypage" | "post" }>`
+  ${({ $type }) =>
+    $type === "mypage" ? FontStyles.SM_SemiBold : FontStyles.XXS_SemiBold};
+`;
+
+const SubText = styled.p`
   ${FontStyles.XXS_SemiBold};
-`;
-
-export const RealName = styled.p`
-  ${FontStyles.XXXS_SemiBold};
   color: ${Colors.Grayscale60};
 `;
 
-export const Email = styled.p`
-  ${FontStyles.XXXS_SemiBold};
-  color: ${Colors.Grayscale60};
-`;
+export const RealName = styled(SubText)``;
+export const Email = styled(SubText)``;
+export const PhoneNumber = styled(SubText)``;
 
-export const PhoneNumber = styled.p`
-  ${FontStyles.XXXS_SemiBold};
-  color: ${Colors.Grayscale60};
-`;
-
-export const AccountInfo = styled.p`
-  ${FontStyles.XXXS_SemiBold};
+export const AccountInfo = styled.p<{ $type: "mypage" | "post" }>`
+  ${({ $type }) =>
+    $type === "mypage" ? FontStyles.XXS_SemiBold : FontStyles.XXXS_SemiBold};
   color: ${Colors.Grayscale60};
 `;

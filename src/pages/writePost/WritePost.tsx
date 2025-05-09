@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 import { useUserStore } from "../../stores/useUserStore";
 import { uploadImages } from "../../api/image";
 import { useState } from "react";
+import ControlledNumberInput from "../../components/common/input/controlledNumberInput/ControlledNumberInput";
 
 const WritePost = () => {
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ const WritePost = () => {
 
   const methods = useForm<PostFormData>({
     resolver: zodResolver(writePostSchema),
+    mode: "onChange",
   });
   const {
     register,
@@ -123,14 +125,16 @@ const WritePost = () => {
               <img src={Send} />
             </Button>
           </S.URL>
-          <InputField
+          <ControlledNumberInput
+            name="price"
+            control={methods.control}
             label="상품 전체 가격"
-            styleType="post"
             placeholder="가격을 입력해주세요"
             prefix="₩"
-            {...register("price")}
-            helperText={errors.totalAmount?.message}
+            maxDigits={9}
+            helperText={errors.price}
           />
+
           <UnitAmountSelector />
           <TextAreaField
             label="자세한 설명"

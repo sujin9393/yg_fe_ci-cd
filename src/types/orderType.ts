@@ -6,7 +6,7 @@ export interface OrderRequestData {
 }
 
 export interface GetOrderParams {
-  sort?: "open" | "closed" | "endede";
+  sort?: "open" | "closed" | "ended";
   cursor?: number;
   limit?: number;
 }
