@@ -56,7 +56,7 @@ const PostDetail = () => {
   const handleButtonClick = () => {
     if (!post) return;
 
-    if (post.participant) {
+    if (post.isParticipant) {
       handleCancelClick();
     } else {
       handleOrderClick();
@@ -93,11 +93,11 @@ const PostDetail = () => {
                   <S.OrderButton
                     onClick={handleButtonClick}
                     disabled={post.postStatus === "CLOSED"}
-                    $isCancel={post.participant}
+                    $isCancel={post.isParticipant}
                   >
                     {post.postStatus === "CLOSED"
                       ? "모집마감"
-                      : post.participant
+                      : post.isParticipant
                         ? "참여취소"
                         : "주문참여"}
                   </S.OrderButton>

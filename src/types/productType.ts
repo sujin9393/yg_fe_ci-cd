@@ -52,11 +52,11 @@ export interface PostProps {
   unitAmount: number;
   soldAmount: number;
   totalAmount: number;
-  participant: boolean;
+  isParticipant: boolean;
   participantCount: number;
   dueDate: string;
   dueSoon: boolean;
-  Wish: boolean;
+  isWish: boolean;
   createdAt: string;
   userProfileResponse: UserInfo;
 }
