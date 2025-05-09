@@ -11,7 +11,7 @@ import DateInput from "../../components/common/input/dateInput/DateInput";
 import TextAreaField from "../../components/common/input/textAreaField/TextAreaField";
 import { HelperText } from "../../components/common/HelperText.styled";
 import { formatDateTimeForDTO } from "../../utils/date";
-import { PostRequestData } from "../../types/productTypes";
+import { PostRequestData } from "../../types/productType";
 import { writePost } from "../../api/product";
 import { useNavigate } from "react-router-dom";
 import { useUserStore } from "../../stores/useUserStore";

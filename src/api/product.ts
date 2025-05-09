@@ -1,4 +1,4 @@
-import { GetGroupBuysParams, PostRequestData } from "../types/productTypes";
+import { GetGroupBuysParams, PostRequestData } from "../types/productType";
 import api from "./instance";
 
 /**

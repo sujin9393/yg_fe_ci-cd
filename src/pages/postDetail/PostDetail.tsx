@@ -7,16 +7,18 @@ import { useModalStore } from "../../stores/useModalStore";
 import { useParams } from "react-router-dom";
 import { formatDateTime, formatRelativeTime, getDday } from "../../utils/date";
 import { useOrderStore } from "../../stores/useOrderStore";
-import { useProductDetail } from "../../hooks/queries/product/useProductDetail";
+import { useProductDetail } from "../../hooks/queries/useProductQuery";
 import { useUserStore } from "../../stores/useUserStore";
+import { useCancelOrderMutation } from "../../hooks/mutations/order/useCancelOrderMutation";
 
 const PostDetail = () => {
   const openModal = useModalStore((s) => s.openModal);
-
   const setOrderInfo = useOrderStore((s) => s.setOrderInfo);
   const { postId } = useParams();
   const user = useUserStore((s) => s.user);
   const { data: post, isLoading, isError } = useProductDetail(Number(postId));
+  const { mutate: cancelOrder } = useCancelOrderMutation();
+  console.log(post);
 
   const handleOrderClick = () => {
     if (!post) return;
@@ -37,6 +39,28 @@ const PostDetail = () => {
     });
 
     openModal("order");
+  };
+
+  const handleCancelClick = () => {
+    openModal("confirm", {
+      confirmTitle: "참여를 취소하시겠습니까?",
+      confirmDescription: "취소 3회 이상 시 일정 기간 주문이 제한됩니다.",
+      confirmText: "참여취소",
+      cancelText: "돌아가기",
+      onConfirm: () => {
+        if (post) cancelOrder(post.postId);
+      },
+    });
+  };
+
+  const handleButtonClick = () => {
+    if (!post) return;
+
+    if (post.participant) {
+      handleCancelClick();
+    } else {
+      handleOrderClick();
+    }
   };
 
   if (isLoading) return <div>로딩중...</div>;
@@ -65,8 +89,16 @@ const PostDetail = () => {
                 <S.unitAmount>(주문 단위: {post.unitAmount})</S.unitAmount>
               </S.ProductInfo>
               <S.OrderInfo>
-                <S.OrderButton onClick={handleOrderClick}>
-                  주문참여
+                <S.OrderButton
+                  onClick={handleButtonClick}
+                  disabled={post.postStatus === "CLOSED"}
+                  $isCancel={post.participant}
+                >
+                  {post.postStatus === "CLOSED"
+                    ? "모집마감"
+                    : post.participant
+                      ? "참여취소"
+                      : "주문참여"}
                 </S.OrderButton>
                 <CurrentParti
                   soldAmount={post.soldAmount}

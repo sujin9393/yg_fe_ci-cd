@@ -3,7 +3,7 @@ import MyList from "../../components/common/myList/MyList";
 import Profile from "../../components/common/profile/Profile";
 import * as S from "./Mypage.styled";
 import { getMyInfo } from "../../api/user";
-import { MyPageInfo } from "../../types/userTypes";
+import { MyPageInfo } from "../../types/userType";
 
 const Mypage = () => {
   const [user, setUser] = useState<MyPageInfo>();

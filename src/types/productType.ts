@@ -1,5 +1,4 @@
-import { GroupBuyImage } from "../components/main/subSection/SubSection";
-import { UserInfo } from "./userTypes";
+import { UserInfo } from "./userType";
 
 export interface GetGroupBuysParams {
   sort?: "latest" | "price_asc" | "ending_soon";
@@ -8,6 +7,20 @@ export interface GetGroupBuysParams {
   cursorPrice?: number;
   cursorCreatedAt?: string;
   limit?: number;
+}
+
+export interface GroupBuyImage {
+  imageKey: string;
+  isThumbnail: boolean;
+  orderIndex: number;
+}
+
+export interface GroupBuyItem {
+  postId: number;
+  title: string;
+  imageKeys: GroupBuyImage[];
+  unitPrice: number;
+  unitAmount: number;
 }
 
 export interface PostRequestData {
