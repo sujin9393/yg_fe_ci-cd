@@ -8,6 +8,7 @@ import { SectionLine } from "./components/common/SectionLine.styled";
 import AppRouter from "./Router";
 import { useModalStore } from "./stores/useModalStore";
 import { useUserStore } from "./stores/useUserStore";
+import { useMyInfoQuery } from "./hooks/queries/useMyInfoQuery";
 
 const App = () => {
   const openModal = useModalStore((s) => s.openModal);
@@ -16,30 +17,29 @@ const App = () => {
   const user = useUserStore((s) => s.user);
   const openedModal = useModalStore((s) => s.openedModal);
   const isModalOpen = Boolean(openedModal);
+  useMyInfoQuery();
 
   return (
-    <>
-      <S.MainContainer $modalOpen={isModalOpen}>
-        <Header />
-        <SectionLine />
-        <AppRouter />
-        {pathname === "/" && (
-          <S.MasterButton
-            onClick={() => {
-              if (!user) {
-                openModal("login"); // 로그인 안 한 경우
-              } else {
-                navigate("/writePost"); // 로그인 한 경우
-              }
-            }}
-          />
-        )}
+    <S.MainContainer $modalOpen={isModalOpen}>
+      <Header />
+      <SectionLine />
+      <AppRouter />
+      {pathname === "/" && (
+        <S.MasterButton
+          onClick={() => {
+            if (!user) {
+              openModal("login");
+            } else {
+              navigate("/writePost");
+            }
+          }}
+        />
+      )}
 
-        {openedModal === "login" && <LoginModal />}
-        {openedModal === "confirm" && <ConfirmModal />}
-        {openedModal === "order" && <OrderModal />}
-      </S.MainContainer>
-    </>
+      {openedModal === "login" && <LoginModal />}
+      {openedModal === "confirm" && <ConfirmModal />}
+      {openedModal === "order" && <OrderModal />}
+    </S.MainContainer>
   );
 };
 
