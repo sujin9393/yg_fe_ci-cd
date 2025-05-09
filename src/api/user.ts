@@ -76,7 +76,7 @@ export const login = async (data: LoginFormData) => {
 };
 
 /**
- * 마이페이지 정보 조회
+ * 프로필 정보 조회
  * @returns
  */
 export const getMyInfo = async () => {
@@ -87,6 +87,6 @@ export const getMyInfo = async () => {
       return res.data.data; // 백엔드 응답 구조에 따라 수정
     }
   } catch (error) {
-    console.error("공동구매 리스트 조회 실패:", error);
+    console.error("내 프로필 조회 실패:", error);
   }
 };
