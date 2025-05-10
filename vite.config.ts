@@ -4,7 +4,7 @@ import svgr from "vite-plugin-svgr";
 
 export default defineConfig({
   plugins: [react(), svgr()],
-  base: "./",
+  base: "/",
   server: {
     port: 3000, // 여기서 포트를 3000으로 명시
     proxy: {
