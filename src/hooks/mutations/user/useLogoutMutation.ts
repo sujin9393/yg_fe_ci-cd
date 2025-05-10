@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { logout } from "../../../api/user";
 import { useNavigate } from "react-router-dom";
 import { useUserStore } from "../../../stores/useUserStore";
@@ -6,12 +6,14 @@ import { useUserStore } from "../../../stores/useUserStore";
 export const useLogoutMutation = () => {
   const navigate = useNavigate();
   const clearUser = useUserStore((s) => s.clearUser);
+  const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: () => logout(),
     onSuccess: (data) => {
       alert(data.message);
       clearUser();
+      queryClient.clear();
       navigate("/");
     },
     onError: (error) => {
