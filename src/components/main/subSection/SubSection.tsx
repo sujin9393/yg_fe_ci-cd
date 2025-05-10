@@ -5,10 +5,9 @@ import * as S from "./SubSection.styled";
 //import tomato from "../../../assets/images/Tomato.png";
 //import 샤프란 from "../../../assets/images/샤프란.png";
 //import yummy from "../../../assets/images/Yummy.png";
-import { useEffect, useState } from "react";
-import { getGroupBuyList } from "../../../api/product";
 import { useNavigate } from "react-router-dom";
-import { GroupBuyItem } from "../../../types/productType";
+import { useGroupBuysList } from "../../../hooks/queries/useProductQuery";
+import Loading from "../../common/loading/Loding";
 
 interface SubSectionProps {
   title: string;
@@ -16,22 +15,19 @@ interface SubSectionProps {
 }
 
 const SubSection = ({ title, categoryId }: SubSectionProps) => {
-  const [groupBuys, setGroupBuys] = useState<GroupBuyItem[]>([]);
+  const {
+    data: groupBuys,
+    isLoading,
+    isError,
+  } = useGroupBuysList({
+    sort: "latest",
+    category: categoryId,
+    limit: 10,
+  });
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await getGroupBuyList({
-        sort: "latest",
-        category: categoryId,
-        limit: 10,
-      });
-      if (res) {
-        setGroupBuys(res);
-      }
-    };
-    fetchData();
-  }, [title, categoryId]);
+  if (isLoading) return <Loading />;
+  if (isError || !groupBuys) return <div>에러 발생</div>;
 
   return (
     <S.RowScrollSection>

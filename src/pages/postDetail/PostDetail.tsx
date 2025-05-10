@@ -7,9 +7,10 @@ import { useModalStore } from "../../stores/useModalStore";
 import { useParams } from "react-router-dom";
 import { formatDateTime, formatRelativeTime, getDday } from "../../utils/date";
 import { useOrderStore } from "../../stores/useOrderStore";
-import { useProductDetail } from "../../hooks/queries/useProductQuery";
 import { useUserStore } from "../../stores/useUserStore";
 import { useCancelOrderMutation } from "../../hooks/mutations/order/useCancelOrderMutation";
+import Loading from "../../components/common/loading/Loding";
+import { useProductDetail } from "../../hooks/queries/useProductQuery";
 
 const PostDetail = () => {
   const openModal = useModalStore((s) => s.openModal);
@@ -64,7 +65,7 @@ const PostDetail = () => {
     }
   };
 
-  if (isLoading) return <div>로딩중...</div>;
+  if (isLoading) return <Loading />;
   if (isError || !post) return <div>에러 발생</div>;
 
   return (
@@ -93,22 +94,28 @@ const PostDetail = () => {
                 {user?.nickname !== post.userProfileResponse.nickname && (
                   <S.OrderButton
                     onClick={handleButtonClick}
-                    disabled={post.postStatus === "CLOSED"}
+                    disabled={post.postStatus !== "OPEN"}
                     $isCancel={post.isParticipant}
                   >
-                    {post.postStatus === "CLOSED"
-                      ? "모집마감"
-                      : post.isParticipant
-                        ? "참여취소"
-                        : "주문참여"}
+                    {post.postStatus === "ENDED"
+                      ? "공구종료"
+                      : post.postStatus === "CLOSED"
+                        ? "모집마감"
+                        : post.isParticipant
+                          ? "참여취소"
+                          : "주문참여"}
                   </S.OrderButton>
                 )}
-                <CurrentParti
-                  soldAmount={post.soldAmount}
-                  totalAmount={post.totalAmount}
-                  participantCount={post.participantCount}
-                />
-                <S.Ddate>마감까지 {getDday(post.dueDate)}</S.Ddate>
+                {post.postStatus !== "ENDED" && (
+                  <>
+                    <CurrentParti
+                      soldAmount={post.soldAmount}
+                      totalAmount={post.totalAmount}
+                      participantCount={post.participantCount}
+                    />
+                    <S.Ddate>마감까지 {getDday(post.dueDate)}</S.Ddate>
+                  </>
+                )}
               </S.OrderInfo>
             </S.InfoPart>
             <S.DetailPart>

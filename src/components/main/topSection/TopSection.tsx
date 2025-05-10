@@ -1,40 +1,36 @@
 import * as S from "./TopSection.styled";
-import { useEffect, useState } from "react";
-import { getGroupBuyList } from "../../../api/product";
 import { getImageUrl } from "./../../../utils/image";
-import { GroupBuyImage } from "../../../types/productType";
-
-interface MainTopItem {
-  postId: number;
-  imageKeys: GroupBuyImage[];
-}
+import { useNavigate } from "react-router-dom";
+import { useGroupBuysList } from "../../../hooks/queries/useProductQuery";
+import Loading from "../../common/loading/Loding";
 
 const TopSection = () => {
-  const [items, setItems] = useState<MainTopItem[]>([]);
+  const navigate = useNavigate();
+  const {
+    data: groupBuys,
+    isLoading,
+    isError,
+  } = useGroupBuysList({
+    sort: "ending_soon",
+    limit: 5,
+  });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await getGroupBuyList({
-        sort: "ending_soon",
-        limit: 5,
-      });
-      if (res) {
-        setItems(res);
-      }
-    };
-    fetchData();
-  }, []);
+  if (isLoading) return <Loading />;
+  if (isError || !groupBuys) return <div>에러 발생</div>;
 
   return (
     <S.SectionContainer>
       <S.SectionName>마감 임박!!</S.SectionName>
       <S.ImagePart>
-        <S.BigImage src={getImageUrl(items[0]?.imageKeys[0]?.imageKey)} />
+        <S.BigImage src={getImageUrl(groupBuys[0]?.imageKeys[0]?.imageKey)} />
         <S.SmallImagePart>
-          {items.slice(1).map((item) => (
+          {groupBuys.slice(1).map((item) => (
             <S.ImageContainer
               key={item.postId}
               src={getImageUrl(item?.imageKeys[0]?.imageKey)}
+              onClick={() => {
+                navigate(`/products/${item.postId}`);
+              }}
             />
           ))}
         </S.SmallImagePart>
