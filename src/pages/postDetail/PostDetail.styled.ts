@@ -71,6 +71,7 @@ export const ProductInfo = styled.div`
   display: flex;
   flex-direction: column;
   gap: 3px;
+  margin-bottom: 20px;
 `;
 
 export const PickupDate = styled.p`
