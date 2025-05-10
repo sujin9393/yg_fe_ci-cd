@@ -54,7 +54,7 @@ const Signup = () => {
     control,
     formState: { errors },
     watch,
-  } = useForm<SignupInfoFormData>({
+  } = useForm({
     resolver: zodResolver(signupInfoSchema),
     mode: "onChange",
     shouldUnregister: true,
@@ -153,7 +153,7 @@ const Signup = () => {
           render={({ field }) => (
             <Dropdown
               label="은행 선택"
-              options={BANK_OPTIONS}
+              options={[{ label: "은행 선택", value: "" }, ...BANK_OPTIONS]}
               {...field}
               value={field.value ?? null}
               placeholder="은행 선택"

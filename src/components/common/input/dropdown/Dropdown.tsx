@@ -110,8 +110,16 @@ const Dropdown = ({
   options,
   width,
   helperText,
+  onChange,
   ...props
 }: DropdownProps) => {
+  const handleChange = (option: Option | null) => {
+    if (option?.value === "") {
+      onChange?.(null); // "" → null로 변환해서 전달
+    } else {
+      onChange?.(option);
+    }
+  };
   return (
     <S.Container $width={width}>
       {label && <S.Label>{label}</S.Label>}
@@ -119,6 +127,8 @@ const Dropdown = ({
         options={options}
         styles={customStyles}
         components={{ Option: CustomOption }}
+        onChange={handleChange} // ✅ 이 줄을 명시적으로 추가!
+        value={props.value ?? null} // ✅ 이 줄도 명시적으로 보장
         {...props}
       />
       {helperText && <HelperText>{helperText}</HelperText>}

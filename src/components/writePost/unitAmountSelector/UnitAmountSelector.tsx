@@ -61,11 +61,11 @@ const UnitAmountSelector = () => {
           maxDigits={3}
         />
         <Controller
-          name="accountBank"
+          name="unitAmount"
           control={control}
           render={({ field }) => (
             <Dropdown
-              label="은행 선택"
+              label="주문단위"
               width="85px"
               options={[{ value: "", label: "주문단위" }, ...unitOptions]}
               {...field}
