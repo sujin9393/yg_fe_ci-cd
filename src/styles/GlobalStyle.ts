@@ -14,7 +14,7 @@ ${Fonts}
     width: 100%;
     height: 100%;
    font-family: 'Pretendard'; 
-    background-color: white;
+   font-family: 'BMJUA'; 
     overflow-x: hidden; 
   }
 
@@ -30,7 +30,6 @@ ${Fonts}
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: black;
   }
 `;
 

@@ -32,6 +32,9 @@ const inputFields = [
 
 const Signup = () => {
   const navigate = useNavigate();
+  const [isNicknameChecked, setIsNicknameChecked] = useState(false);
+  const [isNicknameDuplicated, setIsNicknameDuplicated] = useState(false);
+
   const { mutate: checkNickname } = useNicknameCheckMutation({
     onSuccess: (data) => {
       if (data.isDuplication === "NO") {
@@ -60,12 +63,8 @@ const Signup = () => {
     shouldUnregister: true,
   });
 
-  const [isNicknameChecked, setIsNicknameChecked] = useState(false);
-  const [isNicknameDuplicated, setIsNicknameDuplicated] = useState(false);
-
   const nickname = watch("nickname") || "";
-  const isNicknameValid =
-    !errors.nickname && nickname.length >= 2 && nickname.length <= 12;
+  const isNicknameValid = !errors.nickname;
 
   const handleClick = () => {
     checkNickname(nickname);

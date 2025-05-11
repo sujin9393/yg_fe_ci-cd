@@ -5,18 +5,51 @@ import * as S from "./Signup.styled";
 import Button from "../../components/common/button/Button";
 import { useNavigate } from "react-router-dom";
 import InputField from "../../components/common/input/inputField/InputField";
+import { useEmailCheckMutation } from "../../hooks/mutations/user/useEmailCheckMutation";
+import { useEffect, useState } from "react";
 
 const Signup = () => {
   const navigate = useNavigate();
+  const [isEmailChecked, setIsEmailChecked] = useState(false);
+  const [isEmailDuplicated, setIsEmailDuplicated] = useState(false);
+
+  const { mutate: checkEmail } = useEmailCheckMutation({
+    onSuccess: (data) => {
+      if (data.isDuplication === "NO") {
+        setIsEmailChecked(true);
+        setIsEmailDuplicated(false);
+      } else {
+        setIsEmailChecked(false);
+        setIsEmailDuplicated(true);
+      }
+    },
+    onError: () => {
+      setIsEmailChecked(false);
+      setIsEmailDuplicated(false);
+    },
+  });
 
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<SignupFormData>({
     resolver: zodResolver(signupSchema),
     mode: "onChange",
   });
+
+  const email = watch("email") || "";
+  const isEmailValid = !errors.email;
+
+  const handleClick = () => {
+    checkEmail(email);
+  };
+
+  useEffect(() => {
+    setIsEmailChecked(false);
+    setIsEmailDuplicated(false);
+  }, [email]);
 
   const onSubmit = (data: SignupFormData) => {
     const { email, password } = data;
@@ -34,7 +67,25 @@ const Signup = () => {
           label="이메일"
           placeholder="이메일 입력"
           {...register("email")}
-          helperText={errors.email?.message}
+          helperText={
+            errors.email?.message ||
+            (isEmailDuplicated
+              ? "이미 사용 중인 이메일입니다. 다시 입력해주세요."
+              : !isEmailChecked && email.length >= 2
+                ? "이메일 중복 확인을 해주세요"
+                : "")
+          }
+          suffix={
+            !isEmailChecked && ( // ✅ 중복 확인 완료되면 버튼 숨김
+              <S.ConfirmButton
+                type="button"
+                onClick={handleClick}
+                disabled={!isEmailValid}
+              >
+                중복 확인
+              </S.ConfirmButton>
+            )
+          }
         />
         <InputField
           label="비밀번호"

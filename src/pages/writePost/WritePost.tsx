@@ -24,7 +24,6 @@ const WritePost = () => {
   const navigate = useNavigate();
   const user = useUserStore((s) => s.user);
   const [imageFiles, setImageFiles] = useState<File[]>([]);
-  const { mutate: getAIMutate } = useGetAIMutation();
 
   const methods = useForm<PostFormData>({
     resolver: zodResolver(writePostSchema),
@@ -39,6 +38,7 @@ const WritePost = () => {
   } = methods;
 
   const url = watch("url");
+  const { mutate: getAIMutate } = useGetAIMutation(setValue);
 
   const handlePost = async (data: PostRequestData) => {
     console.log(data);

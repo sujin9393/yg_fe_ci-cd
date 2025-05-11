@@ -29,7 +29,7 @@ export const writePost = async (data: PostRequestData) => {
 
 export const getAI = async (url: string) => {
   try {
-    const res = await api.post("/generation/description", url);
+    const res = await api.post("api/group-buys/generation/description", url);
     return res.data.data;
   } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
