@@ -9,6 +9,7 @@ const UnitAmountSelector = () => {
   const {
     watch,
     control,
+    setValue,
     formState: { errors },
   } = useFormContext();
 
@@ -47,8 +48,9 @@ const UnitAmountSelector = () => {
     const unitNum = Number(unitAmount);
     if (!isNaN(unitNum)) {
       setUnit(unitNum);
+      setValue("hostQuantity", unitNum);
     }
-  }, [unitAmount]);
+  }, [unitAmount, setValue]);
 
   return (
     <div>
@@ -69,8 +71,7 @@ const UnitAmountSelector = () => {
             ) ?? { value: "", label: "주문단위" };
             return (
               <Dropdown
-                label="주문단위"
-                width="85px"
+                width="170px"
                 options={[{ value: "", label: "주문단위" }, ...unitOptions]}
                 value={selectedOption}
                 onChange={(selected) => {
@@ -81,12 +82,12 @@ const UnitAmountSelector = () => {
           }}
         />
       </S.TotalAmount>
-      {(errors.totalAmount || errors.unitAmount) && (
+      {(errors.totalAmount || unitAmount === "") && (
         <S.HelperText>
           {typeof errors.totalAmount?.message === "string"
             ? errors.totalAmount.message
-            : typeof errors.unitAmount?.message === "string"
-              ? errors.unitAmount.message
+            : unitAmount === ""
+              ? "주문 단위를 선택해주세요."
               : ""}
         </S.HelperText>
       )}

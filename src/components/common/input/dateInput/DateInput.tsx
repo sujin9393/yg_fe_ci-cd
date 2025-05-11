@@ -27,6 +27,7 @@ const DateInput = ({
         dateFormat="yyyy.MM.dd h:mm aa"
         placeholderText={placeholder}
         customInput={<S.Input />}
+        popperPlacement="bottom-start"
       />
       {helperText && <S.HelperText>{helperText}</S.HelperText>}
     </S.Container>

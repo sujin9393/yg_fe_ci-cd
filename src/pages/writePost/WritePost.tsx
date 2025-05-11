@@ -19,6 +19,7 @@ import { useState } from "react";
 import ControlledNumberInput from "../../components/common/input/controlledNumberInput/ControlledNumberInput";
 import { writePost } from "../../api/host";
 import { useGetAIMutation } from "../../hooks/mutations/host/useGetAIMutation";
+import Loading from "../../components/common/loading/Loding";
 
 const WritePost = () => {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ const WritePost = () => {
   } = methods;
 
   const url = watch("url");
-  const { mutate: getAIMutate } = useGetAIMutation(setValue);
+  const { mutate: getAIMutate, isPending } = useGetAIMutation(setValue);
 
   const handlePost = async (data: PostRequestData) => {
     console.log(data);
@@ -98,25 +99,6 @@ const WritePost = () => {
             }}
             helperText={errors.imageUrls?.message}
           />
-          <InputField
-            label="공구 제목"
-            styleType="post"
-            placeholder="공구 제목을 입력해주세요"
-            {...register("title")}
-            helperText={errors.title?.message}
-          />
-          <InputField
-            label="상품 이름"
-            styleType="post"
-            placeholder="상품 이름을 입력해주세요"
-            {...register("name")}
-            helperText={errors.name?.message}
-          />
-          <S.Label>계좌번호</S.Label>
-          <S.AccountPart>
-            <Button disabled>우리</Button>
-            <InputField required={false} placeholder="1002-0202" disabled />
-          </S.AccountPart>
           <S.URL>
             <InputField
               label="URL (선택)"
@@ -133,63 +115,89 @@ const WritePost = () => {
               <img src={Send} />
             </Button>
           </S.URL>
-          <ControlledNumberInput
-            name="price"
-            control={methods.control}
-            label="상품 전체 가격"
-            placeholder="가격을 입력해주세요"
-            prefix="₩"
-            maxDigits={9}
-            helperText={errors.price}
-          />
-
-          <UnitAmountSelector />
-          <TextAreaField
-            label="자세한 설명"
-            placeholder="공구방에 올릴 게시글 내용을 작성해주세요."
-            {...register("description")}
-            helperText={errors.description?.message}
-          />
-          <Controller
-            control={methods.control}
-            name="dueDate"
-            render={({ field, fieldState }) => (
-              <DateInput
-                label="공구 마감 일자"
-                value={field.value}
-                placeholder="마감 일자를 선택해주세요"
-                onChange={field.onChange}
-                helperText={fieldState.error?.message}
+          {isPending ? (
+            <Loading message="공구글 생성중입니다." />
+          ) : (
+            <>
+              <InputField
+                label="공구 제목"
+                styleType="post"
+                placeholder="공구 제목을 입력해주세요"
+                {...register("title")}
+                helperText={errors.title?.message}
               />
-            )}
-          />
-          <div>
-            <S.Pickup>
+              <InputField
+                label="상품 이름"
+                styleType="post"
+                placeholder="상품 이름을 입력해주세요"
+                {...register("name")}
+                helperText={errors.name?.message}
+              />
+              <S.Label>계좌번호</S.Label>
+              <S.AccountPart>
+                <Button disabled>우리</Button>
+                <InputField required={false} placeholder="1002-0202" disabled />
+              </S.AccountPart>
+
+              <ControlledNumberInput
+                name="price"
+                control={methods.control}
+                label="상품 전체 가격"
+                placeholder="가격을 입력해주세요"
+                prefix="₩"
+                maxDigits={9}
+                helperText={errors.price}
+              />
+
+              <UnitAmountSelector />
+              <TextAreaField
+                label="자세한 설명"
+                placeholder="공구방에 올릴 게시글 내용을 작성해주세요."
+                {...register("description")}
+                helperText={errors.description?.message}
+              />
               <Controller
                 control={methods.control}
-                name="pickupDate" // 너의 form schema 기준 name
-                render={({ field }) => (
+                name="dueDate"
+                render={({ field, fieldState }) => (
                   <DateInput
-                    label="픽업 일자 / 거래 장소"
+                    label="공구 마감 일자"
                     value={field.value}
-                    placeholder="픽업 일자를 선택해주세요"
+                    placeholder="마감 일자를 선택해주세요"
                     onChange={field.onChange}
+                    helperText={fieldState.error?.message}
                   />
                 )}
               />
-              <InputField
-                styleType="post"
-                placeholder="카테부 교육장"
-                disabled
-              />
-            </S.Pickup>
-            {errors.pickupDate?.message && (
-              <HelperText>{errors.pickupDate.message}</HelperText>
-            )}
-          </div>
-          <S.ButtonWrapper>
-            <Button type="submit">작성 완료</Button>
-          </S.ButtonWrapper>
+              <div>
+                <S.Pickup>
+                  <Controller
+                    control={methods.control}
+                    name="pickupDate" // 너의 form schema 기준 name
+                    render={({ field }) => (
+                      <DateInput
+                        label="픽업 일자 / 거래 장소"
+                        value={field.value}
+                        placeholder="픽업 일자를 선택해주세요"
+                        onChange={field.onChange}
+                      />
+                    )}
+                  />
+                  <InputField
+                    styleType="post"
+                    placeholder="카테부 교육장"
+                    disabled
+                  />
+                </S.Pickup>
+                {errors.pickupDate?.message && (
+                  <HelperText>{errors.pickupDate.message}</HelperText>
+                )}
+              </div>
+              <S.ButtonWrapper>
+                <Button type="submit">작성 완료</Button>
+              </S.ButtonWrapper>
+            </>
+          )}
         </S.PostForm>
       </FormProvider>
     </S.Container>

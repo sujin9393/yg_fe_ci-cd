@@ -5,6 +5,36 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  position: relative;
+  overflow: visible;
+
+  .react-datepicker {
+    width: auto !important;
+    min-width: 350px !important;
+    display: block !important;
+    z-index: 999;
+    background-color: white !important;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .react-datepicker__month-container {
+    width: 258px;
+  }
+
+  .react-datepicker__time-container {
+    width: 90px !important;
+    border-left: 1px solid #eee;
+  }
+
+  .react-datepicker__time {
+    width: 100% !important;
+  }
+
+  .react-datepicker__time-box {
+    width: 100% !important;
+  }
 `;
 
 export const Label = styled.label`
