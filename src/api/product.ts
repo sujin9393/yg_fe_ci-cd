@@ -1,4 +1,4 @@
-import { GetGroupBuysParams, PostRequestData } from "../types/productType";
+import { GetGroupBuysParams } from "../types/productType";
 import api from "./instance";
 
 /**
@@ -33,26 +33,5 @@ export const getPost = async (postId: number) => {
     }
   } catch (error) {
     console.error("공동구매 리스트 조회 실패:", error);
-  }
-};
-
-/**
- * 공구글 작성
- * @param data
- * @returns
- */
-import axios from "axios";
-
-export const writePost = async (data: PostRequestData) => {
-  try {
-    const res = await api.post("/api/group-buys", data);
-    return res.data;
-  } catch (error: unknown) {
-    if (axios.isAxiosError(error)) {
-      console.error("게시 실패:", error.response?.data || error.message);
-    } else {
-      console.error("게시 실패: 알 수 없는 에러", error);
-    }
-    throw error;
   }
 };

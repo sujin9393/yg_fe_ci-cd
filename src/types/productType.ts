@@ -1,7 +1,8 @@
 import { UserInfo } from "./userType";
 
 export interface GetGroupBuysParams {
-  sort?: "latest" | "price_asc" | "ending_soon";
+  orderBy?: "latest" | "price_asc" | "ending_soon";
+  postStatus?: "open" | "closed" | "ended";
   category?: number;
   cursorId?: number;
   cursorPrice?: number;
