@@ -65,6 +65,15 @@ const Signup = () => {
 
   const nickname = watch("nickname") || "";
   const isNicknameValid = !errors.nickname;
+  const isFormValid =
+    Object.keys(errors).length === 0 &&
+    watch("nickname") &&
+    isNicknameChecked &&
+    watch("name") &&
+    watch("phoneNumber") &&
+    watch("accountBank") &&
+    watch("accountNumber") &&
+    watch("agree") === true;
 
   const handleClick = () => {
     checkNickname(nickname);
@@ -173,7 +182,9 @@ const Signup = () => {
           checked={watch("agree") ?? false} // watch로 체크 여부 관리
           helperText={errors.agree?.message}
         />
-        <Button type="submit">지금부터 뭉치기</Button>
+        <Button type="submit" disabled={!isFormValid}>
+          지금부터 뭉치기
+        </Button>
       </S.SignupForm>
     </S.SignupSection>
   );

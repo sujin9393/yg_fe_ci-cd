@@ -41,6 +41,7 @@ const Signup = () => {
 
   const email = watch("email") || "";
   const isEmailValid = !errors.email;
+  const isFormValid = isEmailChecked && Object.keys(errors).length === 0;
 
   const handleClick = () => {
     checkEmail(email);
@@ -71,7 +72,7 @@ const Signup = () => {
             errors.email?.message ||
             (isEmailDuplicated
               ? "이미 사용 중인 이메일입니다. 다시 입력해주세요."
-              : !isEmailChecked && email.length >= 2
+              : isEmailValid && !isEmailChecked
                 ? "이메일 중복 확인을 해주세요"
                 : "")
           }
@@ -101,7 +102,9 @@ const Signup = () => {
           {...register("confirmPassword")}
           helperText={errors.confirmPassword?.message}
         />
-        <Button type="submit">다음</Button>
+        <Button type="submit" disabled={!isFormValid}>
+          다음
+        </Button>
       </S.SignupForm>
     </S.SignupSection>
   );

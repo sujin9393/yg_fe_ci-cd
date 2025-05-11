@@ -52,7 +52,7 @@ const Profile = ({ type, user }: ProfileProps) => {
         )}
 
         <S.AccountInfo $type={type}>
-          {type === "post" && "주최자 계좌번호"}
+          {type === "post" && "주최자 계좌번호 : "}
           {user.accountBank} {user.accountNumber}
         </S.AccountInfo>
       </S.ProfileInfo>
