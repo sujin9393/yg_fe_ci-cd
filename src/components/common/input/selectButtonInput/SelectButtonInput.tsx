@@ -49,9 +49,13 @@ const SelectButtonInput = ({
   return (
     <S.Container>
       <S.ButtonContainer>
-        <S.Button onClick={handleDecrease}>-</S.Button>
+        <S.Button type="button" onClick={handleDecrease}>
+          -
+        </S.Button>
         <S.Count>{amount}</S.Count>
-        <S.Button onClick={handleIncrease}>+</S.Button>
+        <S.Button type="button" onClick={handleIncrease}>
+          +
+        </S.Button>
       </S.ButtonContainer>
       {helperText && <HelperText>{helperText}</HelperText>}
     </S.Container>

@@ -72,7 +72,7 @@ const Signup = () => {
             errors.email?.message ||
             (isEmailDuplicated
               ? "이미 사용 중인 이메일입니다. 다시 입력해주세요."
-              : isEmailValid && !isEmailChecked
+              : email.length > 5 && isEmailValid && !isEmailChecked
                 ? "이메일 중복 확인을 해주세요"
                 : "")
           }

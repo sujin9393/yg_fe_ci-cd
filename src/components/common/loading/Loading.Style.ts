@@ -1,4 +1,5 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes } from "styled-components";
+import { Colors } from "../../../styles";
 
 export const spin = keyframes`
   0% { transform: rotate(0deg); }
@@ -28,5 +29,5 @@ export const LoadingContainer = styled.div`
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #fafafa; /* 배경색 */
+  background-color: ${Colors.Grayscale0}; /* 배경색 */
 `;
