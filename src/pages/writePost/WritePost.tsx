@@ -12,17 +12,19 @@ import TextAreaField from "../../components/common/input/textAreaField/TextAreaF
 import { HelperText } from "../../components/common/HelperText.styled";
 import { formatDateTimeForDTO } from "../../utils/date";
 import { PostRequestData } from "../../types/productType";
-import { writePost } from "../../api/product";
 import { useNavigate } from "react-router-dom";
 import { useUserStore } from "../../stores/useUserStore";
 import { uploadImages } from "../../api/image";
 import { useState } from "react";
 import ControlledNumberInput from "../../components/common/input/controlledNumberInput/ControlledNumberInput";
+import { writePost } from "../../api/host";
+import { useGetAIMutation } from "../../hooks/mutations/host/useGetAIMutation";
 
 const WritePost = () => {
   const navigate = useNavigate();
   const user = useUserStore((s) => s.user);
   const [imageFiles, setImageFiles] = useState<File[]>([]);
+  const { mutate: getAIMutate } = useGetAIMutation();
 
   const methods = useForm<PostFormData>({
     resolver: zodResolver(writePostSchema),
@@ -35,6 +37,8 @@ const WritePost = () => {
     setValue,
     watch,
   } = methods;
+
+  const url = watch("url");
 
   const handlePost = async (data: PostRequestData) => {
     console.log(data);
@@ -121,7 +125,11 @@ const WritePost = () => {
               {...register("url")}
               helperText={errors.url?.message}
             />
-            <Button buttonStyle="square">
+            <Button
+              disabled={!url}
+              onClick={() => getAIMutate(url!)}
+              buttonStyle="square"
+            >
               <img src={Send} />
             </Button>
           </S.URL>

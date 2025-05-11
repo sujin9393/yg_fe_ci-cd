@@ -20,7 +20,8 @@ const SubSection = ({ title, categoryId }: SubSectionProps) => {
     isLoading,
     isError,
   } = useGroupBuysList({
-    sort: "latest",
+    orderBy: "latest",
+    postStatus: "open",
     category: categoryId,
     limit: 10,
   });

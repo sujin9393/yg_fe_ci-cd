@@ -11,7 +11,8 @@ const TopSection = () => {
     isLoading,
     isError,
   } = useGroupBuysList({
-    sort: "ending_soon",
+    orderBy: "ending_soon",
+    postStatus: "open",
     limit: 5,
   });
 
