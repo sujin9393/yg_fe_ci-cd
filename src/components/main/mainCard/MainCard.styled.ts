@@ -7,6 +7,10 @@ export const MainCardContainer = styled.div`
   width: 115px;
   gap: 5px;
   cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  &:hover {
+    transform: scale(1.05);
+  }
 `;
 
 export const CardInfo = styled.div`

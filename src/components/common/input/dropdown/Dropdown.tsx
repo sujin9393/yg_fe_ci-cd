@@ -55,6 +55,7 @@ const customStyles: StylesConfig<Option, false> = {
     ...provided,
     display: "flex",
     alignItems: "center",
+    fontFamily: "Pretendard",
     fontSize: "12px",
     fontWeight: 500,
     gap: 8,
@@ -70,12 +71,14 @@ const customStyles: StylesConfig<Option, false> = {
   singleValue: (provided) => ({
     ...provided,
     color: Colors.Grayscale60,
+    fontFamily: "Pretendard",
     fontSize: "12px",
     fontWeight: 500,
   }),
   placeholder: (provided) => ({
     ...provided,
     color: Colors.Grayscale50,
+    fontFamily: "Pretendard",
     fontSize: "12px",
     fontWeight: 500,
   }),

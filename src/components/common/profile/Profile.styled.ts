@@ -32,6 +32,10 @@ export const LogoutButton = styled.button`
   position: absolute;
   right: 0;
   cursor: pointer;
+  transition: all 0.2s;
+  &:hover {
+    background-color: ${Colors.Main10};
+  }
 `;
 
 export const NameInfo = styled.p<{ $type: "mypage" | "post" }>`

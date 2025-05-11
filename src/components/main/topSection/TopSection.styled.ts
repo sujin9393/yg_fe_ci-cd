@@ -26,6 +26,11 @@ export const BigImage = styled.img`
   width: calc(50% - 20px);
   border-radius: 10px;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  &:hover {
+    transform: scale(1.05);
+  }
+  cursor: pointer;
 `;
 
 export const SmallImagePart = styled.div`
@@ -36,10 +41,9 @@ export const SmallImagePart = styled.div`
   gap: 10px;
 `;
 
-export const ImageContainer = styled.img`
+export const ImageContainer = styled(BigImage)`
   width: calc((100% - 10px) / 2); // 한 줄에 2개씩 (gap 고려)
   height: 70px;
-  border-radius: 10px;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+
   //object-fit: cover;
 `;

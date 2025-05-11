@@ -23,7 +23,12 @@ const TopSection = () => {
     <S.SectionContainer>
       <S.SectionName>마감 임박!!</S.SectionName>
       <S.ImagePart>
-        <S.BigImage src={getImageUrl(groupBuys[0]?.imageKeys[0]?.imageKey)} />
+        <S.BigImage
+          src={getImageUrl(groupBuys[0]?.imageKeys[0]?.imageKey)}
+          onClick={() => {
+            navigate(`/products/${groupBuys[0]?.postId}`);
+          }}
+        />
         <S.SmallImagePart>
           {groupBuys.slice(1).map((item) => (
             <S.ImageContainer
