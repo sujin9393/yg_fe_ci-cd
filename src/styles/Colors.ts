@@ -7,6 +7,12 @@ const Colors = {
   Main50: "#FEEEE8", // 환불메세지 고정색
   Main60: "#53443A", // 다크 브라운
 
+  // Web Background Colors
+  Web10: "#F9F1EA",
+  Web20: "#FD9F28",
+  Web30: "#A25C16",
+  Web40: "#D14300",
+
   // Grayscale Colors
   Grayscale0: "#FFFFFF", // 배경용 흰색
   Grayscale10: "#F1F2F7", // 채팅색

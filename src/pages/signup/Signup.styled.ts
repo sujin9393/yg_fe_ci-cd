@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { FontStyles } from "../../styles";
+import { Colors, FontStyles } from "../../styles";
 
 export const SignupSection = styled.div`
   display: flex;
@@ -24,5 +24,19 @@ export const SignupForm = styled.form`
 
   > button {
     margin-top: 10px;
+  }
+`;
+
+export const ConfirmButton = styled.button`
+  border: none;
+  background-color: ${Colors.Grayscale0};
+  ${FontStyles.XS_Medium};
+  color: ${Colors.Grayscale60};
+  text-decoration: underline;
+  cursor: pointer;
+
+  &:disabled {
+    color: ${Colors.Grayscale50};
+    cursor: default;
   }
 `;

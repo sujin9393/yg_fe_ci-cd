@@ -63,15 +63,22 @@ const UnitAmountSelector = () => {
         <Controller
           name="unitAmount"
           control={control}
-          render={({ field }) => (
-            <Dropdown
-              label="주문단위"
-              width="85px"
-              options={[{ value: "", label: "주문단위" }, ...unitOptions]}
-              {...field}
-              placeholder="주문단위"
-            />
-          )}
+          render={({ field }) => {
+            const selectedOption = unitOptions.find(
+              (opt) => opt.value === field.value
+            ) ?? { value: "", label: "주문단위" };
+            return (
+              <Dropdown
+                label="주문단위"
+                width="85px"
+                options={[{ value: "", label: "주문단위" }, ...unitOptions]}
+                value={selectedOption}
+                onChange={(selected) => {
+                  field.onChange(selected?.value ?? ""); // RHF에 string으로 전달
+                }}
+              />
+            );
+          }}
         />
       </S.TotalAmount>
       {(errors.totalAmount || errors.unitAmount) && (

@@ -9,6 +9,7 @@ import AppRouter from "./Router";
 import { useModalStore } from "./stores/useModalStore";
 import { useUserStore } from "./stores/useUserStore";
 import { useMyInfoQuery } from "./hooks/queries/useMyInfoQuery";
+import WebBackground from "./components/common/webBackgound/WebBackground";
 
 const App = () => {
   const openModal = useModalStore((s) => s.openModal);
@@ -20,26 +21,29 @@ const App = () => {
   useMyInfoQuery();
 
   return (
-    <S.MainContainer $modalOpen={isModalOpen}>
-      <Header />
-      <SectionLine />
-      <AppRouter />
-      {pathname === "/" && (
-        <S.MasterButton
-          onClick={() => {
-            if (!user) {
-              openModal("login");
-            } else {
-              navigate("/writePost");
-            }
-          }}
-        />
-      )}
+    <S.Whole>
+      <WebBackground />
+      <S.MainContainer $modalOpen={isModalOpen}>
+        <Header />
+        <SectionLine />
+        <AppRouter />
+        {pathname === "/" && (
+          <S.MasterButton
+            onClick={() => {
+              if (!user) {
+                openModal("login");
+              } else {
+                navigate("/writePost");
+              }
+            }}
+          />
+        )}
 
-      {openedModal === "login" && <LoginModal />}
-      {openedModal === "confirm" && <ConfirmModal />}
-      {openedModal === "order" && <OrderModal />}
-    </S.MainContainer>
+        {openedModal === "login" && <LoginModal />}
+        {openedModal === "confirm" && <ConfirmModal />}
+        {openedModal === "order" && <OrderModal />}
+      </S.MainContainer>
+    </S.Whole>
   );
 };
 

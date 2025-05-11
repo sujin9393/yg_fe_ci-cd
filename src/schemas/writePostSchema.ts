@@ -54,8 +54,8 @@ export const writePostSchema = z.object({
   // 설명: 최대 500자
   description: z
     .string()
-    .min(1, "자세한 설명을 입력해 주세요.")
-    .max(500, "설명란은 500자 이내로 작성해야 합니다."),
+    .min(2, "상품 설명은 2자 이상 1000자 이내여야 합니다.")
+    .max(1000, "설명란은 1000자 이내로 작성해야 합니다."),
 
   // 이미지: 최소 1장 이상
   imageUrls: z

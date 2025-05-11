@@ -9,10 +9,8 @@ export const uploadImages = async (files: File[]) => {
   const uploadedKeys: string[] = [];
 
   for (const file of files) {
-    const fileName = encodeURIComponent(file.name);
-
     // 1. Presigned URL 요청
-    const res = await api.get(`/api/image/presign?fileName=${fileName}`);
+    const res = await api.get(`/api/image/presign`);
     const { key, url } = res.data;
     console.log(key);
 
