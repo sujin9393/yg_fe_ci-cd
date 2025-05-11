@@ -10,6 +10,8 @@ import { useModalStore } from "./stores/useModalStore";
 import { useUserStore } from "./stores/useUserStore";
 import { useMyInfoQuery } from "./hooks/queries/useMyInfoQuery";
 import WebBackground from "./components/common/webBackgound/WebBackground";
+import { useEffect } from "react";
+import Loading from "./components/common/loading/Loding";
 
 const App = () => {
   const openModal = useModalStore((s) => s.openModal);
@@ -18,7 +20,22 @@ const App = () => {
   const user = useUserStore((s) => s.user);
   const openedModal = useModalStore((s) => s.openedModal);
   const isModalOpen = Boolean(openedModal);
-  useMyInfoQuery();
+  const { data, isLoading } = useMyInfoQuery();
+
+  useEffect(() => {
+    const protectedPaths = ["/writePost", "/mypage"];
+    const isProtected = protectedPaths.includes(pathname);
+
+    // ✅ 쿼리 로딩 중엔 아무것도 하지 않음
+    if (isLoading) return;
+
+    // ✅ 쿼리 끝났고 user가 없으면 리다이렉트
+    if (!data && isProtected) {
+      alert("다시 로그인 해주세요.");
+      navigate("/");
+    }
+    console.log(user?.nickname);
+  }, [data, pathname, isLoading, navigate, user]);
 
   return (
     <S.Whole>
@@ -26,22 +43,28 @@ const App = () => {
       <S.MainContainer $modalOpen={isModalOpen}>
         <Header />
         <SectionLine />
-        <AppRouter />
-        {pathname === "/" && (
-          <S.MasterButton
-            onClick={() => {
-              if (!user) {
-                openModal("login");
-              } else {
-                navigate("/writePost");
-              }
-            }}
-          />
-        )}
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <>
+            <AppRouter />
+            {pathname === "/" && (
+              <S.MasterButton
+                onClick={() => {
+                  if (!user) {
+                    openModal("login");
+                  } else {
+                    navigate("/writePost");
+                  }
+                }}
+              />
+            )}
 
-        {openedModal === "login" && <LoginModal />}
-        {openedModal === "confirm" && <ConfirmModal />}
-        {openedModal === "order" && <OrderModal />}
+            {openedModal === "login" && <LoginModal />}
+            {openedModal === "confirm" && <ConfirmModal />}
+            {openedModal === "order" && <OrderModal />}
+          </>
+        )}
       </S.MainContainer>
     </S.Whole>
   );
