@@ -6,25 +6,20 @@ import { useUserStore } from "../../stores/useUserStore";
 export const useMyInfoQuery = () => {
   const { setUser, clearUser } = useUserStore();
 
-  // ✅ 쿠키에 AccessToken이 있는지 확인
-  const hasAccessToken =
-    typeof document !== "undefined" && document.cookie.includes("AccessToken");
-
-  const { data, isSuccess } = useQuery({
+  const { data, isSuccess, isLoading, isError } = useQuery({
     queryKey: ["myInfo"],
     queryFn: getMyInfo,
     staleTime: 1000 * 60 * 5,
     retry: false,
-    enabled: hasAccessToken, // ✅ 조건부 실행
   });
 
   useEffect(() => {
     if (isSuccess && data) {
       setUser(data);
-    } else if (!hasAccessToken) {
-      clearUser(); // 쿠키 없으면 명시적으로 로그아웃 상태로 초기화
+    } else if (isError) {
+      clearUser(); // 실패 시 로그아웃 처리
     }
-  }, [isSuccess, data, hasAccessToken, setUser, clearUser]);
+  }, [isSuccess, isError, data, setUser, clearUser]);
 
-  return { data, isSuccess };
+  return { data, isSuccess, isLoading }; // ✅ isLoading도 추가
 };
