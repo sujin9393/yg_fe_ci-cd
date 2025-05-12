@@ -11,17 +11,17 @@ import Loading from "../../common/loading/Loding";
 
 interface SubSectionProps {
   title: string;
+  orderBy: "latest" | "price_asc" | "ending_soon";
   categoryId?: number;
 }
 
-const SubSection = ({ title, categoryId }: SubSectionProps) => {
+const SubSection = ({ title, orderBy, categoryId }: SubSectionProps) => {
   const {
     data: groupBuys,
     isLoading,
     isError,
   } = useGroupBuysList({
-    orderBy: "latest",
-    postStatus: "open",
+    orderBy: orderBy,
     category: categoryId,
     limit: 10,
   });

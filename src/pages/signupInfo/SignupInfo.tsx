@@ -10,12 +10,11 @@ import InputField from "../../components/common/input/inputField/InputField";
 import Dropdown from "../../components/common/input/dropdown/Dropdown";
 //import ImageUploader from "../../components/common/image/imageUploader/ImageUploader";
 import AgreeCheckBox from "../../components/common/agreeCheckbox/AgreeCheckBox";
-import { postUser, SignupRequestData } from "../../api/user";
-import { useNavigate } from "react-router-dom";
-import { useUserStore } from "../../stores/useUserStore";
+import { SignupRequestData } from "../../api/user";
 import { useNicknameCheckMutation } from "../../hooks/mutations/user/useNicknameCheckMutation";
 import { useEffect, useState } from "react";
 import { BANK_OPTIONS } from "../../constants";
+import { useSignupMutation } from "../../hooks/mutations/user/useSignupMutation";
 
 const inputFields = [
   {
@@ -31,10 +30,9 @@ const inputFields = [
 ] as const;
 
 const Signup = () => {
-  const navigate = useNavigate();
   const [isNicknameChecked, setIsNicknameChecked] = useState(false);
   const [isNicknameDuplicated, setIsNicknameDuplicated] = useState(false);
-
+  const { mutate: signup } = useSignupMutation();
   const { mutate: checkNickname } = useNicknameCheckMutation({
     onSuccess: (data) => {
       if (data.isDuplication === "NO") {
@@ -84,17 +82,6 @@ const Signup = () => {
     setIsNicknameDuplicated(false);
   }, [nickname]);
 
-  const handleSignup = async (data: SignupRequestData) => {
-    try {
-      const res = await postUser(data); // 서버에 요청
-      console.log("회원가입 성공", res);
-      useUserStore.getState().setUser(res); // ✅ 상태 저장
-      navigate("/");
-    } catch (err) {
-      console.error("회원가입 실패", err);
-    }
-  };
-
   const onSubmit = (data: SignupInfoFormData) => {
     const step1Data = localStorage.getItem("signupStep1");
     if (!step1Data) return alert("이메일/비밀번호 정보가 없습니다.");
@@ -109,7 +96,7 @@ const Signup = () => {
       accountNumber: data.accountNumber,
     };
 
-    handleSignup(requestData); // ✅ 타입 일치
+    signup(requestData);
   };
 
   return (

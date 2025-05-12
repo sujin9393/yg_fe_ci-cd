@@ -1,16 +1,18 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useModalStore } from "../../../stores/useModalStore";
 import { useUserStore } from "../../../stores/useUserStore";
 import { login } from "../../../api/user";
 
 export const useLoginMutation = () => {
   const closeModal = useModalStore((s) => s.closeModal);
+  const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: login, // ✅ 로그인 요청 보내는 함수
     onSuccess: (res) => {
       alert(`반갑습니다. ${res.nickname}님🥳`);
       useUserStore.getState().setUser(res); // 유저 저장
+      queryClient.invalidateQueries({ queryKey: ["myInfo"] });
       closeModal(); // 모달 닫기
     },
     onError: (err) => {

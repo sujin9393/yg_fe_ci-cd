@@ -1,4 +1,4 @@
-import { AxiosError } from "axios";
+import axios, { AxiosError } from "axios";
 import { LoginFormData } from "../schemas/loginSchema";
 import api from "./instance";
 
@@ -26,7 +26,11 @@ export const postUser = async (data: SignupRequestData) => {
       return res.data.data;
     }
   } catch (error) {
-    console.error("회원가입 실패:", error);
+    if (axios.isAxiosError(error) && error.response?.data?.message) {
+      alert(error.response.data.message); // 서버 메시지 직접 사용자에게 표시
+    } else {
+      alert("회원가입 중 오류가 발생했습니다.");
+    }
   }
 };
 
