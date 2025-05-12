@@ -120,7 +120,7 @@ const WritePost = () => {
           </S.URL>
           <HelperText>
             {isGeneratingAI
-              ? "AI 답변 생성은 1분정도 소요됩니다."
+              ? "AI 답변 생성은 최대 1분 소요될 수 있습니다. 다른 폼들을 채워주시면 얼른 가져다드리겠습니다 💌 (❁´◡`❁)"
               : errors.url?.message}
           </HelperText>
           <InputField
@@ -129,7 +129,7 @@ const WritePost = () => {
             placeholder="공구 제목을 입력해주세요"
             disabled={isGeneratingAI}
             {...register("title")}
-            value={isGeneratingAI ? "AI 답변 생성중입니다..." : watch("title")}
+            value={isGeneratingAI ? "AI 답변 생성중..." : watch("title")}
             helperText={errors.title?.message}
           />
           <InputField
@@ -138,13 +138,13 @@ const WritePost = () => {
             placeholder="상품 이름을 입력해주세요"
             disabled={isGeneratingAI}
             {...register("name")}
-            value={isGeneratingAI ? "AI 답변 생성중입니다..." : watch("name")}
+            value={isGeneratingAI ? "AI 답변 생성중..." : watch("name")}
             helperText={errors.name?.message}
           />
           <S.Label>계좌번호</S.Label>
           <S.AccountPart>
-            <Button disabled>우리</Button>
-            <InputField required={false} placeholder="1002-0202" disabled />
+            <Button disabled>{user?.accountBank}</Button>
+            <InputField value={user?.accountNumber} required={false} disabled />
           </S.AccountPart>
 
           <ControlledNumberInput
@@ -164,9 +164,7 @@ const WritePost = () => {
             {...register("description")}
             disabled={isGeneratingAI}
             helperText={errors.description?.message}
-            value={
-              isGeneratingAI ? "AI 답변 생성중입니다..." : watch("description")
-            }
+            value={isGeneratingAI ? "AI 답변 생성중..." : watch("description")}
           />
           <Controller
             control={methods.control}

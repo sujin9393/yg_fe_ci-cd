@@ -53,3 +53,7 @@ export const SubMent = styled.p`
 export const Bottom = styled.div`
   display: flex;
 `;
+
+export const Img = styled.img`
+  cursor: pointer;
+`;

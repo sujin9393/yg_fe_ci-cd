@@ -19,7 +19,13 @@ const WebBackground = () => {
         <img src={Moongs} alt="뭉산 아이콘" />
       </S.MainPart>
       <S.Bottom>
-        <img src={Instagram} alt="인스타그램 아이콘" />
+        <a
+          href="https://www.instagram.com/moong.san?igsh=dzk3djduYTdkYWFj&utm_source=qr"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <S.Img src={Instagram} alt="인스타그램 아이콘" />
+        </a>
       </S.Bottom>
     </S.Container>
   );

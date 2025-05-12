@@ -14,6 +14,7 @@ import { useOrderMutation } from "../../../../hooks/mutations/order/useOrderMuta
 
 const OrderModal = () => {
   const closeModal = useModalStore((s) => s.closeModal);
+  const openModal = useModalStore((s) => s.openModal);
   const { user } = useUserStore();
   const [payerName, setPayerName] = useState(user?.name || "");
 
@@ -32,12 +33,30 @@ const OrderModal = () => {
   const { mutate: orderMutate } = useOrderMutation(postId);
 
   const handleOrder = () => {
-    orderMutate({
-      postId,
-      price: totalPrice,
-      quantity,
-      name: payerName,
-    });
+    if (quantity === leftAmount) {
+      openModal("confirm", {
+        confirmTitle: `최대 수량(${leftAmount}개)을 주문하시겠습니까?`,
+        confirmDescription:
+          "해당 수량을 주문하면 모집 마감되어 주문 후 취소가 불가합니다.",
+        confirmText: "주문하기",
+        cancelText: "취소하기",
+        onConfirm: () => {
+          orderMutate({
+            postId,
+            price: totalPrice,
+            quantity,
+            name: payerName,
+          });
+        },
+      });
+    } else {
+      orderMutate({
+        postId,
+        price: totalPrice,
+        quantity,
+        name: payerName,
+      });
+    }
   };
 
   return (

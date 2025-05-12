@@ -11,7 +11,7 @@ export const writePostSchema = z.object({
   name: z
     .string()
     .min(1, "상품 이름을 입력해 주세요.")
-    .max(30, "상품 이름은 30자 이내로 작성해야 합니다."),
+    .max(100, "상품 이름은 100자 이내로 작성해야 합니다."),
 
   // 상품 전체 수량: 2 ~ 999
   totalAmount: z.coerce

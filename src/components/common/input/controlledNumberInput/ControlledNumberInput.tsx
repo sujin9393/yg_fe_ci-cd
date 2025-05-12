@@ -38,7 +38,7 @@ const ControlledNumberInput = <T extends Record<string, unknown>>({
         const isAIPlaceholder = field.value === -1;
 
         const formatted = isAIPlaceholder
-          ? "AI 답변 생성중입니다..."
+          ? "AI 답변 생성중..."
           : formatWithComma((field.value ?? "").toString());
 
         const handleChange = (input: string) => {
