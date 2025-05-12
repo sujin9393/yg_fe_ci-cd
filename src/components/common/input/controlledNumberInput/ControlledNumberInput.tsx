@@ -15,6 +15,7 @@ type ControlledNumberInputProps<T extends Record<string, unknown>> = {
   styleType?: "signup" | "post" | "login";
   prefix?: string;
   maxDigits: number;
+  disabled?: boolean;
 };
 
 // ✅ 함수에도 제네릭 붙이기
@@ -27,19 +28,24 @@ const ControlledNumberInput = <T extends Record<string, unknown>>({
   styleType = "post",
   prefix,
   maxDigits,
+  disabled = false,
 }: ControlledNumberInputProps<T>) => {
   return (
     <Controller
       name={name}
       control={control}
       render={({ field }) => {
-        const raw = field.value ?? "";
-        const formatted = formatWithComma(raw.toString());
+        const isAIPlaceholder = field.value === -1;
+
+        const formatted = isAIPlaceholder
+          ? "AI 답변 생성중입니다..."
+          : formatWithComma((field.value ?? "").toString());
 
         const handleChange = (input: string) => {
+          if (isAIPlaceholder) return;
           const rawValue = removeComma(input);
           const trimmed = rawValue.slice(0, maxDigits);
-          field.onChange(trimmed);
+          field.onChange(Number(trimmed));
         };
 
         return (
@@ -53,6 +59,7 @@ const ControlledNumberInput = <T extends Record<string, unknown>>({
             helperText={
               typeof helperText === "string" ? helperText : helperText?.message
             }
+            disabled={disabled}
           />
         );
       }}

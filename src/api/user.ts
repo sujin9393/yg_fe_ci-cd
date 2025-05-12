@@ -117,7 +117,7 @@ export const logout = async () => {
       return res.data;
     }
   } catch (error) {
-    console.error("주문 취소 실패:", error);
+    console.error("로그아웃 실패:", error);
     throw error;
   }
 };
@@ -135,5 +135,24 @@ export const getMyInfo = async () => {
     }
   } catch (error) {
     console.error("내 프로필 조회 실패:", error);
+  }
+};
+
+/**
+ * 회원탈퇴
+ * @returns
+ */
+
+export const deleteUser = async () => {
+  try {
+    const res = await api.delete("/api/users");
+
+    if (res.data) {
+      console.log(res.data);
+      return res.data;
+    }
+  } catch (error) {
+    console.error("탈퇴 실패:", error);
+    throw error;
   }
 };

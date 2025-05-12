@@ -5,7 +5,11 @@ import Dropdown from "../../common/input/dropdown/Dropdown";
 import SelectButtonInput from "../../common/input/selectButtonInput/SelectButtonInput";
 import ControlledNumberInput from "../../common/input/controlledNumberInput/ControlledNumberInput";
 
-const UnitAmountSelector = () => {
+interface UnitAmountSelectorProps {
+  disabled?: boolean;
+}
+
+const UnitAmountSelector = ({ disabled = false }: UnitAmountSelectorProps) => {
   const {
     watch,
     control,
@@ -52,6 +56,14 @@ const UnitAmountSelector = () => {
     }
   }, [unitAmount, setValue]);
 
+  useEffect(() => {
+    if (disabled) {
+      setValue("totalAmount", -1);
+      setValue("unitAmount", "");
+      setValue("hostQuantity", 0);
+    }
+  }, [disabled, setValue]);
+
   return (
     <div>
       <S.TotalAmount>
@@ -61,6 +73,7 @@ const UnitAmountSelector = () => {
           label="상품 전체 수량"
           placeholder="상품 전체 수량을 입력해주세요."
           maxDigits={3}
+          disabled={disabled}
         />
         <Controller
           name="unitAmount"
@@ -77,6 +90,7 @@ const UnitAmountSelector = () => {
                 onChange={(selected) => {
                   field.onChange(selected?.value ?? ""); // RHF에 string으로 전달
                 }}
+                disabled={disabled}
               />
             );
           }}
@@ -86,7 +100,7 @@ const UnitAmountSelector = () => {
         <S.HelperText>
           {typeof errors.totalAmount?.message === "string"
             ? errors.totalAmount.message
-            : unitAmount === ""
+            : unitAmount === "" && !disabled
               ? "주문 단위를 선택해주세요."
               : ""}
         </S.HelperText>

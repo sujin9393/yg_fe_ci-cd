@@ -32,6 +32,7 @@ export const URL = styled.div`
   display: flex;
   align-items: end;
   gap: 8px;
+  margin-bottom: -15px;
 
   > button {
     width: 75px;

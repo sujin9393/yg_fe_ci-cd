@@ -9,6 +9,7 @@ export const SignupSection = styled.div`
   gap: 10px;
   margin: 15px 0px;
   align-items: center;
+  justify-content: center;
 `;
 
 export const SectionName = styled.p`
@@ -27,6 +28,7 @@ export const SignupForm = styled.form`
   flex-direction: column;
   gap: 10px;
   align-items: center;
+  margin-top: 20px;
 
   > button {
     margin-top: 10px;

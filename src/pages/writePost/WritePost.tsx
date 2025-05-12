@@ -11,20 +11,18 @@ import DateInput from "../../components/common/input/dateInput/DateInput";
 import TextAreaField from "../../components/common/input/textAreaField/TextAreaField";
 import { HelperText } from "../../components/common/HelperText.styled";
 import { formatDateTimeForDTO } from "../../utils/date";
-import { PostRequestData } from "../../types/productType";
-import { useNavigate } from "react-router-dom";
 import { useUserStore } from "../../stores/useUserStore";
 import { uploadImages } from "../../api/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ControlledNumberInput from "../../components/common/input/controlledNumberInput/ControlledNumberInput";
-import { writePost } from "../../api/host";
 import { useGetAIMutation } from "../../hooks/mutations/host/useGetAIMutation";
 import Loading from "../../components/common/loading/Loding";
+import { usePostMutation } from "../../hooks/mutations/host/usePostMutation";
 
 const WritePost = () => {
-  const navigate = useNavigate();
   const user = useUserStore((s) => s.user);
   const [imageFiles, setImageFiles] = useState<File[]>([]);
+  const [isAISubmitted, setIsAISubmitted] = useState(false);
 
   const methods = useForm<PostFormData>({
     resolver: zodResolver(writePostSchema),
@@ -39,18 +37,19 @@ const WritePost = () => {
   } = methods;
 
   const url = watch("url");
-  const { mutate: getAIMutate, isPending } = useGetAIMutation(setValue);
+  const { mutate: getAIMutate, isPending: isGeneratingAI } = useGetAIMutation(
+    setValue,
+    setIsAISubmitted
+  );
+  const { mutate: writePostMutate, isPending: isPosting } = usePostMutation();
 
-  const handlePost = async (data: PostRequestData) => {
-    console.log(data);
-    try {
-      const res = await writePost(data); // 서버에 요청
-      console.log("공구글 게시 성공", res);
-      navigate(`/products/${res.data.postId}`);
-    } catch (err) {
-      console.error("공구글 게시 실패", err);
-    }
-  };
+  if (isGeneratingAI) {
+    setValue("price", -1);
+  }
+
+  useEffect(() => {
+    setIsAISubmitted(false);
+  }, [url]);
 
   const handleFormSubmit = async (data: PostFormData) => {
     try {
@@ -72,8 +71,7 @@ const WritePost = () => {
 
       console.log("최종 payload:", payload);
 
-      // 3. 게시글 작성
-      await handlePost(payload);
+      writePostMutate(payload);
     } catch (err) {
       console.error("전체 게시 실패", err);
     }
@@ -86,6 +84,8 @@ const WritePost = () => {
     }
     handleFormSubmit(data);
   };
+
+  if (isPosting) return <Loading message="공구글 게시중입니다..." />;
 
   return (
     <S.Container>
@@ -105,99 +105,109 @@ const WritePost = () => {
               styleType="post"
               placeholder="상품 URL을 입력해주세요"
               {...register("url")}
-              helperText={errors.url?.message}
             />
             <Button
-              disabled={!url}
-              onClick={() => getAIMutate(url!)}
+              disabled={!url || isGeneratingAI || isAISubmitted || !!errors.url}
+              onClick={() => {
+                if (!url || errors?.url || isGeneratingAI || isAISubmitted)
+                  return;
+                getAIMutate(url);
+              }}
               buttonStyle="square"
             >
               <img src={Send} />
             </Button>
           </S.URL>
-          {isPending ? (
-            <Loading message="공구글 생성중입니다." />
-          ) : (
-            <>
-              <InputField
-                label="공구 제목"
-                styleType="post"
-                placeholder="공구 제목을 입력해주세요"
-                {...register("title")}
-                helperText={errors.title?.message}
-              />
-              <InputField
-                label="상품 이름"
-                styleType="post"
-                placeholder="상품 이름을 입력해주세요"
-                {...register("name")}
-                helperText={errors.name?.message}
-              />
-              <S.Label>계좌번호</S.Label>
-              <S.AccountPart>
-                <Button disabled>우리</Button>
-                <InputField required={false} placeholder="1002-0202" disabled />
-              </S.AccountPart>
+          <HelperText>
+            {isGeneratingAI
+              ? "AI 답변 생성은 1분정도 소요됩니다."
+              : errors.url?.message}
+          </HelperText>
+          <InputField
+            label="공구 제목"
+            styleType="post"
+            placeholder="공구 제목을 입력해주세요"
+            disabled={isGeneratingAI}
+            {...register("title")}
+            value={isGeneratingAI ? "AI 답변 생성중입니다..." : watch("title")}
+            helperText={errors.title?.message}
+          />
+          <InputField
+            label="상품 이름"
+            styleType="post"
+            placeholder="상품 이름을 입력해주세요"
+            disabled={isGeneratingAI}
+            {...register("name")}
+            value={isGeneratingAI ? "AI 답변 생성중입니다..." : watch("name")}
+            helperText={errors.name?.message}
+          />
+          <S.Label>계좌번호</S.Label>
+          <S.AccountPart>
+            <Button disabled>우리</Button>
+            <InputField required={false} placeholder="1002-0202" disabled />
+          </S.AccountPart>
 
-              <ControlledNumberInput
-                name="price"
-                control={methods.control}
-                label="상품 전체 가격"
-                placeholder="가격을 입력해주세요"
-                prefix="₩"
-                maxDigits={9}
-                helperText={errors.price}
+          <ControlledNumberInput
+            name="price"
+            control={methods.control}
+            label="상품 전체 가격"
+            placeholder="가격을 입력해주세요"
+            prefix="₩"
+            maxDigits={9}
+            disabled={isGeneratingAI}
+            helperText={errors.price}
+          />
+          <UnitAmountSelector disabled={isGeneratingAI} />
+          <TextAreaField
+            label="자세한 설명"
+            placeholder="공구방에 올릴 게시글 내용을 작성해주세요."
+            {...register("description")}
+            disabled={isGeneratingAI}
+            helperText={errors.description?.message}
+            value={
+              isGeneratingAI ? "AI 답변 생성중입니다..." : watch("description")
+            }
+          />
+          <Controller
+            control={methods.control}
+            name="dueDate"
+            render={({ field, fieldState }) => (
+              <DateInput
+                label="공구 마감 일자"
+                value={field.value}
+                placeholder="마감 일자를 선택해주세요"
+                onChange={field.onChange}
+                helperText={fieldState.error?.message}
               />
-
-              <UnitAmountSelector />
-              <TextAreaField
-                label="자세한 설명"
-                placeholder="공구방에 올릴 게시글 내용을 작성해주세요."
-                {...register("description")}
-                helperText={errors.description?.message}
-              />
+            )}
+          />
+          <div>
+            <S.Pickup>
               <Controller
                 control={methods.control}
-                name="dueDate"
-                render={({ field, fieldState }) => (
+                name="pickupDate" // 너의 form schema 기준 name
+                render={({ field }) => (
                   <DateInput
-                    label="공구 마감 일자"
+                    label="픽업 일자 / 거래 장소"
                     value={field.value}
-                    placeholder="마감 일자를 선택해주세요"
+                    placeholder="픽업 일자를 선택해주세요"
                     onChange={field.onChange}
-                    helperText={fieldState.error?.message}
                   />
                 )}
               />
-              <div>
-                <S.Pickup>
-                  <Controller
-                    control={methods.control}
-                    name="pickupDate" // 너의 form schema 기준 name
-                    render={({ field }) => (
-                      <DateInput
-                        label="픽업 일자 / 거래 장소"
-                        value={field.value}
-                        placeholder="픽업 일자를 선택해주세요"
-                        onChange={field.onChange}
-                      />
-                    )}
-                  />
-                  <InputField
-                    styleType="post"
-                    placeholder="카테부 교육장"
-                    disabled
-                  />
-                </S.Pickup>
-                {errors.pickupDate?.message && (
-                  <HelperText>{errors.pickupDate.message}</HelperText>
-                )}
-              </div>
-              <S.ButtonWrapper>
-                <Button type="submit">작성 완료</Button>
-              </S.ButtonWrapper>
-            </>
-          )}
+              <InputField
+                styleType="post"
+                placeholder="카테부 교육장"
+                disabled
+              />
+            </S.Pickup>
+            {errors.pickupDate?.message && (
+              <HelperText>{errors.pickupDate.message}</HelperText>
+            )}
+          </div>
+          <S.ButtonWrapper>
+            <Button type="submit">작성 완료</Button>
+          </S.ButtonWrapper>
         </S.PostForm>
       </FormProvider>
     </S.Container>

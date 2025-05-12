@@ -5,21 +5,19 @@ import { UseFormSetValue } from "react-hook-form";
 import { PostFormData } from "../../../schemas/writePostSchema";
 
 export const useGetAIMutation = (
-  setValue: UseFormSetValue<PostFormData> // ✅ 타입 안전하게 정의
+  setValue: UseFormSetValue<PostFormData>, // ✅ 타입 안전하게 정의
+  setIsAISubmitted: (v: boolean) => void
 ) => {
   return useMutation<AIResponse, Error, string>({
     mutationFn: getAI,
 
     onSuccess: (data) => {
-      alert("✅ 설명 생성이 완료되었습니다.");
-      console.log("설명:", data);
-
-      // ✅ 설명 필드 자동 입력
       setValue("description", data.summary, { shouldValidate: true });
-      setValue("title", data.product_name, { shouldValidate: true });
-      setValue("name", data.product_lower_name, { shouldValidate: true });
+      setValue("title", data.title, { shouldValidate: true });
+      setValue("name", data.product_name, { shouldValidate: true });
       setValue("price", data.total_price, { shouldValidate: true });
       setValue("totalAmount", data.count, { shouldValidate: true });
+      setIsAISubmitted(true);
     },
 
     onError: (error) => {
