@@ -26,6 +26,12 @@ export const Box = styled.img`
   width: 52px;
 `;
 
+export const Product = styled.p`
+  color: ${Colors.Grayscale60};
+  ${FontStyles.XS_Bold};
+  text-align: center;
+`;
+
 export const Title = styled.p`
   ${FontStyles.MD1_SemiBold};
 `;

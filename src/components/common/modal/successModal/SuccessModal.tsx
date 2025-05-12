@@ -8,7 +8,7 @@ import { Button } from "../../button/Button.styled";
 const SuccessModal = () => {
   const closeModal = useModalStore((s) => s.closeModal);
   const {
-    //productName,
+    productName,
     //unitPrice,
     //unitAmount,
     //leftAmount,
@@ -20,6 +20,7 @@ const SuccessModal = () => {
     <Modal onClose={closeModal}>
       <S.Container>
         <S.Box src={Box} />
+        <S.Product>{productName}</S.Product>
         <S.Title>주문이 성공적으로 완료되었습니다🎉</S.Title>
         <S.Account>
           주최자 계좌번호 : {hostAccountBank} {hostAccountNumber}

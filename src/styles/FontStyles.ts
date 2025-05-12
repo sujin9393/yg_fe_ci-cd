@@ -65,6 +65,7 @@ const FontStyles = {
   SM_Regular: getFont("SM", "Regular"),
 
   // XS '0.75rem', // 12px
+  XS_Bold: getFont("XS", "Bold"),
   XS_SemiBold: getFont("XS", "SemiBold"),
   XS_Medium: getFont("XS", "Medium"),
   XS_Regular: getFont("XS", "Regular"),
