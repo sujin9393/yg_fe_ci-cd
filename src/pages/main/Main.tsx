@@ -6,7 +6,7 @@ import * as S from "./Main.styled";
 const Main = () => {
   return (
     <S.Container>
-      <SubSection title="마감임박" orderBy="ending_soon" />
+      <SubSection title="마감임박" orderBy="due_soon_only" />
       <SectionLine />
       <SubSection title="전체" orderBy="latest" />
       <SectionLine />

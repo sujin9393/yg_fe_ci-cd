@@ -18,7 +18,7 @@ const MyList = () => {
   console.log(items);
 
   return (
-    <div>
+    <S.Container>
       <S.ListName>참여목록</S.ListName>
       <FilterSelector
         options={["공구중", "모집마감", "공구종료"]}
@@ -30,7 +30,7 @@ const MyList = () => {
       ) : (
         items.map((item) => <MyListCard key={item.postId} item={item} />)
       )}
-    </div>
+    </S.Container>
   );
 };
 

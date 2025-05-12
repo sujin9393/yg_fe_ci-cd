@@ -12,7 +12,7 @@ import EmptySection from "../../common/emptySection/EmptySection";
 
 interface SubSectionProps {
   title: string;
-  orderBy: "latest" | "price_asc" | "ending_soon";
+  orderBy: "latest" | "price_asc" | "ending_soon" | "due_soon_only";
   categoryId?: number;
 }
 
