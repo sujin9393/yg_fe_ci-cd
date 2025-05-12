@@ -23,7 +23,7 @@ export const ProfileSection = styled.div`
 
 export const DeleteUser = styled.p`
   margin-top: auto;
-  margin-bottom: 20px;
+  padding-bottom: 20px;
   width: 100%;
   text-align: center;
   justify-content: end;
