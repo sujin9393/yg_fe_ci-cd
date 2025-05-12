@@ -8,6 +8,7 @@ import * as S from "./SubSection.styled";
 import { useNavigate } from "react-router-dom";
 import { useGroupBuysList } from "../../../hooks/queries/useProductQuery";
 import Loading from "../../common/loading/Loding";
+import EmptySection from "../../common/emptySection/EmptySection";
 
 interface SubSectionProps {
   title: string;
@@ -28,25 +29,28 @@ const SubSection = ({ title, orderBy, categoryId }: SubSectionProps) => {
   const navigate = useNavigate();
 
   if (isLoading) return <Loading />;
-  if (isError || !groupBuys) return <div>에러 발생</div>;
 
   return (
     <S.RowScrollSection>
       <S.SectionName>{title}</S.SectionName>
-      <S.RowScrollContainer>
-        {groupBuys.map((item) => (
-          <MainCard
-            onClick={() => {
-              navigate(`/products/${item.postId}`);
-            }}
-            key={item.postId}
-            imageKey={item.imageKeys[0]?.imageKey}
-            title={item.title}
-            unitPrice={item.unitPrice.toLocaleString()}
-            unitAmount={item.unitAmount}
-          />
-        ))}
-      </S.RowScrollContainer>
+      {isError || !groupBuys || groupBuys.length === 0 ? (
+        <EmptySection category={title} />
+      ) : (
+        <S.RowScrollContainer>
+          {groupBuys.map((item) => (
+            <MainCard
+              onClick={() => {
+                navigate(`/products/${item.postId}`);
+              }}
+              key={item.postId}
+              imageKey={item.imageKeys[0]?.imageKey}
+              title={item.title}
+              unitPrice={item.unitPrice.toLocaleString()}
+              unitAmount={item.unitAmount}
+            />
+          ))}
+        </S.RowScrollContainer>
+      )}
     </S.RowScrollSection>
   );
 };

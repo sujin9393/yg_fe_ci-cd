@@ -6,16 +6,25 @@ import { Colors, FontStyles } from "../../../styles";
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 3px;
   width: 100%;
 `;
 
 export const PartName = styled.p`
   color: ${Colors.Main30};
-  ${FontStyles.XXS_SemiBold}
+  ${FontStyles.XXS_SemiBold};
+  cursor: pointer;
+`;
+
+export const Info = styled.p`
+  color: ${Colors.Grayscale60};
+  ${FontStyles.XXXS_Light};
+  line-height: 12px;
+  margin-bottom: 3px;
 `;
 
 export const Row = styled.div`
+  margin-top: 2px;
   display: flex;
   gap: 10px;
 `;

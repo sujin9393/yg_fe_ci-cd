@@ -3,6 +3,7 @@ import { useOrderList } from "../../../hooks/queries/useOrderQuery";
 import FilterSelector from "../filteringSelector/FilteringSelector";
 import * as S from "./MyList.styled";
 import MyListCard from "./myListCard/MyListCard";
+import EmptySection from "../emptySection/EmptySection";
 
 const statusMap = {
   공구중: "open",
@@ -17,16 +18,19 @@ const MyList = () => {
   console.log(items);
 
   return (
-    <>
+    <div>
       <S.ListName>참여목록</S.ListName>
       <FilterSelector
         options={["공구중", "모집마감", "공구종료"]}
         selected={status}
         onSelect={setStatus}
       />
-      {items &&
-        items.map((item) => <MyListCard key={item.postId} item={item} />)}
-    </>
+      {!items || items.length === 0 ? (
+        <EmptySection category="참여한" />
+      ) : (
+        items.map((item) => <MyListCard key={item.postId} item={item} />)
+      )}
+    </div>
   );
 };
 
