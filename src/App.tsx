@@ -35,6 +35,7 @@ const App = () => {
       navigate("/");
     }
     console.log(user?.nickname);
+    console.log(user?.type);
   }, [data, pathname, isLoading, navigate, user]);
 
   return (
@@ -48,7 +49,7 @@ const App = () => {
         ) : (
           <>
             <AppRouter />
-            {pathname === "/" && (
+            {user?.type === "ADMIN" && pathname === "/" && (
               <S.MasterButton
                 onClick={() => {
                   if (!user) {

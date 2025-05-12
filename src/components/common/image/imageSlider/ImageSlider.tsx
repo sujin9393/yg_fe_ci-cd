@@ -66,7 +66,7 @@ const ImageSlider = ({ images }: ImageSliderProps) => {
           src={getImageUrl(images[currentIndex])}
         ></S.ImageContainer>
         {currentIndex !== images.length - 1 && (
-          <S.StyledRightArrow onClick={handlePrev} />
+          <S.StyledRightArrow onClick={handleNext} />
         )}
       </S.ImagePart>
       <S.SlideIcon>

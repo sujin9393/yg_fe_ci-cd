@@ -1,5 +1,5 @@
 import * as S from "./Profile.styled";
-import tomato from "../../../assets/images/Tomato.png";
+import 달뭉 from "../../../assets/images/달뭉.webp";
 import { UserInfo } from "../../../types/userType";
 import { useLogoutMutation } from "../../../hooks/mutations/user/useLogoutMutation";
 import { useModalStore } from "../../../stores/useModalStore";
@@ -37,7 +37,7 @@ const Profile = ({ type, user }: ProfileProps) => {
 
   return (
     <S.ProfilePart $type={type}>
-      <S.ProfileImg $type={type} src={tomato} alt="프로필 이미지" />
+      <S.ProfileImg $type={type} src={달뭉} alt="프로필 이미지" />
       <S.ProfileInfo>
         {type === "mypage" && (
           <S.LogoutButton onClick={handleLogout}>로그아웃</S.LogoutButton>

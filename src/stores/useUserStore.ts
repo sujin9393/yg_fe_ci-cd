@@ -4,7 +4,7 @@ export interface UserInfo {
   imageUrl: string | null;
   name: string;
   nickname: string;
-  type: "USER" | "ADMIN"; // 너희 서비스에 맞춰 수정 가능
+  type: "USER" | "ADMIN";
 }
 
 interface UserStore {
