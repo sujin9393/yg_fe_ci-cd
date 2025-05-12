@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-export type ModalType = "login" | "confirm" | "order" | null;
+export type ModalType = "login" | "confirm" | "order" | "success" | null;
 
 interface ModalState {
   openedModal: ModalType;

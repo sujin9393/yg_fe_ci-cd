@@ -21,9 +21,9 @@ export const AccountPart = styled.div`
   align-items: center;
 
   > button {
-    width: 70px;
+    width: 140px;
     ${FontStyles.XS_SemiBold};
-    height: 36px;
+    height: 40px;
     border-radius: 25px;
   }
 `;
@@ -32,6 +32,7 @@ export const URL = styled.div`
   display: flex;
   align-items: end;
   gap: 8px;
+  margin-bottom: -15px;
 
   > button {
     width: 75px;

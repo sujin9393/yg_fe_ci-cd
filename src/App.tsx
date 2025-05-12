@@ -12,6 +12,7 @@ import { useMyInfoQuery } from "./hooks/queries/useMyInfoQuery";
 import WebBackground from "./components/common/webBackgound/WebBackground";
 import { useEffect } from "react";
 import Loading from "./components/common/loading/Loding";
+import SuccessModal from "./components/common/modal/successModal/SuccessModal";
 
 const App = () => {
   const openModal = useModalStore((s) => s.openModal);
@@ -64,6 +65,7 @@ const App = () => {
             {openedModal === "login" && <LoginModal />}
             {openedModal === "confirm" && <ConfirmModal />}
             {openedModal === "order" && <OrderModal />}
+            {openedModal === "success" && <SuccessModal />}
           </>
         )}
       </S.MainContainer>

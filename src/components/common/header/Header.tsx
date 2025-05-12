@@ -10,6 +10,23 @@ const Header = () => {
   const { pathname } = useLocation();
   const user = useUserStore((s) => s.user);
 
+  const handleLogoClick = () => {
+    if (pathname === "/signup" || pathname === "/signupInfo") {
+      openModal("confirm", {
+        confirmTitle: "정말 나가시겠어요?",
+        confirmDescription: "작성 중인 정보가 저장되지 않습니다.",
+        confirmText: "나가기",
+        cancelText: "계속 작성하기",
+        onConfirm: () => {
+          navigate("/");
+          localStorage.removeItem("signupStep1");
+        },
+      });
+    } else {
+      navigate("/");
+    }
+  };
+
   const handleGoBack = () => {
     if (pathname === "/signup" || pathname === "/signupInfo") {
       openModal("confirm", {
@@ -30,11 +47,7 @@ const Header = () => {
   return (
     <S.HeaderContainer>
       {pathname !== "/" && <S.GoBack onClick={handleGoBack} />}
-      <S.LogoPart
-        onClick={() => {
-          navigate("/");
-        }}
-      >
+      <S.LogoPart onClick={handleLogoClick}>
         <img src={Logo} alt="logo" />
         <S.ServiceName src={Service} />
       </S.LogoPart>

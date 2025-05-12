@@ -4,6 +4,8 @@ export interface UserInfo {
   imageUrl: string | null;
   name: string;
   nickname: string;
+  accountBank: string;
+  accountNumber: string;
   type: "USER" | "ADMIN";
 }
 

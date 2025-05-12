@@ -1,5 +1,5 @@
 import styled, { keyframes } from "styled-components";
-import { Colors } from "../../../styles";
+import { Colors, FontStyles } from "../../../styles";
 
 export const spin = keyframes`
   0% { transform: rotate(0deg); }
@@ -21,6 +21,7 @@ export const Message = styled.div`
   color: #555;
   text-align: center;
   margin-top: 20px;
+  ${FontStyles.MD2_Medium};
 `;
 
 export const LoadingContainer = styled.div`

@@ -4,7 +4,7 @@ import * as S from "./InputField.styled";
 type InputFieldProps = {
   label?: string;
   styleType?: "signup" | "post" | "login";
-  placeholder: string;
+  placeholder?: string;
   helperText?: React.ReactNode;
   type?: string;
   prefix?: React.ReactNode;

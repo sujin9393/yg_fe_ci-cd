@@ -25,6 +25,14 @@ export const TextArea = styled.textarea`
     ${FontStyles.XS_Medium};
     color: ${Colors.Grayscale50};
   }
+  &:disabled {
+    background-color: ${Colors.Grayscale40};
+    cursor: default;
+    border: none;
+  }
+  &:disabled::placeholder {
+    color: ${Colors.Grayscale60};
+  }
 `;
 
 export const HelperText = styled.span`

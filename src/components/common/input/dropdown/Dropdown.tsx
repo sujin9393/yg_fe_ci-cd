@@ -24,6 +24,7 @@ interface DropdownProps
   helperText?: React.ReactNode;
   value?: Option | null; // ✅ 명시적으로 nullable
   onChange?: (value: Option | null) => void; // ✅ 명시적으로 nullable
+  disabled?: boolean;
 }
 
 const customStyles: StylesConfig<Option, false> = {
@@ -132,6 +133,7 @@ const Dropdown = ({
         components={{ Option: CustomOption }}
         onChange={handleChange} // ✅ 이 줄을 명시적으로 추가!
         value={props.value ?? null} // ✅ 이 줄도 명시적으로 보장
+        isDisabled={props.disabled}
         {...props}
       />
       {helperText && <HelperText>{helperText}</HelperText>}
