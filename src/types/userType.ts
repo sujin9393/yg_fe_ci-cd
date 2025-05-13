@@ -1,5 +1,6 @@
 export interface UserInfo {
   userId: number;
+  name: string;
   nickname: string;
   accountBank: string;
   accountNumber: string;

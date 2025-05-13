@@ -19,6 +19,7 @@ export const CardInfo = styled.div`
   flex-direction: column;
   flex: 1;
   padding: 5px;
+  min-width: 0; // 💡 텍스트 줄바꿈/말줄임과 flex-item 크기 충돌 방지
 `;
 
 export const OrderState = styled.p`
@@ -26,7 +27,9 @@ export const OrderState = styled.p`
   color: ${Colors.Grayscale80};
 `;
 
-export const productInfo = styled.div``;
+export const productInfo = styled.div`
+  width: 100%;
+`;
 
 export const pickupPlace = styled.p`
   ${FontStyles.XXXS_SemiBold}
@@ -40,6 +43,9 @@ export const unitPrice = styled.p`
 export const postTitle = styled.p`
   ${FontStyles.XS_Regular};
   color: ${Colors.Grayscale60};
+  overflow: hidden; // 넘친 내용 숨기기
+  text-overflow: ellipsis; // 말줄임표로 표시
+  white-space: nowrap; // 줄 바꿈 없이 한 줄만
 `;
 
 export const OrderInfo = styled.div`

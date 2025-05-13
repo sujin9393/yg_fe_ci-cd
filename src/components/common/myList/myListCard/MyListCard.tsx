@@ -23,7 +23,11 @@ const MyListCard = ({ item }: MyListCardItem) => {
       >
         <ImageContainer imageUrl={getImageUrl(item.imageKey)} />
         <S.CardInfo>
-          <S.OrderState>입금확인완료</S.OrderState>
+          <S.OrderState>
+            {item.orderStatus === "CONFIRMED"
+              ? "입금 확인 완료"
+              : "입금 확인 중"}
+          </S.OrderState>
           <S.productInfo>
             <S.pickupPlace>{item.location}</S.pickupPlace>
             <S.unitPrice>{item.unitPrice.toLocaleString()}원</S.unitPrice>

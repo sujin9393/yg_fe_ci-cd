@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import { GetOrderParams, OrderRequestData } from "../types/orderType";
 import api from "./instance";
 
@@ -12,11 +13,16 @@ export const postOrder = async (data: OrderRequestData) => {
     const res = await api.post("/api/orders", data);
 
     if (res.data) {
-      return res.data;
+      return res.data.data;
+    } else {
+      throw new Error("응답에 data가 없습니다");
     }
   } catch (error) {
-    console.error("주문 실패:", error);
-    throw error;
+    console.log(error);
+    if (error instanceof AxiosError && error.response?.data?.message) {
+      throw new Error(error.response.data.message); // 서버 메시지를 직접 전달
+    }
+    throw new Error("닉네임 확인 중 오류가 발생했습니다.");
   }
 };
 

@@ -10,8 +10,8 @@ export const Container = styled.div`
   background-color: ${Colors.Grayscale0};
   border-radius: 20px;
   border: none;
-  width: 360px;
-  padding: 20px;
+  width: 300px;
+  padding: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,21 +26,77 @@ export const Box = styled.img`
   width: 52px;
 `;
 
-export const Product = styled.p`
-  color: ${Colors.Grayscale60};
-  ${FontStyles.XS_Bold};
-  text-align: center;
+export const OrderInfo = styled.div`
+  border: 1px solid ${Colors.Grayscale50};
+  border-radius: 10px;
+  padding: 10px 15px;
+  width: 230px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 `;
 
-export const Title = styled.p`
+export const Product = styled.p`
+  color: ${Colors.Grayscale70};
+  ${FontStyles.XS_SemiBold};
+  overflow: hidden; // 넘친 내용 숨기기
+  text-overflow: ellipsis; // 말줄임표로 표시
+  white-space: nowrap; // 줄 바꿈 없이 한 줄만
+`;
+
+export const InfoLine = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const Title = styled.span`
+  ${FontStyles.XXS_Medium};
+  color: ${Colors.Grayscale60};
+`;
+
+export const Amount = styled.span`
+  ${FontStyles.XXS_Medium};
+  color: ${Colors.Grayscale60};
+`;
+
+export const Price = styled(Amount)`
+  color: ${Colors.Main30};
+`;
+
+export const Ment = styled.p`
   ${FontStyles.MD1_SemiBold};
 `;
 
-export const Account = styled.p`
+export const AccountPart = styled.div`
   border: 1px solid ${Colors.Grayscale50};
-  ${FontStyles.XS_SemiBold};
   border-radius: 10px;
-  padding: 5px 15px;
+  padding: 10px;
+  width: 230px;
+  background-color: ${Colors.Grayscale10};
+  display: flex;
+  justify-content: center;
+`;
+
+export const AccountWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: fit-content;
+`;
+
+export const Account = styled.p`
+  ${FontStyles.XXS_SemiBold};
+  > span {
+    color: ${Colors.Grayscale60};
+  }
+`;
+
+export const Name = styled.p`
+  ${FontStyles.XXS_Medium};
+
+  > span {
+    color: ${Colors.Grayscale60};
+  }
 `;
 
 export const Info = styled.p`

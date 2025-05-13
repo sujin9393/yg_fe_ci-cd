@@ -63,7 +63,7 @@ const OrderModal = () => {
     <Modal onClose={closeModal}>
       <S.Container>
         <S.CloseButton onClick={closeModal} />
-        <S.ContainerLabel>수량 선택</S.ContainerLabel>
+        <S.ContainerLabel>상품 주문</S.ContainerLabel>
         <SectionLine />
         <S.Name>{productName}</S.Name>
         <S.MainPart>
