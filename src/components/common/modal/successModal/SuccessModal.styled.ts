@@ -11,7 +11,7 @@ export const Container = styled.div`
   border-radius: 20px;
   border: none;
   width: 300px;
-  padding: 30px;
+  padding: 30px 0px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,9 +27,10 @@ export const Box = styled.img`
 `;
 
 export const Main = styled.div`
-  width: fit-content;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  width: fit-content; // ✅ 이게 핵심
   gap: 5px;
 `;
 
@@ -80,16 +81,17 @@ export const AccountPart = styled.div`
   background-color: ${Colors.Grayscale10};
   display: flex;
   justify-content: center;
+  width: fit-content;
+  min-width: 210px;
 `;
 
 export const AccountWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  width: fit-content;
 `;
 
 export const Account = styled.p`
+  max-width: 215px;
   ${FontStyles.XXS_SemiBold};
   > span {
     color: ${Colors.Grayscale60};
