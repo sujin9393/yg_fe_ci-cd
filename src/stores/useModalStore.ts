@@ -1,52 +1,46 @@
 import { create } from "zustand";
+import { OrderResponse } from "../types/orderType";
 
-export type ModalType = "login" | "confirm" | "order" | "success" | null;
+export type ModalType = "login" | "confirm" | "order" | "success";
 
-interface ModalState {
-  openedModal: ModalType;
-
-  // ✅ ConfirmModal용 payload
+type ConfirmPayload = {
   confirmTitle?: string;
   confirmDescription?: string;
   confirmText?: string;
   cancelText?: string;
   onConfirm?: () => void;
   onCancel?: () => void;
+};
 
-  openModal: (
-    type: ModalType,
-    payload?: {
-      confirmTitle?: string;
-      confirmDescription?: string;
-      confirmText?: string;
-      cancelText?: string;
-      onConfirm?: () => void;
-      onCancel?: () => void;
-    }
+type ModalPayloadMap = {
+  confirm: ConfirmPayload;
+  success: OrderResponse;
+  login: undefined;
+  order: undefined;
+  null: undefined;
+};
+
+interface ModalState {
+  openedModal: ModalType | null;
+  payload?: ConfirmPayload | OrderResponse;
+
+  openModal: <T extends ModalType>(
+    type: T,
+    payload?: ModalPayloadMap[T]
   ) => void;
+
   closeModal: () => void;
 }
 
 export const useModalStore = create<ModalState>((set) => ({
   openedModal: null,
-  openModal: (type, payload) =>
-    set({
-      openedModal: type,
-      confirmTitle: payload?.confirmTitle,
-      confirmDescription: payload?.confirmDescription,
-      confirmText: payload?.confirmText,
-      cancelText: payload?.cancelText,
-      onConfirm: payload?.onConfirm,
-      onCancel: payload?.onCancel,
-    }),
-  closeModal: () =>
-    set({
-      openedModal: null,
-      confirmTitle: undefined,
-      confirmDescription: undefined,
-      confirmText: undefined,
-      cancelText: undefined,
-      onConfirm: undefined,
-      onCancel: undefined,
-    }),
+  payload: undefined,
+
+  openModal: (type, payload) => {
+    set({ openedModal: type, payload });
+  },
+
+  closeModal: () => {
+    set({ openedModal: null, payload: undefined });
+  },
 }));

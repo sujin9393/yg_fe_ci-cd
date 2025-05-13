@@ -5,6 +5,15 @@ export interface OrderRequestData {
   name?: string;
 }
 
+export interface OrderResponse {
+  productName: string;
+  quantity: number;
+  price: number;
+  hostName: string;
+  hostAccountBank: string;
+  hostAccountNumber: string;
+}
+
 export interface GetOrderParams {
   sort?: "open" | "closed" | "ended";
   cursor?: number;

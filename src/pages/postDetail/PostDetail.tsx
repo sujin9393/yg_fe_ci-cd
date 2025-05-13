@@ -36,8 +36,8 @@ const PostDetail = () => {
       unitAmount: post.unitAmount,
       totalAmount: post.totalAmount,
       leftAmount: post.leftAmount,
-      hostAccountBank: post.userProfileResponse.accountBank ?? "정보없음",
-      hostAccountNumber: post.userProfileResponse.accountNumber ?? "정보없음",
+      hostAccountBank: post.userProfileResponse.accountBank,
+      hostAccountNumber: post.userProfileResponse.accountNumber,
     });
 
     openModal("order");

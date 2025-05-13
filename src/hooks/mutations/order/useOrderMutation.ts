@@ -18,10 +18,14 @@ export const useOrderMutation = (postId: number) => {
       });
 
       closeModal();
-      openModal("success");
+      openModal("success", data);
     },
-    onError: (err) => {
-      console.error("주문 실패", err);
+    onError: (error) => {
+      if (error instanceof Error) {
+        alert(error.message);
+      } else {
+        alert("알 수 없는 오류가 발생했습니다.");
+      }
     },
   });
 };
