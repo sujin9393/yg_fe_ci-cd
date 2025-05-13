@@ -26,11 +26,17 @@ export const Box = styled.img`
   width: 52px;
 `;
 
+export const Main = styled.div`
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+`;
+
 export const OrderInfo = styled.div`
   border: 1px solid ${Colors.Grayscale50};
   border-radius: 10px;
   padding: 10px 15px;
-  width: 230px;
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -70,8 +76,7 @@ export const Ment = styled.p`
 export const AccountPart = styled.div`
   border: 1px solid ${Colors.Grayscale50};
   border-radius: 10px;
-  padding: 10px;
-  width: 230px;
+  padding: 10px 15px;
   background-color: ${Colors.Grayscale10};
   display: flex;
   justify-content: center;

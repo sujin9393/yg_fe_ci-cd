@@ -3,7 +3,7 @@ import { OrderResponse } from "../types/orderType";
 
 export type ModalType = "login" | "confirm" | "order" | "success";
 
-type ConfirmPayload = {
+export type ConfirmPayload = {
   confirmTitle?: string;
   confirmDescription?: string;
   confirmText?: string;
@@ -12,7 +12,7 @@ type ConfirmPayload = {
   onCancel?: () => void;
 };
 
-type ModalPayloadMap = {
+export type ModalPayloadMap = {
   confirm: ConfirmPayload;
   success: OrderResponse;
   login: undefined;

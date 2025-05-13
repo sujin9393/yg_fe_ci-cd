@@ -1,10 +1,14 @@
 import * as S from "./ConfirmModal.styled";
 import Modal from "../Modal";
-import { useModalStore } from "../../../../stores/useModalStore";
+import {
+  ConfirmPayload,
+  useModalStore,
+} from "../../../../stores/useModalStore";
 import Button from "../../button/Button";
 import Alert from "../../../../assets/icons/Alert.svg?react";
 
 const ConfirmModal = () => {
+  const { payload, closeModal } = useModalStore();
   const {
     confirmTitle,
     confirmDescription,
@@ -12,8 +16,7 @@ const ConfirmModal = () => {
     cancelText,
     onConfirm,
     onCancel,
-    closeModal,
-  } = useModalStore();
+  } = (payload || {}) as ConfirmPayload;
 
   return (
     <Modal onClose={closeModal}>
