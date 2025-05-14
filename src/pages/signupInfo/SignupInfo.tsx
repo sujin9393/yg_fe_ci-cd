@@ -105,7 +105,9 @@ const Signup = () => {
       <S.SectionInfo>
         회원가입을 완료하려면 아래 정보를 입력해주세요.
         <br />
-        입력이 완료되면 가입이 정상적으로 처리됩니다.
+        해당 정보는 <span>주문 및 환불 시 본인 확인</span>을 위해 사용되며
+        <br />
+        부정확한 경우 환불이 제한될 수 있습니다.
       </S.SectionInfo>
       <S.SignupForm onSubmit={handleSubmit(onSubmit)}>
         {/* <ImageUploader {...register("imageUrl")} styleType="circle" /> */}

@@ -15,7 +15,6 @@ const MyList = () => {
   type StatusKey = keyof typeof statusMap;
   const [status, setStatus] = useState<StatusKey>("공구중");
   const { data: items } = useOrderList({ sort: statusMap[status] });
-  console.log(items);
 
   return (
     <S.Container>

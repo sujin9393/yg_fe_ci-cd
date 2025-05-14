@@ -20,6 +20,9 @@ export const SectionInfo = styled.p`
   ${FontStyles.XS_Regular}
   color: ${Colors.Grayscale60};
   text-align: center;
+  > span {
+    color: ${Colors.Main30};
+  }
 `;
 
 export const SignupForm = styled.form`

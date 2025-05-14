@@ -96,10 +96,18 @@ const PostDetail = () => {
           <S.PostInfo>
             <S.TitlePart>
               <S.PostTitle>{post.title}</S.PostTitle>
-              <S.Url href={post.url} target="_blank" rel="noopener noreferrer">
-                📎
+              {post.url ? (
+                <S.Url
+                  href={post.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  📎
+                  <S.UrlTitle>{post.name}</S.UrlTitle>
+                </S.Url>
+              ) : (
                 <S.ProductTitle>{post.name}</S.ProductTitle>
-              </S.Url>
+              )}
             </S.TitlePart>
             <S.InfoPart>
               <S.ProductInfo>

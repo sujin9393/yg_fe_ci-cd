@@ -36,7 +36,6 @@ const App = () => {
       navigate("/");
     }
     console.log(user?.nickname);
-    console.log(user?.type);
   }, [data, pathname, isLoading, navigate, user]);
 
   return (

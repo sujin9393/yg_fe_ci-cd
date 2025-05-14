@@ -19,7 +19,6 @@ const SubSection = ({ title, orderBy, categoryId }: SubSectionProps) => {
   const { data: groupBuys, isError } = useGroupBuysList({
     orderBy: orderBy,
     category: categoryId,
-    limit: 10,
   });
   const navigate = useNavigate();
 
