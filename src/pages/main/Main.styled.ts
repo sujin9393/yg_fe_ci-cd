@@ -20,11 +20,11 @@ export const Img = styled.img`
 export const Ment = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 10px 0px 5px 0px;
+  margin: 10px 0px 5px 10px;
 `;
 
 export const Title = styled.p`
-  ${FontStyles.MD2_SemiBold};
+  ${FontStyles.SM_SemiBold};
 `;
 
 export const Info = styled.p`

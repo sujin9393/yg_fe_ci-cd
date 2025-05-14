@@ -64,7 +64,7 @@ const App = () => {
 
             {openedModal === "login" && <LoginModal />}
             {openedModal === "confirm" && <ConfirmModal />}
-            {openedModal === "order" && <OrderModal />}
+            {openedModal === "order" && user && <OrderModal />}
             {openedModal === "success" && <SuccessModal />}
           </>
         )}

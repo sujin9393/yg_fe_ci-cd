@@ -11,6 +11,7 @@ import { useUserStore } from "../../stores/useUserStore";
 import { useCancelOrderMutation } from "../../hooks/mutations/order/useCancelOrderMutation";
 import Loading from "../../components/common/loading/Loding";
 import { useProductDetail } from "../../hooks/queries/useProductQuery";
+import { useEffect, useState } from "react";
 
 const PostDetail = () => {
   const openModal = useModalStore((s) => s.openModal);
@@ -20,6 +21,22 @@ const PostDetail = () => {
   const { data: post, isLoading, isError } = useProductDetail(Number(postId));
   const { mutate: cancelOrder } = useCancelOrderMutation();
   console.log(post);
+
+  const [ddayText, setDdayText] = useState<string>("");
+
+  useEffect(() => {
+    if (!post?.dueDate) return; // post 또는 dueDate가 없으면 아무것도 하지 않음
+
+    const updateDday = () => {
+      setDdayText(getDday(post.dueDate));
+    };
+
+    updateDday(); // 초기값 바로 설정
+
+    const timer = setInterval(updateDday, 1000); // 1초마다 갱신
+
+    return () => clearInterval(timer); // 언마운트 시 클리어
+  }, [post?.dueDate]);
 
   const handleOrderClick = () => {
     if (!post) return;
@@ -65,7 +82,7 @@ const PostDetail = () => {
     }
   };
 
-  if (isLoading) return <Loading />;
+  if (isLoading) return <Loading message="게시글을 불러오는 중입니다" />;
   if (isError || !post) return <div>에러 발생</div>;
 
   return (
@@ -113,7 +130,13 @@ const PostDetail = () => {
                       totalAmount={post.totalAmount}
                       participantCount={post.participantCount}
                     />
-                    <S.Ddate>마감까지 {getDday(post.dueDate)}</S.Ddate>
+                    <S.Ddate>
+                      {post.postStatus === "OPEN"
+                        ? `⏰ ${ddayText}`
+                        : post.leftAmount === 0
+                          ? "🛒 품절! 수량이 모두 매진되었어요"
+                          : "⏰ 마감기간이 지났어요"}
+                    </S.Ddate>
                   </>
                 )}
               </S.OrderInfo>

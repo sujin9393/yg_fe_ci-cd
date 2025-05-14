@@ -1,19 +1,34 @@
 import styled, { keyframes } from "styled-components";
 import { Colors, FontStyles } from "../../../styles";
 
-export const spin = keyframes`
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+const bounce = keyframes`
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
 `;
 
-export const Loader = styled.div`
-  border: 8px solid #f3f3f3; /* 바깥 원 색상 */
-  border-top: 8px solid #3498db; /* 애니메이션 원 색상 */
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  animation: ${spin} 1.5s linear infinite;
-  margin: 20px auto;
+export const LoadingContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh; /* ✅ 모바일 대응도 가능 */
+  background-color: ${Colors.Grayscale0};
+  overflow: visible; /* ✅ 잘림 방지 */
+`;
+
+export const BouncingIcon = styled.div`
+  width: 100px;
+  height: 100px;
+  animation: ${bounce} 1.2s ease-in-out infinite;
+`;
+
+export const Img = styled.img`
+  width: 100%;
+  height: 100%;
 `;
 
 export const Message = styled.div`
@@ -22,13 +37,4 @@ export const Message = styled.div`
   text-align: center;
   margin-top: 20px;
   ${FontStyles.MD2_Medium};
-`;
-
-export const LoadingContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background-color: ${Colors.Grayscale0}; /* 배경색 */
 `;

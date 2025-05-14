@@ -44,27 +44,34 @@ export function formatRelativeTime(dateString: string): string {
 
 /**
  * D-day 계산
+ * - 1일 이내면 "마감 n시간 n분 n초 전" (0인 단위는 생략)
+ * - 1일 이상이면 "마감까지 D-n"
  */
 export function getDday(targetDateString: string): string {
-  const today = new Date();
-  const targetDate = new Date(targetDateString);
+  const now = new Date();
+  const target = new Date(targetDateString);
 
-  // 시간 무시하고 날짜만 비교
-  const todayMidnight = new Date(
-    today.getFullYear(),
-    today.getMonth(),
-    today.getDate()
-  );
-  const targetMidnight = new Date(
-    targetDate.getFullYear(),
-    targetDate.getMonth(),
-    targetDate.getDate()
-  );
+  const diffMs = target.getTime() - now.getTime();
+  if (diffMs <= 0) return "마감 종료";
 
-  const diffTime = targetMidnight.getTime() - todayMidnight.getTime();
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  const diffSeconds = Math.floor(diffMs / 1000);
+  const diffMinutes = Math.floor(diffSeconds / 60);
+  const diffHours = Math.floor(diffMinutes / 60);
+  const diffDays = Math.floor(diffHours / 24);
 
-  if (diffDays > 0) return `D-${diffDays}`;
-  if (diffDays === 0) return "D-DAY";
-  return `D+${Math.abs(diffDays)}`;
+  // 1일 이내면 시/분/초 단위로
+  if (diffDays < 1) {
+    const hours = diffHours % 24;
+    const minutes = diffMinutes % 60;
+    const seconds = diffSeconds % 60;
+
+    const parts = [];
+    if (hours > 0) parts.push(`${hours}시간`);
+    if (minutes > 0) parts.push(`${minutes}분`);
+    if (seconds > 0) parts.push(`${seconds}초`);
+
+    return `마감 ${parts.join(" ")} 전`;
+  }
+
+  return `마감까지 D-${diffDays}`;
 }

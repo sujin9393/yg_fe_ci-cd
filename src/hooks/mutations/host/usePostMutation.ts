@@ -10,11 +10,11 @@ export const usePostMutation = () => {
     mutationFn: (data: PostRequestData) => writePost(data),
     onSuccess: (data) => {
       console.log("공구글 게시 성공:", data);
-      alert("공구글이 게시되었습니다 🎉");
       navigate(`/products/${data.data.postId}`);
     },
     onError: (err) => {
       console.error("공구글 게시 실패", err);
+      alert("공구글 게시에 실패했습니다ㅠㅠ");
     },
   });
 };
