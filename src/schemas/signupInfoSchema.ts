@@ -8,7 +8,9 @@ export const signupInfoSchema = z.object({
 
   name: z
     .string()
-    .min(2, { message: "2자 이상의 올바른 실명을 입력해주세요" })
+    .min(2, {
+      message: "2자 이상의 올바른 실명을 입력해주세요.",
+    })
     .max(50, { message: "50자 이하의 올바른 실명을 입력해주세요" })
     .regex(/^[가-힣a-zA-Z\s]+$/, {
       message: "이름은 한글 또는 영문만 입력할 수 있어요",

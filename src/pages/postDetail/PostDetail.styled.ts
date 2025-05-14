@@ -62,9 +62,19 @@ export const PostTitle = styled.p`
   ${FontStyles.MD2_SemiBold};
 `;
 
-export const ProductTitle = styled.p`
+export const Url = styled.a`
+  text-decoration: none;
+  cursor: default;
+  display: inline; // 핵심! 텍스트만큼만 영역
+`;
+
+export const ProductTitle = styled.span`
   ${FontStyles.SM_SemiBold};
   color: ${Colors.Grayscale70};
+`;
+
+export const UrlTitle = styled(ProductTitle)`
+  cursor: pointer;
 `;
 
 export const ProductInfo = styled.div`
@@ -107,9 +117,15 @@ export const OrderButton = styled.button<{ $isCancel: boolean }>`
   margin-bottom: 5px;
   cursor: pointer;
 
+  transition: transform 0.3s ease-in-out;
+  &:hover {
+    transform: scale(1.02);
+  }
+
   &:disabled {
     background-color: ${Colors.Grayscale60};
     cursor: default;
+    transform: none;
   }
 `;
 
@@ -128,13 +144,15 @@ export const SectionDivider = styled.div`
   display: flex;
   width: 100%;
   align-items: center;
-  gap: 15px;
   margin: 10px 0px;
+  gap: 15px;
 `;
 
 export const SectionName = styled.p`
   ${FontStyles.XS_SemiBold}
-  width: 55px;
+  width: fit-content;
+  flex-shrink: 0; // ✅ 줄바꿈 방지
+  white-space: nowrap; // ✅ 강제 줄바꿈 방지
 `;
 
 export const DetailInfo = styled.div`

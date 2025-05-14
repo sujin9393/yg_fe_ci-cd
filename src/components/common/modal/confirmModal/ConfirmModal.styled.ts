@@ -16,6 +16,7 @@ export const Container = styled.div`
 `;
 
 export const Message = styled.p`
+  margin-top: 5px;
   ${FontStyles.MD1_SemiBold}
 `;
 
@@ -28,5 +29,5 @@ export const ButtonPart = styled.div`
   display: flex;
   gap: 20px;
   width: 100%;
-  margin-top: 10px;
+  margin-top: 15px;
 `;

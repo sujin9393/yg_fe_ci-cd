@@ -7,7 +7,7 @@ export const Anounce = styled.div`
   margin: 20px;
   border: none;
   border-radius: 10px;
-  padding: 10px;
+  padding: 5px;
   align-items: start;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
 `;
@@ -15,16 +15,17 @@ export const Anounce = styled.div`
 export const Img = styled.img`
   display: flex;
   justify-content: start;
+  width: 60px;
 `;
 
 export const Ment = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 10px 0px 5px 10px;
+  margin: 10px 0px;
 `;
 
 export const Title = styled.p`
-  ${FontStyles.SM_SemiBold};
+  ${FontStyles.MD2_SemiBold};
 `;
 
 export const Info = styled.p`
