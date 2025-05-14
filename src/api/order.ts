@@ -19,10 +19,11 @@ export const postOrder = async (data: OrderRequestData) => {
     }
   } catch (error) {
     console.log(error);
-    if (error instanceof AxiosError && error.response?.data?.message) {
-      throw new Error(error.response.data.message); // 서버 메시지를 직접 전달
+    // AxiosError 자체를 throw해야 useMutation에서 status 분기가 가능
+    if (error instanceof AxiosError) {
+      throw error;
     }
-    throw new Error("닉네임 확인 중 오류가 발생했습니다.");
+    throw new Error("주문 중 알 수 없는 오류가 발생했습니다.");
   }
 };
 

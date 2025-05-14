@@ -20,7 +20,6 @@ const PostDetail = () => {
   const user = useUserStore((s) => s.user);
   const { data: post, isLoading, isError } = useProductDetail(Number(postId));
   const { mutate: cancelOrder } = useCancelOrderMutation();
-  console.log(post);
 
   const [ddayText, setDdayText] = useState<string>("");
 
@@ -97,7 +96,10 @@ const PostDetail = () => {
           <S.PostInfo>
             <S.TitlePart>
               <S.PostTitle>{post.title}</S.PostTitle>
-              <S.ProductTitle>{post.name}</S.ProductTitle>
+              <S.Url href={post.url} target="_blank" rel="noopener noreferrer">
+                📎
+                <S.ProductTitle>{post.name}</S.ProductTitle>
+              </S.Url>
             </S.TitlePart>
             <S.InfoPart>
               <S.ProductInfo>

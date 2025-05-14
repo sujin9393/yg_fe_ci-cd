@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { postOrder } from "../../../api/order";
 import { useModalStore } from "../../../stores/useModalStore";
+import { AxiosError } from "axios";
 
 export const useOrderMutation = (postId: number) => {
   const openModal = useModalStore((s) => s.openModal);
@@ -21,9 +22,12 @@ export const useOrderMutation = (postId: number) => {
       openModal("success", data);
     },
     onError: (error) => {
-      if (error instanceof Error) {
-        console.log(error.message);
-        if (error.message === "Access Denied") {
+      if (error instanceof AxiosError) {
+        const status = error.response?.status;
+
+        if (status === 409) {
+          alert("이미 주문한 공구입니다.");
+        } else if (status === 403 || error.message === "Access Denied") {
           alert("로그인이 만료되었습니다. 다시 로그인 해주세요.");
           closeModal();
           openModal("login");
