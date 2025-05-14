@@ -19,6 +19,7 @@ export const useGetAIMutation = (
       setValue("price", data.total_price, { shouldValidate: true });
       setValue("totalAmount", data.count, { shouldValidate: true });
       setIsAISubmitted(true);
+      console.log(data);
     },
 
     onError: (error) => {

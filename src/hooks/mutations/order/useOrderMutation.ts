@@ -22,9 +22,16 @@ export const useOrderMutation = (postId: number) => {
     },
     onError: (error) => {
       if (error instanceof Error) {
-        alert(error.message);
+        console.log(error.message);
+        if (error.message === "Access Denied") {
+          alert("로그인이 만료되었습니다. 다시 로그인 해주세요.");
+          closeModal();
+          openModal("login");
+        } else {
+          alert("오류가 발생했습니다. 인스타그램으로 문의해주세요.");
+        }
       } else {
-        alert("알 수 없는 오류가 발생했습니다.");
+        alert("알 수 없는 오류가 발생했습니다. 인스타그램으로 문의해주세요.");
       }
     },
   });

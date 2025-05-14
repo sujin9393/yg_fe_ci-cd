@@ -168,6 +168,11 @@ const Signup = () => {
           {...register("agree")}
           checked={watch("agree") ?? false} // watch로 체크 여부 관리
           helperText={errors.agree?.message}
+          info="입력하신 정보는 서비스 운영을 위한 본인 확인, 주문 처리 및 환불 안내
+                      목적으로만 사용되며, 어떠한 경우에도 동의 없이 제3자에게 제공되지
+                      않습니다. 개인정보의 수집 및 이용에 관한 보다 자세한 내용은
+                      **[개인정보처리방침]**에서 확인하실 수 있으며, 해당 방침은 관련
+                      법률에 따라 안전하게 관리되고 있습니다."
         />
         <Button type="submit" disabled={!isFormValid}>
           지금부터 뭉치기

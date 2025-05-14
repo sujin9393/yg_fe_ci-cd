@@ -116,6 +116,7 @@ const UnitAmountSelector = ({ disabled = false }: UnitAmountSelectorProps) => {
               <SelectButtonInput
                 unit={unit}
                 max={totalAmount}
+                min={0}
                 initial={field.value}
                 onChange={field.onChange}
               />

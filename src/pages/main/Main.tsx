@@ -18,7 +18,9 @@ const Main = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Button $buttonStyle="square">구글폼 보내기</Button>
+            <Button $buttonStyle="square" $isMove={true}>
+              구글폼 보내기
+            </Button>
           </S.NoUnderlineLink>
         </S.Ment>
       </S.Anounce>

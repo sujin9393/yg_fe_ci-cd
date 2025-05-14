@@ -19,6 +19,7 @@ export const TextArea = styled.textarea`
   border: 1px solid ${Colors.Grayscale50};
   border-radius: 8px;
   color: ${Colors.Grayscale60};
+  white-space: pre-wrap;
   ${FontStyles.XS_SemiBold};
 
   &::placeholder {

@@ -2,7 +2,6 @@ import * as S from "./OrderModal.styled";
 import Modal from "../Modal";
 import { useModalStore } from "../../../../stores/useModalStore";
 import SelectButtonInput from "../../input/selectButtonInput/SelectButtonInput";
-import { useState } from "react";
 import InputField from "../../input/inputField/InputField";
 import AgreeCheckBox from "../../agreeCheckbox/AgreeCheckBox";
 import { DotIcon } from "../../DotIcon.styled";
@@ -11,6 +10,7 @@ import { SectionLine } from "../../SectionLine.styled";
 import { useOrderStore } from "../../../../stores/useOrderStore";
 import { useUserStore } from "../../../../stores/useUserStore";
 import { useOrderMutation } from "../../../../hooks/mutations/order/useOrderMutation";
+import { useState } from "react";
 
 const OrderModal = () => {
   const closeModal = useModalStore((s) => s.closeModal);
@@ -58,6 +58,8 @@ const OrderModal = () => {
       });
     }
   };
+
+  if (!user) return null;
 
   return (
     <Modal onClose={closeModal}>
@@ -117,6 +119,7 @@ const OrderModal = () => {
               label="환불 방법"
               message="본인 계좌 환불"
               checked={true}
+              info="회원가입 시 입력하신 본인 계좌로 환불됩니다."
             />
           </S.AccountInfo>
         </S.MainPart>

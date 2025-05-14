@@ -4,6 +4,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   buttonStyle?: "round" | "square";
   buttonState?: "confirm" | "cancel";
+  isMove?: boolean;
 }
 
 const Button = ({
@@ -11,6 +12,7 @@ const Button = ({
   children,
   buttonStyle = "round",
   buttonState = "confirm",
+  isMove = false,
   ...props
 }: ButtonProps) => {
   return (
@@ -18,6 +20,7 @@ const Button = ({
       type={type}
       $buttonStyle={buttonStyle}
       $buttonState={buttonState}
+      $isMove={isMove}
       {...props}
     >
       {children}

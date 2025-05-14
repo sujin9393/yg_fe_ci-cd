@@ -7,7 +7,6 @@ import * as S from "./SubSection.styled";
 //import yummy from "../../../assets/images/Yummy.png";
 import { useNavigate } from "react-router-dom";
 import { useGroupBuysList } from "../../../hooks/queries/useProductQuery";
-import Loading from "../../common/loading/Loding";
 import EmptySection from "../../common/emptySection/EmptySection";
 
 interface SubSectionProps {
@@ -17,18 +16,12 @@ interface SubSectionProps {
 }
 
 const SubSection = ({ title, orderBy, categoryId }: SubSectionProps) => {
-  const {
-    data: groupBuys,
-    isLoading,
-    isError,
-  } = useGroupBuysList({
+  const { data: groupBuys, isError } = useGroupBuysList({
     orderBy: orderBy,
     category: categoryId,
     limit: 10,
   });
   const navigate = useNavigate();
-
-  if (isLoading) return <Loading />;
 
   return (
     <S.RowScrollSection>

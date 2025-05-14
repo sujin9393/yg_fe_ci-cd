@@ -85,7 +85,7 @@ const WritePost = () => {
     handleFormSubmit(data);
   };
 
-  if (isPosting) return <Loading message="공구글 게시중입니다..." />;
+  if (isPosting) return <Loading message="공구글 게시중입니다" />;
 
   return (
     <S.Container>

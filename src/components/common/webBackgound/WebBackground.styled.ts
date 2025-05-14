@@ -1,6 +1,14 @@
-// WebBackground.styled.ts
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { Colors } from "../../../styles";
+
+const bounce = keyframes`
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+`;
 
 export const Container = styled.div`
   //position: absolute;
@@ -32,6 +40,7 @@ export const ServiceName = styled.img`
 
 export const MainPart = styled.div`
   padding: 20px;
+  cursor: default;
 `;
 
 export const MainMent = styled.p`
@@ -50,10 +59,19 @@ export const SubMent = styled.p`
   font-size: 30px;
 `;
 
+export const MainImg = styled.img`
+  margin-top: 5px;
+  animation: ${bounce} 1.2s ease-in-out infinite;
+`;
+
 export const Bottom = styled.div`
   display: flex;
 `;
 
-export const Img = styled.img`
+export const Insta = styled.img`
   cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  &:hover {
+    transform: scale(1.05);
+  }
 `;

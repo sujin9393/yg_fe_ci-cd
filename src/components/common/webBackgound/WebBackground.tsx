@@ -16,7 +16,7 @@ const WebBackground = () => {
           혼자보다 <span>뭉쳐야</span> 이득!
         </S.MainMent>
         <S.SubMent>혼밥은 괜찮아도 혼쇼핑은 비싸니까</S.SubMent>
-        <img src={Moongs} alt="뭉산 아이콘" />
+        <S.MainImg src={Moongs} alt="뭉산 아이콘" />
       </S.MainPart>
       <S.Bottom>
         <a
@@ -24,7 +24,7 @@ const WebBackground = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <S.Img src={Instagram} alt="인스타그램 아이콘" />
+          <S.Insta src={Instagram} alt="인스타그램 아이콘" />
         </a>
       </S.Bottom>
     </S.Container>

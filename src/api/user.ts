@@ -139,6 +139,28 @@ export const getMyInfo = async () => {
 };
 
 /**
+ * 토큰 재발행
+ * @returns 회원정보
+ */
+export const getRefreshToken = async () => {
+  try {
+    const res = await api.post("/api/users/token/refresh");
+
+    if (res.data) {
+      return res.data;
+    } else {
+      throw new Error("응답에 data가 없습니다");
+    }
+  } catch (error) {
+    console.log(error);
+    if (error instanceof AxiosError && error.response?.data?.message) {
+      throw new Error(error.response.data.message); // 서버 메시지를 직접 전달
+    }
+    throw new Error("토큰 발행 중 알 수 없는 오류 발생");
+  }
+};
+
+/**
  * 회원탈퇴
  * @returns
  */

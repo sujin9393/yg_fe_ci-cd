@@ -139,6 +139,7 @@ export const SectionName = styled.p`
 
 export const DetailInfo = styled.div`
   ${FontStyles.XS_Medium};
+  white-space: pre-wrap;
 `;
 
 export const PostDate = styled.p`
