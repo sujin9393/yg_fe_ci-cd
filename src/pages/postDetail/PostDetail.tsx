@@ -18,8 +18,14 @@ const PostDetail = () => {
   const setOrderInfo = useOrderStore((s) => s.setOrderInfo);
   const { postId } = useParams();
   const user = useUserStore((s) => s.user);
-  const { data: post, isLoading, isError } = useProductDetail(Number(postId));
+  const {
+    data: post,
+    isLoading,
+    isError,
+    refetch,
+  } = useProductDetail(Number(postId));
   const { mutate: cancelOrder } = useCancelOrderMutation();
+  console.log(post);
 
   const [ddayText, setDdayText] = useState<string>("");
 
@@ -28,6 +34,11 @@ const PostDetail = () => {
 
     const updateDday = () => {
       setDdayText(getDday(post.dueDate));
+
+      // 마감 도달 시 refetch 한 번 실행
+      if (ddayText === "마감 종료") {
+        refetch(); // ✅ 마감 도달 시 최신 post 상태 갱신
+      }
     };
 
     updateDday(); // 초기값 바로 설정
@@ -35,7 +46,7 @@ const PostDetail = () => {
     const timer = setInterval(updateDday, 1000); // 1초마다 갱신
 
     return () => clearInterval(timer); // 언마운트 시 클리어
-  }, [post?.dueDate]);
+  }, [post?.dueDate, ddayText, refetch]);
 
   const handleOrderClick = () => {
     if (!post) return;
