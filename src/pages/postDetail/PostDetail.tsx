@@ -25,7 +25,6 @@ const PostDetail = () => {
     refetch,
   } = useProductDetail(Number(postId));
   const { mutate: cancelOrder } = useCancelOrderMutation();
-  console.log(post);
 
   const [ddayText, setDdayText] = useState<string>("");
 
