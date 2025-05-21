@@ -4,7 +4,6 @@ import Header from "./components/common/header/Header";
 import ConfirmModal from "./components/common/modal/confirmModal/ConfirmModal";
 import LoginModal from "./components/common/modal/loginModal/LoginModal";
 import OrderModal from "./components/common/modal/orderModal/OrderModal";
-import { SectionLine } from "./components/common/SectionLine.styled";
 import AppRouter from "./Router";
 import { useModalStore } from "./stores/useModalStore";
 import { useUserStore } from "./stores/useUserStore";
@@ -13,6 +12,7 @@ import WebBackground from "./components/common/webBackgound/WebBackground";
 import { useEffect } from "react";
 import Loading from "./components/common/loading/Loding";
 import SuccessModal from "./components/common/modal/successModal/SuccessModal";
+import { SectionLine } from "./components/common/SectionLine.styled";
 
 const App = () => {
   const openModal = useModalStore((s) => s.openModal);
@@ -43,7 +43,7 @@ const App = () => {
       <WebBackground />
       <S.MainContainer $modalOpen={isModalOpen}>
         <Header />
-        <SectionLine />
+        {pathname !== "/" && pathname !== "/products" && <SectionLine />}
         {isLoading ? (
           <Loading />
         ) : (

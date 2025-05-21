@@ -19,11 +19,13 @@ const MyList = () => {
   return (
     <S.Container>
       <S.ListName>참여목록</S.ListName>
-      <FilterSelector
-        options={["공구중", "모집마감", "공구종료"]}
-        selected={status}
-        onSelect={setStatus}
-      />
+      <S.FilteringSection>
+        <FilterSelector
+          options={["공구중", "모집마감", "공구종료"]}
+          selected={status}
+          onSelect={setStatus}
+        />
+      </S.FilteringSection>
       {!items || items.length === 0 ? (
         <EmptySection category="참여한" />
       ) : (
