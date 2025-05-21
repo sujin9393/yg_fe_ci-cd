@@ -4,10 +4,12 @@ import SubSection from "../../components/main/subSection/SubSection";
 import * as S from "./Main.styled";
 import Moong from "../../assets/icons/Moong.svg";
 import { Button } from "../../components/common/button/Button.styled";
+import SearchBar from "../../components/common/searchBar/SearchBar";
 
 const Main = () => {
   return (
     <>
+      <SearchBar />
       <S.Anounce>
         <S.Img src={Moong} />
         <S.Ment>
