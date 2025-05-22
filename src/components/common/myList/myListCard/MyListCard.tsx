@@ -28,11 +28,11 @@ const MyListCard = ({ item }: MyListCardItem) => {
               ? "입금 확인 완료"
               : "입금 확인 중"}
           </S.OrderState>
-          <S.productInfo>
-            <S.pickupPlace>{item.location}</S.pickupPlace>
-            <S.unitPrice>{item.unitPrice.toLocaleString()}원</S.unitPrice>
-            <S.postTitle>{item.title}</S.postTitle>
-          </S.productInfo>
+          <S.ProductInfo>
+            <S.PickupPlace>{item.location}</S.PickupPlace>
+            <S.UnitPrice>{item.unitPrice.toLocaleString()}원</S.UnitPrice>
+            <S.PostTitle>{item.title}</S.PostTitle>
+          </S.ProductInfo>
           <S.OrderInfo>
             <S.MyOrder>
               <img src={ShoppingBag} alt="쇼핑백" /> 구매수량 :{" "}

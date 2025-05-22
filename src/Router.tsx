@@ -6,6 +6,7 @@ import Signup from "./pages/signup/Signup";
 import SignupInfo from "./pages/signupInfo/SignupInfo";
 import WritePost from "./pages/writePost/WritePost";
 import PostList from "./pages/postList/PostList";
+import ChatList from "./pages/chatList/ChatList";
 
 const AppRouter = () => {
   return (
@@ -18,6 +19,7 @@ const AppRouter = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/signupInfo" element={<SignupInfo />} />
         <Route path="/writePost" element={<WritePost />} />
+        <Route path="/chat" element={<ChatList />} />
       </Routes>
     </>
   );

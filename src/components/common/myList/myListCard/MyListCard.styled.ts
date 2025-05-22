@@ -27,20 +27,20 @@ export const OrderState = styled.p`
   color: ${Colors.Grayscale80};
 `;
 
-export const productInfo = styled.div`
+export const ProductInfo = styled.div`
   width: 100%;
 `;
 
-export const pickupPlace = styled.p`
+export const PickupPlace = styled.p`
   ${FontStyles.XXXS_SemiBold}
   color: ${Colors.Grayscale60};
 `;
 
-export const unitPrice = styled.p`
+export const UnitPrice = styled.p`
   ${FontStyles.XS_SemiBold}
 `;
 
-export const postTitle = styled.p`
+export const PostTitle = styled.p`
   ${FontStyles.XS_Regular};
   color: ${Colors.Grayscale60};
   overflow: hidden; // 넘친 내용 숨기기
