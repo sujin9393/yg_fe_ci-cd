@@ -18,7 +18,6 @@ const MyList = () => {
 
   return (
     <S.Container>
-      <S.ListName>참여목록</S.ListName>
       <S.FilteringSection>
         <FilterSelector
           options={["공구중", "모집마감", "공구종료"]}

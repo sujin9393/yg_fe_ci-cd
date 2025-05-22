@@ -5,11 +5,17 @@ import { useDeleteUserMutation } from "../../hooks/mutations/user/useDeleteUserM
 import { useMyInfoQuery } from "../../hooks/queries/useMyInfoQuery";
 import { useModalStore } from "../../stores/useModalStore";
 import Loading from "../../components/common/loading/Loding";
+import FilteringTab from "../../components/mypage/filteringTab/FilteringTab";
+import { useState } from "react";
 
 const Mypage = () => {
   const { mutate: deleteUser } = useDeleteUserMutation();
   const { data: user, isLoading } = useMyInfoQuery();
   const openModal = useModalStore((s) => s.openModal);
+  const tabOptions = ["참여목록", "주최목록", "관심목록"] as const;
+  type TabType = (typeof tabOptions)[number];
+
+  const [activeTab, setActiveTab] = useState<TabType>("참여목록");
 
   const handleDeleteUser = () => {
     openModal("confirm", {
@@ -31,6 +37,11 @@ const Mypage = () => {
       <S.ProfileSection>
         {user && <Profile type="mypage" user={user} />}
       </S.ProfileSection>
+      <FilteringTab
+        options={tabOptions.slice()}
+        selected={activeTab}
+        onSelect={setActiveTab}
+      />
       <MyList />
       <S.DeleteUser onClick={handleDeleteUser}>회원탈퇴</S.DeleteUser>
     </S.MypageContainer>
