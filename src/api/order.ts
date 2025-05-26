@@ -1,6 +1,7 @@
 import { AxiosError } from "axios";
-import { GetOrderParams, OrderRequestData } from "../types/orderType";
+import { OrderRequestData } from "../types/orderType";
 import api from "./instance";
+import { GetMyListParams } from "../types/userType";
 
 /**
  * 주문 등록
@@ -49,7 +50,7 @@ export const deleteOrder = async (postId: number) => {
  * 참여목록 조회
  * @returns
  */
-export const getOrderList = async (params?: GetOrderParams) => {
+export const getOrderList = async (params?: GetMyListParams) => {
   try {
     const res = await api.get("/api/group-buys/user/participants", { params });
 
@@ -57,7 +58,7 @@ export const getOrderList = async (params?: GetOrderParams) => {
       return res.data.data;
     }
   } catch (error) {
-    console.error("공동구매 리스트 조회 실패:", error);
+    console.error("참여목록 조회 실패:", error);
     throw error;
   }
 };

@@ -1,6 +1,7 @@
 import axios from "axios";
 import api from "./instance";
 import { PostRequestData } from "../types/productType";
+import { GetMyListParams } from "../types/userType";
 
 /**
  * 공구글 작성
@@ -37,6 +38,23 @@ export const getAI = async (url: string) => {
     } else {
       console.error("알 수 없는 에러", error);
     }
+    throw error;
+  }
+};
+
+/**
+ * 주최목록 조회
+ * @returns
+ */
+export const getHostList = async (params?: GetMyListParams) => {
+  try {
+    const res = await api.get("/api/group-buys/users/me/hosts", { params });
+
+    if (res.data.data) {
+      return res.data.data;
+    }
+  } catch (error) {
+    console.error("주최목록 조회 실패:", error);
     throw error;
   }
 };

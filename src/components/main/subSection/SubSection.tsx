@@ -39,6 +39,7 @@ const SubSection = ({ title, orderBy, categoryId }: SubSectionProps) => {
               title={item.title}
               unitPrice={item.unitPrice.toLocaleString()}
               unitAmount={item.unitAmount}
+              postId={item.postId}
             />
           ))}
         </S.RowScrollContainer>
