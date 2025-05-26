@@ -190,3 +190,43 @@ export const deleteUser = async () => {
     throw error;
   }
 };
+
+/**
+ * 관심 공구 추가
+ * @returns
+ */
+export const postLike = async (postId: number) => {
+  try {
+    const res = await api.post(`/api/users/wish/${postId}`);
+
+    if (res.data) {
+      return res.data;
+    }
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response?.data?.message) {
+      alert(error.response.data.message); // 서버 메시지 직접 사용자에게 표시
+    } else {
+      alert("관심 등록 중 오류가 발생했습니다.");
+    }
+  }
+};
+
+/**
+ * 관심 공구 취소
+ * @returns
+ */
+export const deleteLike = async (postId: number) => {
+  try {
+    const res = await api.post(`/api/users/wish/${postId}`);
+
+    if (res.data) {
+      return res.data;
+    }
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response?.data?.message) {
+      alert(error.response.data.message); // 서버 메시지 직접 사용자에게 표시
+    } else {
+      alert("관심 취소 중 오류가 발생했습니다.");
+    }
+  }
+};

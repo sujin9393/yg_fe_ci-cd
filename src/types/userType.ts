@@ -12,3 +12,32 @@ export interface MyPageInfo extends UserInfo {
   email: string;
   phoneNumber: string;
 }
+
+export interface GetMyListParams {
+  sort?: "open" | "closed" | "ended";
+  cursor?: number;
+  limit?: number;
+}
+
+export interface MyListProps {
+  posts: ListPostProps[];
+  nextCursor: number;
+  hasMore: boolean;
+}
+
+export interface ListPostProps {
+  postId: number;
+  title: string;
+  postStatus: string;
+  location: string;
+  imageKey: string;
+  unitPrice: number;
+  orderQuantity?: number;
+  hostQuantity?: number;
+  soldAmount: number;
+  totalAmount: number;
+  participantCount: number;
+  orderStatus?: string;
+  dueSoon: boolean;
+  isWish: boolean;
+}

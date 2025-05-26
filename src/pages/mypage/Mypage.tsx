@@ -42,7 +42,7 @@ const Mypage = () => {
         selected={activeTab}
         onSelect={setActiveTab}
       />
-      <MyList />
+      <MyList activeTab={activeTab} />
       <S.DeleteUser onClick={handleDeleteUser}>회원탈퇴</S.DeleteUser>
     </S.MypageContainer>
   );

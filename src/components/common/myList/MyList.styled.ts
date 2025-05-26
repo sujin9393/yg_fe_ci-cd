@@ -5,5 +5,5 @@ export const Container = styled.div`
 `;
 
 export const FilteringSection = styled.div`
-  margin: 20px 30px;
+  margin: 15px 30px 0px 30px;
 `;

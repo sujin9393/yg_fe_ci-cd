@@ -1,15 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import { getOrderList } from "../../api/order";
 import {
   GetMyListParams,
   ListPostProps,
   MyListProps,
 } from "../../types/userType";
+import { getHostList } from "../../api/host";
 
-export const useOrderList = (params?: GetMyListParams) => {
+export const useHostList = (params?: GetMyListParams) => {
   return useQuery<MyListProps, Error, ListPostProps[]>({
-    queryKey: ["partiList", params],
-    queryFn: () => getOrderList(params),
+    queryKey: ["hostList", params],
+    queryFn: () => getHostList(params),
     select: (data) => data.posts,
   });
 };

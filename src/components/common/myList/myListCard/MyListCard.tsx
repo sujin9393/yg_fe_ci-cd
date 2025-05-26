@@ -3,12 +3,12 @@ import ShoppingBag from "../../../../assets/icons/ShoppingBag.svg";
 import CurrentParti from "../../currentParti/CurrentParti";
 import { SectionLine } from "../../SectionLine.styled";
 import ImageContainer from "../../image/imageContainer/ImageContainer";
-import { OrderPostProps } from "../../../../types/orderType";
 import { getImageUrl } from "../../../../utils/image";
 import { useNavigate } from "react-router-dom";
+import { ListPostProps } from "../../../../types/userType";
 
 interface MyListCardItem {
-  item: OrderPostProps;
+  item: ListPostProps;
 }
 
 const MyListCard = ({ item }: MyListCardItem) => {
@@ -21,13 +21,18 @@ const MyListCard = ({ item }: MyListCardItem) => {
           navigate(`/products/${item.postId}`);
         }}
       >
-        <ImageContainer imageUrl={getImageUrl(item.imageKey)} />
+        <ImageContainer
+          imageUrl={getImageUrl(item.imageKey)}
+          postId={item.postId}
+        />
         <S.CardInfo>
-          <S.OrderState>
-            {item.orderStatus === "CONFIRMED"
-              ? "입금 확인 완료"
-              : "입금 확인 중"}
-          </S.OrderState>
+          {item.orderStatus && (
+            <S.OrderState>
+              {item.orderStatus === "CONFIRMED"
+                ? "입금 확인 완료"
+                : "입금 확인 중"}
+            </S.OrderState>
+          )}
           <S.ProductInfo>
             <S.PickupPlace>{item.location}</S.PickupPlace>
             <S.UnitPrice>{item.unitPrice.toLocaleString()}원</S.UnitPrice>
@@ -35,8 +40,8 @@ const MyListCard = ({ item }: MyListCardItem) => {
           </S.ProductInfo>
           <S.OrderInfo>
             <S.MyOrder>
-              <img src={ShoppingBag} alt="쇼핑백" /> 구매수량 :{" "}
-              {item.orderQuantity}
+              <img src={ShoppingBag} alt="쇼핑백" /> 구매수량 :
+              {item.orderQuantity ? item.orderQuantity : item.hostQuantity}
             </S.MyOrder>
             <CurrentParti
               soldAmount={item.soldAmount}
