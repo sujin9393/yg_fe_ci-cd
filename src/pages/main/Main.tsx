@@ -31,7 +31,12 @@ const Main = () => {
         <SectionLine />
         <SubSection title="전체" orderBy="latest" />
         <SectionLine />
-        <SubSection title="뭉산PICK" orderBy="latest" categoryId={1} />
+        <SubSection
+          title="뭉산PICK"
+          orderBy="latest"
+          category="moongsanPick"
+          categoryId={1}
+        />
       </S.Container>
     </>
   );

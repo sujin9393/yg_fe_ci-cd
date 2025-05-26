@@ -43,7 +43,9 @@ const App = () => {
       <WebBackground />
       <S.MainContainer $modalOpen={isModalOpen}>
         <Header />
-        {pathname !== "/" && pathname !== "/products" && <SectionLine />}
+        {pathname !== "/" &&
+          pathname !== "/products" &&
+          !pathname.startsWith("/products/category/") && <SectionLine />}
         {isLoading ? (
           <Loading />
         ) : (

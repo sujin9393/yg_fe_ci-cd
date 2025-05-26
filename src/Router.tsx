@@ -15,6 +15,7 @@ const AppRouter = () => {
         <Route path="/" element={<Main />} />
         <Route path="/products/:postId" element={<PostDetail />} />
         <Route path="/products" element={<PostList />} />
+        <Route path="/products/category/:category" element={<PostList />} />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signupInfo" element={<SignupInfo />} />
