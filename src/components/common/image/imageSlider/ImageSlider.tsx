@@ -13,11 +13,13 @@ const ImageSlider = ({ images }: ImageSliderProps) => {
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
   const [touchEndX, setTouchEndX] = useState<number | null>(null);
 
-  const handleNext = () => {
+  const handleNext = (e: React.MouseEvent) => {
+    e.stopPropagation();
     setCurrentIndex((prev) => (prev + 1) % images.length);
   };
 
-  const handlePrev = () => {
+  const handlePrev = (e: React.MouseEvent) => {
+    e.stopPropagation();
     setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
   };
 
@@ -31,19 +33,17 @@ const ImageSlider = ({ images }: ImageSliderProps) => {
     setTouchEndX(e.targetTouches[0].clientX);
   };
 
+  const goToNext = () => setCurrentIndex((prev) => (prev + 1) % images.length);
+  const goToPrev = () =>
+    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+
   // 터치 끝났을 때
   const handleTouchEnd = () => {
     if (touchStartX !== null && touchEndX !== null) {
       const diff = touchStartX - touchEndX;
 
-      if (diff > 50) {
-        // 오른쪽으로 넘김 (다음 슬라이드)
-        handleNext();
-      }
-      if (diff < -50) {
-        // 왼쪽으로 넘김 (이전 슬라이드)
-        handlePrev();
-      }
+      if (diff > 50) goToNext();
+      if (diff < -50) goToPrev();
     }
 
     // 초기화

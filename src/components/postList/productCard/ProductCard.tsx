@@ -1,23 +1,38 @@
 import ImageSlider from "../../common/image/imageSlider/ImageSlider";
 import * as S from "./ProductCard.styled";
-import 참치1 from "../../../assets/images/참치1.png";
-import 참치2 from "../../../assets/images/참치2.png";
 import CurrentParti from "../../common/currentParti/CurrentParti";
 import { SectionLine } from "../../common/SectionLine.styled";
+import { GroupBuyItem } from "../../../types/productType";
+import { formatDateTime } from "../../../utils/date";
+import { useNavigate } from "react-router-dom";
 
-const ProductCard = () => {
+interface ProductCardProps {
+  item: GroupBuyItem;
+}
+
+const ProductCard = ({ item }: ProductCardProps) => {
+  const navigate = useNavigate();
   return (
     <>
-      <S.Container>
-        <S.Title>꼭 사야돼요..</S.Title>
-        <S.Date>게시글 업로드 날짜 2025~</S.Date>
-        <ImageSlider images={[참치1, 참치2]} />
-        <S.ProductName>상품명</S.ProductName>
+      <S.Container
+        onClick={() => {
+          navigate(`/products/${item.postId}`);
+        }}
+      >
+        <S.Title>{item.title}</S.Title>
+        <S.Date>게시글 업로드 날짜 {formatDateTime(item.createdAt)}</S.Date>
+        <ImageSlider images={item.imageKeys?.map((img) => img.imageKey)} />
+        <S.ProductName>{item.name}</S.ProductName>
         <S.Info>
           <S.PriceInfo>
-            1,400원 <span>(주문단위 : 3)</span>
+            {item.unitPrice.toLocaleString()}원{" "}
+            <span>(주문단위 : {item.unitAmount})</span>
           </S.PriceInfo>
-          <CurrentParti soldAmount={45} totalAmount={80} participantCount={5} />
+          <CurrentParti
+            soldAmount={item.soldAmount}
+            totalAmount={item.totalAmount}
+            participantCount={item.participantCount}
+          />
         </S.Info>
       </S.Container>
       <SectionLine />

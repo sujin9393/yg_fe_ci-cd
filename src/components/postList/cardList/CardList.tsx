@@ -1,13 +1,17 @@
+import { GroupBuyItem } from "../../../types/productType";
 import ProductCard from "../productCard/ProductCard";
 import * as S from "./CardList.styled";
 
-const CardList = () => {
+interface CardListProps {
+  list: GroupBuyItem[];
+}
+
+const CardList = ({ list }: CardListProps) => {
   return (
     <S.ListContainer>
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
+      {list.map((item) => (
+        <ProductCard key={item.postId} item={item} />
+      ))}
     </S.ListContainer>
   );
 };

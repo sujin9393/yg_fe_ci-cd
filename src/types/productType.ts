@@ -19,9 +19,16 @@ export interface GroupBuyImage {
 export interface GroupBuyItem {
   postId: number;
   title: string;
+  name: string;
   imageKeys: GroupBuyImage[];
   unitPrice: number;
   unitAmount: number;
+  soldAmount: number;
+  totalAmount: number;
+  participantCount: number;
+  dueSoon: boolean;
+  isWish: boolean;
+  createdAt: string;
 }
 
 export interface PostRequestData {
