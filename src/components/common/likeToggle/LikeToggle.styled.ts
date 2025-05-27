@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-export const LikeToggleButton = styled.img`
+export const LikeToggleButton = styled.img<{ $imageType: "normal" | "full" }>`
   position: absolute;
-  right: 5px;
-  bottom: 5px;
+  right: ${({ $imageType }) => ($imageType === "full" ? "10px" : "5px")};
+  bottom: ${({ $imageType }) => ($imageType === "full" ? "10px" : "5px")};
   cursor: pointer;
-  width: 15px;
-  height: 15px;
+  width: ${({ $imageType }) => ($imageType === "full" ? "20px" : "15px")};
+  height: ${({ $imageType }) => ($imageType === "full" ? "20px" : "15px")};
 `;

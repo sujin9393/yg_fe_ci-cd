@@ -1,14 +1,16 @@
 import { getImageUrl } from "../../../../utils/image";
+import LikeToggle from "../../likeToggle/LikeToggle";
 import * as S from "./ImageSlider.styled";
 import { useState } from "react";
 
 //const images = [참치1, 참치2];
 
 interface ImageSliderProps {
+  postId: number;
   images: string[];
 }
 
-const ImageSlider = ({ images }: ImageSliderProps) => {
+const ImageSlider = ({ postId, images }: ImageSliderProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
   const [touchEndX, setTouchEndX] = useState<number | null>(null);
@@ -71,6 +73,7 @@ const ImageSlider = ({ images }: ImageSliderProps) => {
           <S.Indicator key={index} $isSelected={currentIndex === index} />
         ))}
       </S.SlideIcon>
+      <LikeToggle postId={postId} imageType="full" />
     </S.ImageSliderContainer>
   );
 };

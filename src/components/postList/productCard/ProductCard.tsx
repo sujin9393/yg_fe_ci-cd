@@ -21,7 +21,10 @@ const ProductCard = ({ item }: ProductCardProps) => {
       >
         <S.Title>{item.title}</S.Title>
         <S.Date>게시글 업로드 날짜 {formatDateTime(item.createdAt)}</S.Date>
-        <ImageSlider images={item.imageKeys?.map((img) => img.imageKey)} />
+        <ImageSlider
+          postId={item.postId}
+          images={item.imageKeys?.map((img) => img.imageKey)}
+        />
         <S.ProductName>{item.name}</S.ProductName>
         <S.Info>
           <S.PriceInfo>
