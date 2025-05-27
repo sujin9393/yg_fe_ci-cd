@@ -35,6 +35,8 @@ export const MainContainer = styled.div`
 // ✅ 여기서 스크롤만 담당
 export const ScrollArea = styled.div<{ $modalOpen: boolean }>`
   flex: 1;
+  display: flex;
+  flex-direction: column;
   overflow-y: ${({ $modalOpen }) => ($modalOpen ? "hidden" : "auto")};
 `;
 
