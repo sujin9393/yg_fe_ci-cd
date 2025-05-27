@@ -96,7 +96,7 @@ const UnitAmountSelector = ({ disabled = false }: UnitAmountSelectorProps) => {
           }}
         />
       </S.TotalAmount>
-      {(errors.totalAmount || unitAmount === "") && (
+      {!disabled && (errors.totalAmount || unitAmount === "") && (
         <S.HelperText>
           {typeof errors.totalAmount?.message === "string"
             ? errors.totalAmount.message
