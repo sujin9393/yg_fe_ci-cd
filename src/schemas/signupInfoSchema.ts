@@ -1,6 +1,12 @@
 import { z } from "zod";
 
 export const signupInfoSchema = z.object({
+  imageUrl: z
+    .string()
+    .url("올바른 이미지 주소를 입력해주세요.")
+    .optional()
+    .or(z.literal("")), // <- 빈 문자열 허용 시
+
   nickname: z
     .string()
     .min(2, { message: "2자 이상 12자 이하의 닉네임을 입력해주세요" })

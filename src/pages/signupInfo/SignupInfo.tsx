@@ -8,13 +8,14 @@ import {
 } from "../../schemas/signupInfoSchema";
 import InputField from "../../components/common/input/inputField/InputField";
 import Dropdown from "../../components/common/input/dropdown/Dropdown";
-//import ImageUploader from "../../components/common/image/imageUploader/ImageUploader";
+import ImageUploader from "../../components/common/image/imageUploader/ImageUploader";
 import AgreeCheckBox from "../../components/common/agreeCheckbox/AgreeCheckBox";
 import { SignupRequestData } from "../../api/user";
 import { useNicknameCheckMutation } from "../../hooks/mutations/user/useNicknameCheckMutation";
 import { useEffect, useState } from "react";
 import { BANK_OPTIONS } from "../../constants";
 import { useSignupMutation } from "../../hooks/mutations/user/useSignupMutation";
+import { useNavigate } from "react-router-dom";
 
 const inputFields = [
   {
@@ -32,22 +33,24 @@ const inputFields = [
 const Signup = () => {
   const [isNicknameChecked, setIsNicknameChecked] = useState(false);
   const [isNicknameDuplicated, setIsNicknameDuplicated] = useState(false);
-  const { mutate: signup } = useSignupMutation();
-  const { mutate: checkNickname } = useNicknameCheckMutation({
-    onSuccess: (data) => {
-      if (data.isDuplication === "NO") {
-        setIsNicknameChecked(true);
-        setIsNicknameDuplicated(false);
-      } else {
+  const { mutate: signup, isPending: waitingSignup } = useSignupMutation();
+  const { mutate: checkNickname, isPending: checkingNickname } =
+    useNicknameCheckMutation({
+      onSuccess: (data) => {
+        if (data.isDuplication === "NO") {
+          setIsNicknameChecked(true);
+          setIsNicknameDuplicated(false);
+        } else {
+          setIsNicknameChecked(false);
+          setIsNicknameDuplicated(true);
+        }
+      },
+      onError: () => {
         setIsNicknameChecked(false);
-        setIsNicknameDuplicated(true);
-      }
-    },
-    onError: () => {
-      setIsNicknameChecked(false);
-      setIsNicknameDuplicated(false);
-    },
-  });
+        setIsNicknameDuplicated(false);
+      },
+    });
+  const navigate = useNavigate();
 
   const {
     register,
@@ -84,7 +87,11 @@ const Signup = () => {
 
   const onSubmit = (data: SignupInfoFormData) => {
     const step1Data = localStorage.getItem("signupStep1");
-    if (!step1Data) return alert("이메일/비밀번호 정보가 없습니다.");
+    if (!step1Data) {
+      alert("이메일/비밀번호 정보가 없습니다. 처음부터 다시 회원가입해주세요.");
+      navigate("/");
+      return;
+    }
 
     const step1 = JSON.parse(step1Data);
     const requestData: SignupRequestData = {
@@ -110,7 +117,7 @@ const Signup = () => {
         부정확한 경우 환불이 제한될 수 있습니다.
       </S.SectionInfo>
       <S.SignupForm onSubmit={handleSubmit(onSubmit)}>
-        {/* <ImageUploader {...register("imageUrl")} styleType="circle" /> */}
+        <ImageUploader {...register("imageUrl")} styleType="circle" />
         <InputField
           label="닉네임"
           placeholder="사용할 닉네임 입력"
@@ -121,9 +128,12 @@ const Signup = () => {
               ? "이미 사용 중인 닉네임입니다. 다시 입력해주세요."
               : !isNicknameChecked && nickname.length >= 2
                 ? "닉네임 중복 확인을 해주세요"
-                : "")
+                : checkingNickname
+                  ? "닉네임 중복 확인 중입니다..."
+                  : "")
           }
           suffix={
+            !checkingNickname &&
             !isNicknameChecked && ( // ✅ 중복 확인 완료되면 버튼 숨김
               <S.ConfirmButton
                 type="button"
@@ -176,8 +186,8 @@ const Signup = () => {
                       **[개인정보처리방침]**에서 확인하실 수 있으며, 해당 방침은 관련
                       법률에 따라 안전하게 관리되고 있습니다."
         />
-        <Button type="submit" disabled={!isFormValid}>
-          지금부터 뭉치기
+        <Button type="submit" disabled={!isFormValid || waitingSignup}>
+          {waitingSignup ? "뭉치는 중..." : "지금부터 뭉치기"}
         </Button>
       </S.SignupForm>
     </S.SignupSection>

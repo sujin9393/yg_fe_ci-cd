@@ -7,6 +7,7 @@ import { useModalStore } from "../../stores/useModalStore";
 import Loading from "../../components/common/loading/Loding";
 import FilteringTab from "../../components/mypage/filteringTab/FilteringTab";
 import { useState } from "react";
+import { Button } from "../../components/common/button/Button.styled";
 
 const Mypage = () => {
   const { mutate: deleteUser } = useDeleteUserMutation();
@@ -36,6 +37,7 @@ const Mypage = () => {
       <S.PageName>마이페이지</S.PageName>
       <S.ProfileSection>
         {user && <Profile type="mypage" user={user} />}
+        <Button>프로필 수정하기</Button>
       </S.ProfileSection>
       <FilteringTab
         options={tabOptions.slice()}
