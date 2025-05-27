@@ -51,6 +51,7 @@ const PostDetail = () => {
     if (!post) return;
 
     if (!user) {
+      alert("로그인이 필요한 기능입니다");
       openModal("login");
       return;
     }
@@ -99,7 +100,10 @@ const PostDetail = () => {
       {post && (
         <>
           <S.TopSection>
-            <ImageSlider images={post.imageKeys?.map((img) => img.imageKey)} />
+            <ImageSlider
+              postId={post.postId}
+              images={post.imageKeys?.map((img) => img.imageKey)}
+            />
             <Profile type="post" user={post.userProfileResponse} />
           </S.TopSection>
           <SectionLine />
