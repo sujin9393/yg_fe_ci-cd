@@ -29,7 +29,7 @@ const PostDetail = () => {
   const [ddayText, setDdayText] = useState<string>("");
 
   useEffect(() => {
-    if (!post?.dueDate) return; // post 또는 dueDate가 없으면 아무것도 하지 않음
+    if (!post?.dueDate) return;
 
     const updateDday = () => {
       setDdayText(getDday(post.dueDate));

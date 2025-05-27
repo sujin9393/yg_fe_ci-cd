@@ -57,7 +57,6 @@ const Header = () => {
           <S.ProfileIcon
             onClick={() => {
               if (!user) {
-                alert("로그인이 필요한 기능입니다");
                 openModal("login"); // 로그인 안 한 경우
               } else {
                 navigate("/mypage"); // 로그인 한 경우

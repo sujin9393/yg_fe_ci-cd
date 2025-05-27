@@ -130,7 +130,7 @@ const WritePost = () => {
             disabled={isGeneratingAI}
             {...register("title")}
             value={isGeneratingAI ? "AI 답변 생성중..." : watch("title")}
-            helperText={errors.title?.message}
+            helperText={!isGeneratingAI && errors.title?.message}
           />
           <InputField
             label="상품 이름"
@@ -139,7 +139,7 @@ const WritePost = () => {
             disabled={isGeneratingAI}
             {...register("name")}
             value={isGeneratingAI ? "AI 답변 생성중..." : watch("name")}
-            helperText={errors.name?.message}
+            helperText={!isGeneratingAI && errors.name?.message}
           />
           <S.Label>계좌번호</S.Label>
           <S.AccountPart>
@@ -155,7 +155,7 @@ const WritePost = () => {
             prefix="₩"
             maxDigits={9}
             disabled={isGeneratingAI}
-            helperText={errors.price}
+            helperText={!isGeneratingAI ? errors.price : undefined}
           />
           <UnitAmountSelector disabled={isGeneratingAI} />
           <TextAreaField
@@ -163,7 +163,9 @@ const WritePost = () => {
             placeholder="공구방에 올릴 게시글 내용을 작성해주세요."
             {...register("description")}
             disabled={isGeneratingAI}
-            helperText={errors.description?.message}
+            helperText={
+              !isGeneratingAI ? errors.description?.message : undefined
+            }
             value={isGeneratingAI ? "AI 답변 생성중..." : watch("description")}
           />
           <Controller
