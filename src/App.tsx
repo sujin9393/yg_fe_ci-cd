@@ -41,34 +41,31 @@ const App = () => {
   return (
     <S.Whole>
       <WebBackground />
-      <S.MainContainer $modalOpen={isModalOpen}>
-        <Header />
-        {pathname !== "/" &&
-          pathname !== "/products" &&
-          !pathname.startsWith("/products/category/") && <SectionLine />}
-        {isLoading ? (
-          <Loading />
-        ) : (
-          <>
-            <AppRouter />
-            {user?.type === "ADMIN" && pathname === "/" && (
-              <S.MasterButton
-                onClick={() => {
-                  if (!user) {
-                    openModal("login");
-                  } else {
-                    navigate("/writePost");
-                  }
-                }}
-              />
-            )}
+      <S.MainContainer>
+        <S.ScrollArea $modalOpen={isModalOpen} id="main-container">
+          <Header />
+          {pathname !== "/" &&
+            pathname !== "/products" &&
+            !pathname.startsWith("/products/category/") && <SectionLine />}
+          {isLoading ? <Loading /> : <AppRouter />}
+        </S.ScrollArea>
 
-            {openedModal === "login" && <LoginModal />}
-            {openedModal === "confirm" && <ConfirmModal />}
-            {openedModal === "order" && user && <OrderModal />}
-            {openedModal === "success" && <SuccessModal />}
-          </>
+        {user?.type === "ADMIN" && pathname === "/" && (
+          <S.MasterButton
+            onClick={() => {
+              if (!user) {
+                openModal("login");
+              } else {
+                navigate("/writePost");
+              }
+            }}
+          />
         )}
+
+        {openedModal === "login" && <LoginModal />}
+        {openedModal === "confirm" && <ConfirmModal />}
+        {openedModal === "order" && user && <OrderModal />}
+        {openedModal === "success" && <SuccessModal />}
       </S.MainContainer>
     </S.Whole>
   );

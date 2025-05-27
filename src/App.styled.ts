@@ -17,20 +17,25 @@ export const Whole = styled.div`
   }
 `;
 
-export const MainContainer = styled.div<{ $modalOpen: boolean }>`
+export const MainContainer = styled.div`
   width: 390px;
-  height: 100%;
+  height: 100vh;
   background-color: ${Colors.Grayscale0};
   display: flex;
   flex-direction: column;
-  overflow-y: ${({ $modalOpen }) => ($modalOpen ? "hidden" : "auto")};
+  position: relative;
   @media (max-width: 1040px) {
     margin: 0 auto;
   }
   @media (max-width: 390px) {
     width: 100%;
   }
-  position: relative;
+`;
+
+// ✅ 여기서 스크롤만 담당
+export const ScrollArea = styled.div<{ $modalOpen: boolean }>`
+  flex: 1;
+  overflow-y: ${({ $modalOpen }) => ($modalOpen ? "hidden" : "auto")};
 `;
 
 export const MasterButton = styled(MasterButtonIcon)`
@@ -39,6 +44,7 @@ export const MasterButton = styled(MasterButtonIcon)`
   right: 20px;
   cursor: pointer;
   z-index: 10;
+  cursor: pointer;
 
   @media (max-width: 390px) {
     right: 20px;
