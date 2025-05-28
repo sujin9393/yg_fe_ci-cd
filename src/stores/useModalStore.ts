@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { OrderResponse } from "../types/orderType";
 
-export type ModalType = "login" | "confirm" | "order" | "success";
+export type ModalType = "login" | "confirm" | "order" | "success" | "host";
 
 export type ConfirmPayload = {
   confirmTitle?: string;
@@ -17,6 +17,7 @@ export type ModalPayloadMap = {
   success: OrderResponse;
   login: undefined;
   order: undefined;
+  host: undefined;
   null: undefined;
 };
 

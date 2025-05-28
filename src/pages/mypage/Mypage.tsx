@@ -1,4 +1,3 @@
-import MyList from "../../components/common/myList/MyList";
 import Profile from "../../components/common/profile/Profile";
 import * as S from "./Mypage.styled";
 import { useDeleteUserMutation } from "../../hooks/mutations/user/useDeleteUserMutation";
@@ -8,6 +7,7 @@ import Loading from "../../components/common/loading/Loding";
 import FilteringTab from "../../components/mypage/filteringTab/FilteringTab";
 import { useState } from "react";
 import { Button } from "../../components/common/button/Button.styled";
+import MyList from "../../components/mypage/myList/MyList";
 
 const Mypage = () => {
   const { mutate: deleteUser } = useDeleteUserMutation();
