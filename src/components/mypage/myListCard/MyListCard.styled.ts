@@ -1,16 +1,17 @@
 import styled from "styled-components";
-import { Colors, FontStyles } from "../../../../styles";
+import { Colors, FontStyles } from "../../../styles";
 
 export const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 15px;
+  margin: 20px 30px;
 `;
 
 export const CommonSection = styled.div`
   display: flex;
   gap: 10px;
   align-items: center;
-  margin: 20px 30px;
   cursor: pointer;
 `;
 
@@ -70,4 +71,9 @@ export const TotalAmount = styled.p`
   ${FontStyles.XXS_Bold}
 `;
 
-export const ButtonSection = styled.div``;
+export const ButtonSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-self: center;
+`;

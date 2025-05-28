@@ -5,7 +5,7 @@ import {
   CardInfo,
   CommonSection,
   PickupPlace,
-} from "../../common/myList/myListCard/MyListCard.styled";
+} from "../../mypage/myListCard/MyListCard.styled";
 import CurrentParti from "../../common/currentParti/CurrentParti";
 import { SectionLine } from "../../common/SectionLine.styled";
 
