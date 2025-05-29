@@ -18,11 +18,13 @@ import ControlledNumberInput from "../../components/common/input/controlledNumbe
 import { useGetAIMutation } from "../../hooks/mutations/host/useGetAIMutation";
 import Loading from "../../components/common/loading/Loding";
 import { usePostMutation } from "../../hooks/mutations/host/usePostMutation";
+import { useModalStore } from "../../stores/useModalStore";
 
 const WritePost = () => {
   const user = useUserStore((s) => s.user);
   const [imageFiles, setImageFiles] = useState<File[]>([]);
   const [isAISubmitted, setIsAISubmitted] = useState(false);
+  const openModal = useModalStore((s) => s.openModal);
 
   const methods = useForm<PostFormData>({
     resolver: zodResolver(writePostSchema),
@@ -56,15 +58,18 @@ const WritePost = () => {
       // 1. 이미지 업로드 (key만 반환됨)
       const imageKeys = await uploadImages(imageFiles); // ← File[]은 외부 상태에서 가져오는 것으로 가정
       console.log("업로드 결과 (S3 keys):", imageKeys);
+      const { imageUrls, ...rest } = data;
+      void imageUrls;
 
       // 2. 최종 payload 구성
       const payload = {
-        ...data,
+        ...rest,
         imageKeys: imageKeys,
         location: "카카오테크 부트캠프장",
         dueDate: formatDateTimeForDTO(data.dueDate),
         pickupDate: formatDateTimeForDTO(data.pickupDate),
       };
+
       if (payload.url === "") {
         delete payload.url; // 명시적으로 삭제
       }
@@ -79,10 +84,12 @@ const WritePost = () => {
 
   const onSubmit = (data: PostFormData) => {
     if (!user) {
-      console.warn("로그인 필요");
+      alert("다시 로그인해주세요.");
+      openModal("login");
       return;
     }
     handleFormSubmit(data);
+    console.log(data);
   };
 
   if (isPosting) return <Loading message="공구글 게시중입니다" />;
