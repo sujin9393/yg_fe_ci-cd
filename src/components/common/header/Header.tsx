@@ -57,7 +57,7 @@ const Header = () => {
           <S.ProfileIcon
             onClick={() => {
               if (!user) {
-                openModal("login"); // 로그인 안 한 경우
+                openModal("host"); // 로그인 안 한 경우
               } else {
                 navigate("/mypage"); // 로그인 한 경우
               }

@@ -11,6 +11,7 @@ const ConfirmModal = () => {
   const { payload, closeModal } = useModalStore();
   const {
     confirmTitle,
+    subDescription,
     confirmDescription,
     confirmText,
     cancelText,
@@ -23,7 +24,8 @@ const ConfirmModal = () => {
       <S.Container>
         <Alert />
         <S.Message>{confirmTitle}</S.Message>
-        <S.Info>{confirmDescription}</S.Info>
+        <S.Sub>{subDescription}</S.Sub>
+        <S.Info $isSub={!subDescription}>{confirmDescription}</S.Info>
         <S.ButtonPart>
           <Button
             onClick={() => {
