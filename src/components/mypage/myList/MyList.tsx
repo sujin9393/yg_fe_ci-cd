@@ -51,7 +51,7 @@ const MyList = ({ activeTab }: MyListProps) => {
           <MyListCard
             key={item.postId}
             item={item}
-            renderActions={(item) => {
+            renderActions={() => {
               if (activeTab === "참여목록") {
                 return (
                   <>
