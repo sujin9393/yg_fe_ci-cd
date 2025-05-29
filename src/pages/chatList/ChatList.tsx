@@ -1,5 +1,5 @@
 import ChatCard from "../../components/chatList/chatCard/ChatCard";
-import * as S from "./ChatList.styled";
+//import * as S from "./ChatList.styled";
 
 const ChatList = () => {
   return (
