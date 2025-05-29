@@ -4,7 +4,7 @@ import svgr from "vite-plugin-svgr";
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd());
-
+  console.log(env.VITE_API_BASE_URL);
   return {
     plugins: [react(), svgr()],
     base: "/",
