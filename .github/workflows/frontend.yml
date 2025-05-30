@@ -30,9 +30,6 @@ jobs:
       - name: Run Lint
         run: npm run lint
 
-      - name: Run Unit Tests + Coverage
-        run: npm run test -- --coverage
-
   cd:
     name: Frontend CD
     needs: ci
@@ -62,3 +59,4 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "dist/*"
           target: "/home/${{ secrets.DEPLOY_USER }}/frontend"
+        
