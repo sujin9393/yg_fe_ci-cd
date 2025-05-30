@@ -1,4 +1,4 @@
-name: Frontend CI/CD with Artifact
+name: Frontend CI/CD with Artifact + Auto Start
 
 on:
   push:
@@ -59,4 +59,17 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "dist/*"
-          target: "/home/${{ secrets.DEPLOY_USER }}/frontend"
+          target: "/home/${{ secrets.DEPLOY_USER }}/frontend/dist"
+
+      - name: Restart frontend server (pm2 serve)
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.FE_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            sudo npm install -g pm2
+            pm2 delete frontend || true
+            pm2 serve /home/${{ secrets.DEPLOY_USER }}/frontend/dist 3000 --spa --name "frontend"
+            pm2 save
+          
